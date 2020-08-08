@@ -33,8 +33,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         parentPanel = new javax.swing.JPanel();
         pnlLogin = new javax.swing.JPanel();
         login_AppName = new javax.swing.JLabel();
@@ -48,7 +46,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         pnlLoginExtra = new javax.swing.JPanel();
         login_ForgottenLink = new javax.swing.JLabel();
         login_CookiesLink = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        login_Background = new javax.swing.JLabel();
         pnlMain = new javax.swing.JPanel();
         main_BackButton = new javax.swing.JButton();
         main_WelcomeBackMessage = new javax.swing.JLabel();
@@ -58,10 +56,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         main_NextClassesButton = new javax.swing.JButton();
         main_NavToClassButton = new javax.swing.JButton();
-
-        jButton1.setText("jButton1");
-
-        jLabel3.setText("jLabel3");
+        main_NavigateButton = new javax.swing.JButton();
+        main_ChatButton = new javax.swing.JButton();
+        main_CalendarScrollPane = new javax.swing.JScrollPane();
+        main_CalendarEvents = new javax.swing.JTable();
+        main_CalendarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(750, 200, 0, 0));
@@ -200,10 +199,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
         pnlLogin.add(pnlLoginExtra);
         pnlLoginExtra.setBounds(0, 570, 360, 79);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        pnlLogin.add(jLabel2);
-        jLabel2.setBounds(0, 0, 360, 640);
+        login_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
+        pnlLogin.add(login_Background);
+        login_Background.setBounds(0, 0, 360, 640);
 
         parentPanel.add(pnlLogin, "card2");
 
@@ -213,7 +211,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_BackButton.setBackground(new java.awt.Color(255, 255, 255));
         main_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         main_BackButton.setForeground(new java.awt.Color(0, 0, 0));
-        main_BackButton.setText("<");
+        main_BackButton.setText("< Back");
         main_BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 main_BackButtonActionPerformed(evt);
@@ -261,11 +259,54 @@ public class frmTimeMinus extends javax.swing.JFrame {
             }
         });
         main_NextClassLabel.add(main_NextClassesButton);
-        main_NextClassesButton.setBounds(300, 90, 38, 32);
+        main_NextClassesButton.setBounds(300, 0, 38, 32);
 
         main_NavToClassButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NavToClassButton.setForeground(new java.awt.Color(255, 255, 255));
         main_NavToClassButton.setText("Navigate to Class");
+
+        main_NavigateButton.setBackground(new java.awt.Color(2, 31, 84));
+        main_NavigateButton.setForeground(new java.awt.Color(255, 255, 255));
+        main_NavigateButton.setText("Find a Specific venue");
+
+        main_ChatButton.setBackground(new java.awt.Color(2, 31, 84));
+        main_ChatButton.setForeground(new java.awt.Color(255, 255, 255));
+        main_ChatButton.setText("Chat with an SRC member or Lecturer");
+
+        main_CalendarEvents.setBackground(new java.awt.Color(2, 31, 84));
+        main_CalendarEvents.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        main_CalendarEvents.setForeground(new java.awt.Color(255, 255, 255));
+        main_CalendarEvents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"19 Feb: Career Expo in Cafeteria"},
+                {"20 Feb: ITMP221 CAS Presentation"},
+                {"23 Feb: ITSP200: Feedback Session"},
+                {"3 Mar: ITDA211 Take Home Test 2"},
+                {"x Month: ?????????????????????????????????????????????"}
+            },
+            new String [] {
+                "Upcomming Events"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        main_CalendarEvents.setFocusable(false);
+        main_CalendarEvents.setGridColor(new java.awt.Color(255, 255, 255));
+        main_CalendarEvents.setRowHeight(50);
+        main_CalendarEvents.setRowSelectionAllowed(false);
+        main_CalendarEvents.getTableHeader().setResizingAllowed(false);
+        main_CalendarEvents.getTableHeader().setReorderingAllowed(false);
+        main_CalendarScrollPane.setViewportView(main_CalendarEvents);
+
+        main_CalendarButton.setBackground(new java.awt.Color(2, 31, 84));
+        main_CalendarButton.setForeground(new java.awt.Color(255, 255, 255));
+        main_CalendarButton.setText("Open Calendar View");
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
@@ -273,29 +314,53 @@ public class frmTimeMinus extends javax.swing.JFrame {
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(main_BackButton)
                     .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnlMainLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlMainLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 4, Short.MAX_VALUE))
                     .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10))
+                        .addContainerGap()
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(main_CalendarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(main_NextClassLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(pnlMainLayout.createSequentialGroup()
+                                .addComponent(main_BackButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
-                .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(main_NavToClassButton)
-                .addGap(412, 412, 412))
+                .addGap(18, 18, 18)
+                .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(main_CalendarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         parentPanel.add(pnlMain, "card3");
@@ -359,9 +424,10 @@ public class frmTimeMinus extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_login_ButtonActionPerformed
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_main_NextClassesButtonActionPerformed
 
 //////////          MAIN SCREEN         //////////
     private void main_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_BackButtonActionPerformed
@@ -370,10 +436,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_main_BackButtonActionPerformed
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_main_NextClassesButtonActionPerformed
+
 
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,11 +478,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel login_AppName;
+    private javax.swing.JLabel login_Background;
     private javax.swing.JButton login_Button;
     private javax.swing.JLabel login_CookiesLink;
     private javax.swing.JLabel login_ForgottenLink;
@@ -428,7 +491,12 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JLabel login_detailsHeader;
     private javax.swing.JPanel login_detailsPanel;
     private javax.swing.JButton main_BackButton;
+    private javax.swing.JButton main_CalendarButton;
+    private javax.swing.JTable main_CalendarEvents;
+    private javax.swing.JScrollPane main_CalendarScrollPane;
+    private javax.swing.JButton main_ChatButton;
     private javax.swing.JButton main_NavToClassButton;
+    private javax.swing.JButton main_NavigateButton;
     private javax.swing.JLabel main_NextClassHeader;
     private javax.swing.JPanel main_NextClassLabel;
     private javax.swing.JLabel main_NextClassNameCode;
