@@ -34,6 +34,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         parentPanel = new javax.swing.JPanel();
         pnlLogin = new javax.swing.JPanel();
         login_AppName = new javax.swing.JLabel();
@@ -50,6 +51,14 @@ public class frmTimeMinus extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         pnlHome = new javax.swing.JPanel();
         main_BackButton = new javax.swing.JButton();
+        main_WelcomeBackMessage = new javax.swing.JLabel();
+        main_NextClassLabel = new javax.swing.JPanel();
+        main_NextClassHeader = new javax.swing.JLabel();
+        main_NextClassNameCode = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(750, 200, 0, 0));
@@ -199,14 +208,65 @@ public class frmTimeMinus extends javax.swing.JFrame {
         pnlHome.setPreferredSize(new java.awt.Dimension(360, 640));
         pnlHome.setLayout(null);
 
-        main_BackButton.setText("< Back");
+        main_BackButton.setBackground(new java.awt.Color(255, 255, 255));
+        main_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        main_BackButton.setForeground(new java.awt.Color(0, 0, 0));
+        main_BackButton.setText("<");
         main_BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 main_BackButtonActionPerformed(evt);
             }
         });
         pnlHome.add(main_BackButton);
-        main_BackButton.setBounds(10, 20, 69, 32);
+        main_BackButton.setBounds(0, 0, 41, 30);
+
+        main_WelcomeBackMessage.setBackground(new java.awt.Color(0, 0, 0));
+        main_WelcomeBackMessage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        main_WelcomeBackMessage.setForeground(new java.awt.Color(0, 0, 0));
+        main_WelcomeBackMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        main_WelcomeBackMessage.setText("Welcome Back USER_NAME USER_SURNAME");
+        main_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnlHome.add(main_WelcomeBackMessage);
+        main_WelcomeBackMessage.setBounds(10, 30, 340, 50);
+
+        main_NextClassLabel.setBackground(new java.awt.Color(2, 31, 84));
+        main_NextClassLabel.setLayout(null);
+
+        main_NextClassHeader.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        main_NextClassHeader.setForeground(new java.awt.Color(255, 255, 255));
+        main_NextClassHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        main_NextClassHeader.setText("Your next class:");
+        main_NextClassLabel.add(main_NextClassHeader);
+        main_NextClassHeader.setBounds(6, 6, 330, 19);
+
+        main_NextClassNameCode.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        main_NextClassNameCode.setForeground(new java.awt.Color(255, 255, 255));
+        main_NextClassNameCode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        main_NextClassNameCode.setText("CLASS_NAME — CLASS_CODE");
+        main_NextClassLabel.add(main_NextClassNameCode);
+        main_NextClassNameCode.setBounds(10, 40, 320, 19);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Duration : START_TIME — END_TIME");
+        main_NextClassLabel.add(jLabel1);
+        jLabel1.setBounds(10, 70, 320, 19);
+
+        jButton2.setBackground(new java.awt.Color(2, 31, 84));
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText(">");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        main_NextClassLabel.add(jButton2);
+        jButton2.setBounds(300, 90, 38, 32);
+
+        pnlHome.add(main_NextClassLabel);
+        main_NextClassLabel.setBounds(10, 70, 340, 120);
 
         parentPanel.add(pnlHome, "card3");
 
@@ -280,6 +340,10 @@ public class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_main_BackButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @param args the command line arguments
@@ -317,6 +381,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JButton login_Button;
@@ -329,6 +396,10 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JLabel login_detailsHeader;
     private javax.swing.JPanel login_detailsPanel;
     private javax.swing.JButton main_BackButton;
+    private javax.swing.JLabel main_NextClassHeader;
+    private javax.swing.JPanel main_NextClassLabel;
+    private javax.swing.JLabel main_NextClassNameCode;
+    private javax.swing.JLabel main_WelcomeBackMessage;
     private javax.swing.JPanel parentPanel;
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlLogin;
