@@ -49,7 +49,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         login_CookiesLink = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         pnlHome = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        main_BackButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(750, 200, 0, 0));
@@ -199,14 +199,14 @@ public class frmTimeMinus extends javax.swing.JFrame {
         pnlHome.setPreferredSize(new java.awt.Dimension(360, 640));
         pnlHome.setLayout(null);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        main_BackButton.setText("< Back");
+        main_BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                main_BackButtonActionPerformed(evt);
             }
         });
-        pnlHome.add(jButton1);
-        jButton1.setBounds(10, 20, 77, 32);
+        pnlHome.add(main_BackButton);
+        main_BackButton.setBounds(10, 20, 69, 32);
 
         parentPanel.add(pnlHome, "card3");
 
@@ -274,12 +274,12 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
 
 //////////          MAIN SCREEN         //////////
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void main_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_BackButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(pnlLogin);
         parentPanel.repaint();
         parentPanel.revalidate();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_main_BackButtonActionPerformed
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @param args the command line arguments
@@ -317,7 +317,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JButton login_Button;
@@ -329,6 +328,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JTextField login_Username;
     private javax.swing.JLabel login_detailsHeader;
     private javax.swing.JPanel login_detailsPanel;
+    private javax.swing.JButton main_BackButton;
     private javax.swing.JPanel parentPanel;
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlLogin;
