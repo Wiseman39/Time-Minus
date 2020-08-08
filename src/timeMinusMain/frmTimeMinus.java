@@ -57,6 +57,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_NextClassNameCode = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -206,7 +207,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
         pnlHome.setBackground(new java.awt.Color(255, 255, 255));
         pnlHome.setPreferredSize(new java.awt.Dimension(360, 640));
-        pnlHome.setLayout(null);
 
         main_BackButton.setBackground(new java.awt.Color(255, 255, 255));
         main_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -217,8 +217,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 main_BackButtonActionPerformed(evt);
             }
         });
-        pnlHome.add(main_BackButton);
-        main_BackButton.setBounds(0, 0, 41, 30);
 
         main_WelcomeBackMessage.setBackground(new java.awt.Color(0, 0, 0));
         main_WelcomeBackMessage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -226,8 +224,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_WelcomeBackMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         main_WelcomeBackMessage.setText("Welcome Back USER_NAME USER_SURNAME");
         main_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnlHome.add(main_WelcomeBackMessage);
-        main_WelcomeBackMessage.setBounds(10, 30, 340, 50);
 
         main_NextClassLabel.setBackground(new java.awt.Color(2, 31, 84));
         main_NextClassLabel.setLayout(null);
@@ -265,8 +261,40 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_NextClassLabel.add(jButton2);
         jButton2.setBounds(300, 90, 38, 32);
 
-        pnlHome.add(main_NextClassLabel);
-        main_NextClassLabel.setBounds(10, 70, 340, 120);
+        jButton3.setBackground(new java.awt.Color(2, 31, 84));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Navigate to Class");
+
+        javax.swing.GroupLayout pnlHomeLayout = new javax.swing.GroupLayout(pnlHome);
+        pnlHome.setLayout(pnlHomeLayout);
+        pnlHomeLayout.setHorizontalGroup(
+            pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHomeLayout.createSequentialGroup()
+                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(main_BackButton)
+                    .addGroup(pnlHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlHomeLayout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
+        );
+        pnlHomeLayout.setVerticalGroup(
+            pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHomeLayout.createSequentialGroup()
+                .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlHomeLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addContainerGap())
+        );
 
         parentPanel.add(pnlHome, "card3");
 
@@ -383,6 +411,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel login_AppName;
