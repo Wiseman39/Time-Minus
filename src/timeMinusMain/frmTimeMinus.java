@@ -2,8 +2,6 @@
 package timeMinusMain;
 
 import java.awt.Color;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +21,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.repaint();
         parentPanel.revalidate();
         
+        
     }
 
     /**
@@ -35,6 +34,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         parentPanel = new javax.swing.JPanel();
         pnlLogin = new javax.swing.JPanel();
         login_AppName = new javax.swing.JLabel();
@@ -49,17 +49,19 @@ public class frmTimeMinus extends javax.swing.JFrame {
         login_ForgottenLink = new javax.swing.JLabel();
         login_CookiesLink = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        pnlHome = new javax.swing.JPanel();
+        pnlMain = new javax.swing.JPanel();
         main_BackButton = new javax.swing.JButton();
         main_WelcomeBackMessage = new javax.swing.JLabel();
         main_NextClassLabel = new javax.swing.JPanel();
         main_NextClassHeader = new javax.swing.JLabel();
         main_NextClassNameCode = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        main_NextClassesButton = new javax.swing.JButton();
+        main_NavToClassButton = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
+
+        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(750, 200, 0, 0));
@@ -205,8 +207,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
         parentPanel.add(pnlLogin, "card2");
 
-        pnlHome.setBackground(new java.awt.Color(255, 255, 255));
-        pnlHome.setPreferredSize(new java.awt.Dimension(360, 640));
+        pnlMain.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMain.setPreferredSize(new java.awt.Dimension(360, 640));
 
         main_BackButton.setBackground(new java.awt.Color(255, 255, 255));
         main_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -249,54 +251,54 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_NextClassLabel.add(jLabel1);
         jLabel1.setBounds(10, 70, 320, 19);
 
-        jButton2.setBackground(new java.awt.Color(2, 31, 84));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText(">");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        main_NextClassesButton.setBackground(new java.awt.Color(2, 31, 84));
+        main_NextClassesButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        main_NextClassesButton.setForeground(new java.awt.Color(255, 255, 255));
+        main_NextClassesButton.setText(">");
+        main_NextClassesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                main_NextClassesButtonActionPerformed(evt);
             }
         });
-        main_NextClassLabel.add(jButton2);
-        jButton2.setBounds(300, 90, 38, 32);
+        main_NextClassLabel.add(main_NextClassesButton);
+        main_NextClassesButton.setBounds(300, 90, 38, 32);
 
-        jButton3.setBackground(new java.awt.Color(2, 31, 84));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Navigate to Class");
+        main_NavToClassButton.setBackground(new java.awt.Color(2, 31, 84));
+        main_NavToClassButton.setForeground(new java.awt.Color(255, 255, 255));
+        main_NavToClassButton.setText("Navigate to Class");
 
-        javax.swing.GroupLayout pnlHomeLayout = new javax.swing.GroupLayout(pnlHome);
-        pnlHome.setLayout(pnlHomeLayout);
-        pnlHomeLayout.setHorizontalGroup(
-            pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHomeLayout.createSequentialGroup()
-                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
+        pnlMain.setLayout(pnlMainLayout);
+        pnlMainLayout.setHorizontalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(main_BackButton)
-                    .addGroup(pnlHomeLayout.createSequentialGroup()
+                    .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlHomeLayout.createSequentialGroup()
+                    .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
-        pnlHomeLayout.setVerticalGroup(
-            pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHomeLayout.createSequentialGroup()
+        pnlMainLayout.setVerticalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMainLayout.createSequentialGroup()
                 .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlHomeLayout.createSequentialGroup()
+                    .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap())
+                .addComponent(main_NavToClassButton)
+                .addGap(412, 412, 412))
         );
 
-        parentPanel.add(pnlHome, "card3");
+        parentPanel.add(pnlMain, "card3");
 
         getContentPane().add(parentPanel, java.awt.BorderLayout.CENTER);
 
@@ -339,7 +341,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         User user = new User();
         if (user.userLoginTest(login_Username.getText(), login_Password.getText())) {//test login button, will work with database
             parentPanel.removeAll();
-            parentPanel.add(pnlHome);
+            parentPanel.add(pnlMain);
             parentPanel.repaint();
             parentPanel.revalidate();
             if (!login_RememberDetails.isSelected()) {
@@ -369,9 +371,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.revalidate();
     }//GEN-LAST:event_main_BackButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_main_NextClassesButtonActionPerformed
+
+    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @param args the command line arguments
@@ -410,10 +414,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JButton login_Button;
     private javax.swing.JLabel login_CookiesLink;
@@ -425,13 +428,15 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JLabel login_detailsHeader;
     private javax.swing.JPanel login_detailsPanel;
     private javax.swing.JButton main_BackButton;
+    private javax.swing.JButton main_NavToClassButton;
     private javax.swing.JLabel main_NextClassHeader;
     private javax.swing.JPanel main_NextClassLabel;
     private javax.swing.JLabel main_NextClassNameCode;
+    private javax.swing.JButton main_NextClassesButton;
     private javax.swing.JLabel main_WelcomeBackMessage;
     private javax.swing.JPanel parentPanel;
-    private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlLoginExtra;
+    private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
 }
