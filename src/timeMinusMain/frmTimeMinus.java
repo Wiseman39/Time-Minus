@@ -15,9 +15,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
      */
     public frmTimeMinus() {
         initComponents();
-        pnlLogin.setFocusable(true);
+        screen_Login.setFocusable(true);
         parentPanel.removeAll();
-        parentPanel.add(pnlLogin);
+        parentPanel.add(screen_Login);
         parentPanel.repaint();
         parentPanel.revalidate();
         
@@ -34,7 +34,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private void initComponents() {
 
         parentPanel = new javax.swing.JPanel();
-        pnlLogin = new javax.swing.JPanel();
+        screen_Login = new javax.swing.JPanel();
         login_AppName = new javax.swing.JLabel();
         login_Logo = new javax.swing.JLabel();
         login_detailsPanel = new javax.swing.JPanel();
@@ -43,17 +43,17 @@ public class frmTimeMinus extends javax.swing.JFrame {
         login_Password = new javax.swing.JTextField();
         login_RememberDetails = new javax.swing.JCheckBox();
         login_Button = new javax.swing.JButton();
-        pnlLoginExtra = new javax.swing.JPanel();
+        login_ExtraPanel = new javax.swing.JPanel();
         login_ForgottenLink = new javax.swing.JLabel();
         login_CookiesLink = new javax.swing.JLabel();
         login_Background = new javax.swing.JLabel();
-        pnlMain = new javax.swing.JPanel();
+        screen_StudentMain = new javax.swing.JPanel();
         main_BackButton = new javax.swing.JButton();
         main_WelcomeBackMessage = new javax.swing.JLabel();
         main_NextClassLabel = new javax.swing.JPanel();
         main_NextClassHeader = new javax.swing.JLabel();
         main_NextClassNameCode = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        main_nextClassDuration = new javax.swing.JLabel();
         main_NextClassesButton = new javax.swing.JButton();
         main_NavToClassButton = new javax.swing.JButton();
         main_NavigateButton = new javax.swing.JButton();
@@ -61,6 +61,20 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_CalendarScrollPane = new javax.swing.JScrollPane();
         main_CalendarEvents = new javax.swing.JTable();
         main_CalendarButton = new javax.swing.JButton();
+        screen_studentSchedule = new javax.swing.JPanel();
+        sSchedule_Banner = new javax.swing.JPanel();
+        sSchedule_BannerText = new javax.swing.JLabel();
+        sSchedule_scrollPane = new javax.swing.JScrollPane();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        screen_StudentCalendar = new javax.swing.JPanel();
+        screen_ChatMenu = new javax.swing.JPanel();
+        screen_ChatRoom = new javax.swing.JPanel();
+        screen_NavMenu = new javax.swing.JPanel();
+        screen_NavDirections = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(750, 200, 0, 0));
@@ -70,19 +84,19 @@ public class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.setBackground(new java.awt.Color(255, 255, 255));
         parentPanel.setLayout(new java.awt.CardLayout());
 
-        pnlLogin.setBackground(new java.awt.Color(0, 0, 255));
-        pnlLogin.setLayout(null);
+        screen_Login.setBackground(new java.awt.Color(0, 0, 255));
+        screen_Login.setLayout(null);
 
         login_AppName.setBackground(new java.awt.Color(255, 255, 255));
         login_AppName.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         login_AppName.setForeground(new java.awt.Color(255, 255, 255));
         login_AppName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login_AppName.setText("Time - Minus");
-        pnlLogin.add(login_AppName);
+        screen_Login.add(login_AppName);
         login_AppName.setBounds(6, 105, 354, 44);
 
         login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
-        pnlLogin.add(login_Logo);
+        screen_Login.add(login_Logo);
         login_Logo.setBounds(6, 27, 200, 60);
 
         login_detailsPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -160,10 +174,10 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        pnlLogin.add(login_detailsPanel);
+        screen_Login.add(login_detailsPanel);
         login_detailsPanel.setBounds(26, 155, 313, 310);
 
-        pnlLoginExtra.setBackground(new java.awt.Color(255, 255, 255));
+        login_ExtraPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         login_ForgottenLink.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         login_ForgottenLink.setForeground(new java.awt.Color(20, 100, 246));
@@ -175,20 +189,20 @@ public class frmTimeMinus extends javax.swing.JFrame {
         login_CookiesLink.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login_CookiesLink.setText("Cookies must be enabled in your browser");
 
-        javax.swing.GroupLayout pnlLoginExtraLayout = new javax.swing.GroupLayout(pnlLoginExtra);
-        pnlLoginExtra.setLayout(pnlLoginExtraLayout);
-        pnlLoginExtraLayout.setHorizontalGroup(
-            pnlLoginExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLoginExtraLayout.createSequentialGroup()
+        javax.swing.GroupLayout login_ExtraPanelLayout = new javax.swing.GroupLayout(login_ExtraPanel);
+        login_ExtraPanel.setLayout(login_ExtraPanelLayout);
+        login_ExtraPanelLayout.setHorizontalGroup(
+            login_ExtraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(login_ExtraPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlLoginExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(login_ExtraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(login_ForgottenLink, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(login_CookiesLink, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        pnlLoginExtraLayout.setVerticalGroup(
-            pnlLoginExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLoginExtraLayout.createSequentialGroup()
+        login_ExtraPanelLayout.setVerticalGroup(
+            login_ExtraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(login_ExtraPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(login_ForgottenLink)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -196,17 +210,17 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        pnlLogin.add(pnlLoginExtra);
-        pnlLoginExtra.setBounds(0, 570, 360, 79);
+        screen_Login.add(login_ExtraPanel);
+        login_ExtraPanel.setBounds(0, 570, 360, 79);
 
         login_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
-        pnlLogin.add(login_Background);
+        screen_Login.add(login_Background);
         login_Background.setBounds(0, 0, 360, 640);
 
-        parentPanel.add(pnlLogin, "card2");
+        parentPanel.add(screen_Login, "card2");
 
-        pnlMain.setBackground(new java.awt.Color(255, 255, 255));
-        pnlMain.setPreferredSize(new java.awt.Dimension(360, 640));
+        screen_StudentMain.setBackground(new java.awt.Color(255, 255, 255));
+        screen_StudentMain.setPreferredSize(new java.awt.Dimension(360, 640));
 
         main_BackButton.setBackground(new java.awt.Color(255, 255, 255));
         main_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -233,7 +247,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_NextClassHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         main_NextClassHeader.setText("Your next class:");
         main_NextClassLabel.add(main_NextClassHeader);
-        main_NextClassHeader.setBounds(6, 6, 330, 19);
+        main_NextClassHeader.setBounds(6, 6, 340, 19);
 
         main_NextClassNameCode.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         main_NextClassNameCode.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,12 +256,12 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_NextClassLabel.add(main_NextClassNameCode);
         main_NextClassNameCode.setBounds(10, 40, 320, 19);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Duration : START_TIME — END_TIME");
-        main_NextClassLabel.add(jLabel1);
-        jLabel1.setBounds(10, 70, 320, 19);
+        main_nextClassDuration.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        main_nextClassDuration.setForeground(new java.awt.Color(255, 255, 255));
+        main_nextClassDuration.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        main_nextClassDuration.setText("Duration : START_TIME — END_TIME");
+        main_NextClassLabel.add(main_nextClassDuration);
+        main_nextClassDuration.setBounds(10, 70, 320, 19);
 
         main_NextClassesButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NextClassesButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -308,42 +322,39 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_CalendarButton.setForeground(new java.awt.Color(255, 255, 255));
         main_CalendarButton.setText("Open Calendar View");
 
-        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
-        pnlMain.setLayout(pnlMainLayout);
-        pnlMainLayout.setHorizontalGroup(
-            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlMainLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlMainLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        javax.swing.GroupLayout screen_StudentMainLayout = new javax.swing.GroupLayout(screen_StudentMain);
+        screen_StudentMain.setLayout(screen_StudentMainLayout);
+        screen_StudentMainLayout.setHorizontalGroup(
+            screen_StudentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_StudentMainLayout.createSequentialGroup()
+                .addGroup(screen_StudentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(screen_StudentMainLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(screen_StudentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 4, Short.MAX_VALUE))
-                    .addGroup(pnlMainLayout.createSequentialGroup()
+                    .addGroup(screen_StudentMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(screen_StudentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(main_CalendarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(main_NextClassLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(pnlMainLayout.createSequentialGroup()
+                            .addGroup(screen_StudentMainLayout.createSequentialGroup()
                                 .addComponent(main_BackButton)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_StudentMainLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
-            .addGroup(pnlMainLayout.createSequentialGroup()
+            .addGroup(screen_StudentMainLayout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnlMainLayout.setVerticalGroup(
-            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMainLayout.createSequentialGroup()
+        screen_StudentMainLayout.setVerticalGroup(
+            screen_StudentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_StudentMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -363,7 +374,185 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        parentPanel.add(pnlMain, "card3");
+        parentPanel.add(screen_StudentMain, "card3");
+
+        screen_studentSchedule.setBackground(new java.awt.Color(255, 255, 255));
+        screen_studentSchedule.setMaximumSize(new java.awt.Dimension(360, 640));
+
+        sSchedule_Banner.setBackground(new java.awt.Color(2, 31, 84));
+
+        sSchedule_BannerText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        sSchedule_BannerText.setForeground(new java.awt.Color(255, 255, 255));
+        sSchedule_BannerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sSchedule_BannerText.setText("Your Schedule for the day");
+
+        javax.swing.GroupLayout sSchedule_BannerLayout = new javax.swing.GroupLayout(sSchedule_Banner);
+        sSchedule_Banner.setLayout(sSchedule_BannerLayout);
+        sSchedule_BannerLayout.setHorizontalGroup(
+            sSchedule_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sSchedule_BannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sSchedule_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        sSchedule_BannerLayout.setVerticalGroup(
+            sSchedule_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sSchedule_BannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sSchedule_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel6.setLayout(new java.awt.GridLayout(4, 1));
+
+        jPanel7.setBackground(new java.awt.Color(2, 31, 84));
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 193, Short.MAX_VALUE)
+        );
+
+        jPanel6.add(jPanel7);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 362, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
+        );
+
+        jPanel6.add(jPanel8);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 362, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
+        );
+
+        jPanel6.add(jPanel9);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 362, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
+        );
+
+        jPanel6.add(jPanel10);
+
+        sSchedule_scrollPane.setViewportView(jPanel6);
+
+        javax.swing.GroupLayout screen_studentScheduleLayout = new javax.swing.GroupLayout(screen_studentSchedule);
+        screen_studentSchedule.setLayout(screen_studentScheduleLayout);
+        screen_studentScheduleLayout.setHorizontalGroup(
+            screen_studentScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sSchedule_Banner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(sSchedule_scrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        screen_studentScheduleLayout.setVerticalGroup(
+            screen_studentScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_studentScheduleLayout.createSequentialGroup()
+                .addComponent(sSchedule_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSchedule_scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
+        );
+
+        parentPanel.add(screen_studentSchedule, "card4");
+
+        screen_StudentCalendar.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout screen_StudentCalendarLayout = new javax.swing.GroupLayout(screen_StudentCalendar);
+        screen_StudentCalendar.setLayout(screen_StudentCalendarLayout);
+        screen_StudentCalendarLayout.setHorizontalGroup(
+            screen_StudentCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        screen_StudentCalendarLayout.setVerticalGroup(
+            screen_StudentCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+
+        parentPanel.add(screen_StudentCalendar, "card9");
+
+        screen_ChatMenu.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout screen_ChatMenuLayout = new javax.swing.GroupLayout(screen_ChatMenu);
+        screen_ChatMenu.setLayout(screen_ChatMenuLayout);
+        screen_ChatMenuLayout.setHorizontalGroup(
+            screen_ChatMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        screen_ChatMenuLayout.setVerticalGroup(
+            screen_ChatMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+
+        parentPanel.add(screen_ChatMenu, "card5");
+
+        screen_ChatRoom.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout screen_ChatRoomLayout = new javax.swing.GroupLayout(screen_ChatRoom);
+        screen_ChatRoom.setLayout(screen_ChatRoomLayout);
+        screen_ChatRoomLayout.setHorizontalGroup(
+            screen_ChatRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        screen_ChatRoomLayout.setVerticalGroup(
+            screen_ChatRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+
+        parentPanel.add(screen_ChatRoom, "card6");
+
+        screen_NavMenu.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout screen_NavMenuLayout = new javax.swing.GroupLayout(screen_NavMenu);
+        screen_NavMenu.setLayout(screen_NavMenuLayout);
+        screen_NavMenuLayout.setHorizontalGroup(
+            screen_NavMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        screen_NavMenuLayout.setVerticalGroup(
+            screen_NavMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+
+        parentPanel.add(screen_NavMenu, "card7");
+
+        screen_NavDirections.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout screen_NavDirectionsLayout = new javax.swing.GroupLayout(screen_NavDirections);
+        screen_NavDirections.setLayout(screen_NavDirectionsLayout);
+        screen_NavDirectionsLayout.setHorizontalGroup(
+            screen_NavDirectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        screen_NavDirectionsLayout.setVerticalGroup(
+            screen_NavDirectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+
+        parentPanel.add(screen_NavDirections, "card8");
 
         getContentPane().add(parentPanel, java.awt.BorderLayout.CENTER);
 
@@ -406,7 +595,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         User user = new User();
         if (user.userLoginTest(login_Username.getText(), login_Password.getText())) {//test login button, will work with database
             parentPanel.removeAll();
-            parentPanel.add(pnlMain);
+            parentPanel.add(screen_StudentMain);
             parentPanel.repaint();
             parentPanel.revalidate();
             if (!login_RememberDetails.isSelected()) {
@@ -425,14 +614,19 @@ public class frmTimeMinus extends javax.swing.JFrame {
         
     }//GEN-LAST:event_login_ButtonActionPerformed
 
-    private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_main_NextClassesButtonActionPerformed
+    
 
 //////////          MAIN SCREEN         //////////
+private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_studentSchedule);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }//GEN-LAST:event_main_NextClassesButtonActionPerformed
+	
     private void main_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_BackButtonActionPerformed
         parentPanel.removeAll();
-        parentPanel.add(pnlLogin);
+        parentPanel.add(screen_Login);
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_main_BackButtonActionPerformed
@@ -478,11 +672,16 @@ public class frmTimeMinus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
     private javax.swing.JButton login_Button;
     private javax.swing.JLabel login_CookiesLink;
+    private javax.swing.JPanel login_ExtraPanel;
     private javax.swing.JLabel login_ForgottenLink;
     private javax.swing.JLabel login_Logo;
     private javax.swing.JTextField login_Password;
@@ -502,9 +701,18 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JLabel main_NextClassNameCode;
     private javax.swing.JButton main_NextClassesButton;
     private javax.swing.JLabel main_WelcomeBackMessage;
+    private javax.swing.JLabel main_nextClassDuration;
     private javax.swing.JPanel parentPanel;
-    private javax.swing.JPanel pnlLogin;
-    private javax.swing.JPanel pnlLoginExtra;
-    private javax.swing.JPanel pnlMain;
+    private javax.swing.JPanel sSchedule_Banner;
+    private javax.swing.JLabel sSchedule_BannerText;
+    private javax.swing.JScrollPane sSchedule_scrollPane;
+    private javax.swing.JPanel screen_ChatMenu;
+    private javax.swing.JPanel screen_ChatRoom;
+    private javax.swing.JPanel screen_Login;
+    private javax.swing.JPanel screen_NavDirections;
+    private javax.swing.JPanel screen_NavMenu;
+    private javax.swing.JPanel screen_StudentCalendar;
+    private javax.swing.JPanel screen_StudentMain;
+    private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
 }
