@@ -66,7 +66,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         sSchedule_BannerText = new javax.swing.JLabel();
         sSchedule_BackButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        sSchedule_scheduleTable = new javax.swing.JTable();
         screen_StudentCalendar = new javax.swing.JPanel();
         screen_ChatMenu = new javax.swing.JPanel();
         screen_ChatRoom = new javax.swing.JPanel();
@@ -412,15 +412,19 @@ public class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        sSchedule_scheduleTable.setBackground(new java.awt.Color(2, 31, 84));
+        sSchedule_scheduleTable.setForeground(new java.awt.Color(255, 255, 255));
+        sSchedule_scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Schedule"
+                ""
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        sSchedule_scheduleTable.setRowSelectionAllowed(false);
+        sSchedule_scheduleTable.setTableHeader(null);
+        jScrollPane1.setViewportView(sSchedule_scheduleTable);
 
         javax.swing.GroupLayout screen_studentScheduleLayout = new javax.swing.GroupLayout(screen_studentSchedule);
         screen_studentSchedule.setLayout(screen_studentScheduleLayout);
@@ -645,7 +649,6 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
     private javax.swing.JButton login_Button;
@@ -675,6 +678,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JButton sSchedule_BackButton;
     private javax.swing.JPanel sSchedule_Banner;
     private javax.swing.JLabel sSchedule_BannerText;
+    private javax.swing.JTable sSchedule_scheduleTable;
     private javax.swing.JPanel screen_ChatMenu;
     private javax.swing.JPanel screen_ChatRoom;
     private javax.swing.JPanel screen_Login;
