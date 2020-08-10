@@ -18,9 +18,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
      */
     public frmTimeMinus() {//Constructor
         initComponents();
-        screen_Login.setFocusable(true);//shows login screen by defual when program starts
+        screen_login.setFocusable(true);//shows login screen by defual when program starts
         parentPanel.removeAll();
-        parentPanel.add(screen_Login);
+        parentPanel.add(screen_login);
         parentPanel.repaint();
         parentPanel.revalidate();
         
@@ -45,15 +45,15 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private void initComponents() {
 
         parentPanel = new javax.swing.JPanel();
-        screen_Login = new javax.swing.JPanel();
+        screen_login = new javax.swing.JPanel();
         login_AppName = new javax.swing.JLabel();
-        login_Logo = new javax.swing.JLabel();
         login_detailsPanel = new javax.swing.JPanel();
         login_detailsHeader = new javax.swing.JLabel();
-        login_Username = new javax.swing.JTextField();
-        login_Password = new javax.swing.JTextField();
+        login_username = new javax.swing.JTextField();
+        login_password = new javax.swing.JTextField();
         login_RememberDetails = new javax.swing.JCheckBox();
         login_Button = new javax.swing.JButton();
+        login_Logo = new javax.swing.JLabel();
         login_ExtraPanel = new javax.swing.JPanel();
         login_ForgottenLink = new javax.swing.JLabel();
         login_CookiesLink = new javax.swing.JLabel();
@@ -65,13 +65,14 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_NextClassHeader = new javax.swing.JLabel();
         main_NextClassNameCode = new javax.swing.JLabel();
         main_nextClassDuration = new javax.swing.JLabel();
-        main_NextClassesButton = new javax.swing.JButton();
+        main_nextClassVenue = new javax.swing.JLabel();
         main_NavToClassButton = new javax.swing.JButton();
         main_NavigateButton = new javax.swing.JButton();
         main_ChatButton = new javax.swing.JButton();
         main_CalendarScrollPane = new javax.swing.JScrollPane();
         main_CalendarEvents = new javax.swing.JTable();
         main_CalendarButton = new javax.swing.JButton();
+        main_NextClassesButton = new javax.swing.JButton();
         screen_studentSchedule = new javax.swing.JPanel();
         sSchedule_Banner = new javax.swing.JPanel();
         sSchedule_BannerText = new javax.swing.JLabel();
@@ -81,7 +82,15 @@ public class frmTimeMinus extends javax.swing.JFrame {
         screen_StudentCalendar = new javax.swing.JPanel();
         screen_ChatMenu = new javax.swing.JPanel();
         screen_ChatRoom = new javax.swing.JPanel();
-        screen_NavMenu = new javax.swing.JPanel();
+        screen_navMenu = new javax.swing.JPanel();
+        navMenu_Banner = new javax.swing.JPanel();
+        navMenu_BannerText = new javax.swing.JLabel();
+        navMenu_BackButton1 = new javax.swing.JButton();
+        navMenu_startComboB = new javax.swing.JComboBox<>();
+        navMenu_endComboB = new javax.swing.JComboBox<>();
+        navMenu_startLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         screen_NavDirections = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,20 +101,16 @@ public class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.setBackground(new java.awt.Color(255, 255, 255));
         parentPanel.setLayout(new java.awt.CardLayout());
 
-        screen_Login.setBackground(new java.awt.Color(0, 0, 255));
-        screen_Login.setLayout(null);
+        screen_login.setBackground(new java.awt.Color(0, 0, 255));
+        screen_login.setLayout(null);
 
         login_AppName.setBackground(new java.awt.Color(255, 255, 255));
         login_AppName.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         login_AppName.setForeground(new java.awt.Color(255, 255, 255));
         login_AppName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login_AppName.setText("Time - Minus");
-        screen_Login.add(login_AppName);
+        screen_login.add(login_AppName);
         login_AppName.setBounds(6, 105, 354, 44);
-
-        login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
-        screen_Login.add(login_Logo);
-        login_Logo.setBounds(6, 27, 200, 60);
 
         login_detailsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -114,27 +119,27 @@ public class frmTimeMinus extends javax.swing.JFrame {
         login_detailsHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login_detailsHeader.setText("Please enter your login details below:");
 
-        login_Username.setBackground(new java.awt.Color(255, 255, 255));
-        login_Username.setForeground(new java.awt.Color(153, 153, 153));
-        login_Username.setText("Student ID / Pearson Email");
-        login_Username.addFocusListener(new java.awt.event.FocusAdapter() {
+        login_username.setBackground(new java.awt.Color(255, 255, 255));
+        login_username.setForeground(new java.awt.Color(153, 153, 153));
+        login_username.setText("Student ID / Pearson Email");
+        login_username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                login_UsernameFocusGained(evt);
+                login_usernameFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                login_UsernameFocusLost(evt);
+                login_usernameFocusLost(evt);
             }
         });
 
-        login_Password.setBackground(new java.awt.Color(255, 255, 255));
-        login_Password.setForeground(new java.awt.Color(153, 153, 153));
-        login_Password.setText("Password");
-        login_Password.addFocusListener(new java.awt.event.FocusAdapter() {
+        login_password.setBackground(new java.awt.Color(255, 255, 255));
+        login_password.setForeground(new java.awt.Color(153, 153, 153));
+        login_password.setText("Password");
+        login_password.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                login_PasswordFocusGained(evt);
+                login_passwordFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                login_PasswordFocusLost(evt);
+                login_passwordFocusLost(evt);
             }
         });
 
@@ -158,9 +163,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(login_detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(login_Password)
+                    .addComponent(login_password)
                     .addComponent(login_detailsHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(login_Username, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(login_username, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, login_detailsPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(login_RememberDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -172,9 +177,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(login_detailsHeader)
                 .addGap(18, 18, 18)
-                .addComponent(login_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(login_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(login_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(login_password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(login_RememberDetails)
                 .addGap(27, 27, 27)
@@ -182,8 +187,12 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        screen_Login.add(login_detailsPanel);
+        screen_login.add(login_detailsPanel);
         login_detailsPanel.setBounds(26, 155, 313, 310);
+
+        login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
+        screen_login.add(login_Logo);
+        login_Logo.setBounds(6, 27, 200, 60);
 
         login_ExtraPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -218,14 +227,14 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        screen_Login.add(login_ExtraPanel);
+        screen_login.add(login_ExtraPanel);
         login_ExtraPanel.setBounds(0, 570, 360, 79);
 
         login_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
-        screen_Login.add(login_Background);
+        screen_login.add(login_Background);
         login_Background.setBounds(0, 0, 360, 640);
 
-        parentPanel.add(screen_Login, "card2");
+        parentPanel.add(screen_login, "card2");
 
         screen_studentMain.setBackground(new java.awt.Color(255, 255, 255));
         screen_studentMain.setPreferredSize(new java.awt.Dimension(360, 640));
@@ -249,40 +258,56 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         main_NextClassLabel.setBackground(new java.awt.Color(2, 31, 84));
-        main_NextClassLabel.setLayout(null);
 
         main_NextClassHeader.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         main_NextClassHeader.setForeground(new java.awt.Color(255, 255, 255));
         main_NextClassHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         main_NextClassHeader.setText("Your next class:");
-        main_NextClassLabel.add(main_NextClassHeader);
-        main_NextClassHeader.setBounds(6, 6, 340, 19);
 
-        main_NextClassNameCode.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        main_NextClassNameCode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         main_NextClassNameCode.setForeground(new java.awt.Color(255, 255, 255));
         main_NextClassNameCode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         main_NextClassNameCode.setText("CLASS_NAME — CLASS_CODE");
-        main_NextClassLabel.add(main_NextClassNameCode);
-        main_NextClassNameCode.setBounds(10, 40, 320, 19);
 
         main_nextClassDuration.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         main_nextClassDuration.setForeground(new java.awt.Color(255, 255, 255));
-        main_nextClassDuration.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        main_nextClassDuration.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         main_nextClassDuration.setText("Duration : START_TIME — END_TIME");
-        main_NextClassLabel.add(main_nextClassDuration);
-        main_nextClassDuration.setBounds(10, 70, 320, 19);
 
-        main_NextClassesButton.setBackground(new java.awt.Color(2, 31, 84));
-        main_NextClassesButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        main_NextClassesButton.setForeground(new java.awt.Color(255, 255, 255));
-        main_NextClassesButton.setText(">");
-        main_NextClassesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                main_NextClassesButtonActionPerformed(evt);
-            }
-        });
-        main_NextClassLabel.add(main_NextClassesButton);
-        main_NextClassesButton.setBounds(300, 0, 38, 32);
+        main_nextClassVenue.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        main_nextClassVenue.setForeground(new java.awt.Color(255, 255, 255));
+        main_nextClassVenue.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        main_nextClassVenue.setText("Venue: VENUE-_NUMBER");
+
+        javax.swing.GroupLayout main_NextClassLabelLayout = new javax.swing.GroupLayout(main_NextClassLabel);
+        main_NextClassLabel.setLayout(main_NextClassLabelLayout);
+        main_NextClassLabelLayout.setHorizontalGroup(
+            main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_NextClassLabelLayout.createSequentialGroup()
+                .addGroup(main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(main_NextClassLabelLayout.createSequentialGroup()
+                        .addComponent(main_NextClassHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addGroup(main_NextClassLabelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(main_NextClassNameCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(main_nextClassVenue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(main_nextClassDuration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        main_NextClassLabelLayout.setVerticalGroup(
+            main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_NextClassLabelLayout.createSequentialGroup()
+                .addComponent(main_NextClassHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(main_NextClassNameCode)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(main_nextClassDuration)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(main_nextClassVenue)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
 
         main_NavToClassButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NavToClassButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -291,6 +316,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_NavigateButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NavigateButton.setForeground(new java.awt.Color(255, 255, 255));
         main_NavigateButton.setText("Find a Specific venue");
+        main_NavigateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                main_NavigateButtonActionPerformed(evt);
+            }
+        });
 
         main_ChatButton.setBackground(new java.awt.Color(2, 31, 84));
         main_ChatButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -331,6 +361,16 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_CalendarButton.setForeground(new java.awt.Color(255, 255, 255));
         main_CalendarButton.setText("Open Calendar View");
 
+        main_NextClassesButton.setBackground(new java.awt.Color(2, 31, 84));
+        main_NextClassesButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        main_NextClassesButton.setForeground(new java.awt.Color(255, 255, 255));
+        main_NextClassesButton.setText(">");
+        main_NextClassesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                main_NextClassesButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout screen_studentMainLayout = new javax.swing.GroupLayout(screen_studentMain);
         screen_studentMain.setLayout(screen_studentMainLayout);
         screen_studentMainLayout.setHorizontalGroup(
@@ -353,12 +393,14 @@ public class frmTimeMinus extends javax.swing.JFrame {
                                 .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(screen_studentMainLayout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(screen_studentMainLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 4, Short.MAX_VALUE)))
+                                .addGap(59, 59, 59)
+                                .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(main_NextClassesButton)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_studentMainLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         screen_studentMainLayout.setVerticalGroup(
@@ -367,18 +409,20 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(main_NavToClassButton)
-                .addGap(18, 18, 18)
+                .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(main_NavToClassButton)
+                    .addComponent(main_NextClassesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_CalendarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -503,20 +547,103 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
         parentPanel.add(screen_ChatRoom, "card6");
 
-        screen_NavMenu.setBackground(new java.awt.Color(255, 255, 255));
+        screen_navMenu.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout screen_NavMenuLayout = new javax.swing.GroupLayout(screen_NavMenu);
-        screen_NavMenu.setLayout(screen_NavMenuLayout);
-        screen_NavMenuLayout.setHorizontalGroup(
-            screen_NavMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+        navMenu_Banner.setBackground(new java.awt.Color(2, 31, 84));
+
+        navMenu_BannerText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        navMenu_BannerText.setForeground(new java.awt.Color(255, 255, 255));
+        navMenu_BannerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        navMenu_BannerText.setText("Navigate to a venue");
+
+        javax.swing.GroupLayout navMenu_BannerLayout = new javax.swing.GroupLayout(navMenu_Banner);
+        navMenu_Banner.setLayout(navMenu_BannerLayout);
+        navMenu_BannerLayout.setHorizontalGroup(
+            navMenu_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navMenu_BannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(navMenu_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
-        screen_NavMenuLayout.setVerticalGroup(
-            screen_NavMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+        navMenu_BannerLayout.setVerticalGroup(
+            navMenu_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navMenu_BannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(navMenu_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        parentPanel.add(screen_NavMenu, "card7");
+        navMenu_BackButton1.setBackground(new java.awt.Color(255, 255, 255));
+        navMenu_BackButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        navMenu_BackButton1.setForeground(new java.awt.Color(0, 0, 0));
+        navMenu_BackButton1.setText("< Back");
+        navMenu_BackButton1.setPreferredSize(new java.awt.Dimension(90, 40));
+        navMenu_BackButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                navMenu_BackButton1ActionPerformed(evt);
+            }
+        });
+
+        navMenu_startComboB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select your current location" }));
+
+        navMenu_endComboB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select your desired venue" }));
+
+        navMenu_startLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        navMenu_startLabel.setForeground(new java.awt.Color(0, 0, 0));
+        navMenu_startLabel.setText("Start:");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("End:");
+
+        jButton1.setBackground(new java.awt.Color(2, 31, 84));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Show Directions");
+
+        javax.swing.GroupLayout screen_navMenuLayout = new javax.swing.GroupLayout(screen_navMenu);
+        screen_navMenu.setLayout(screen_navMenuLayout);
+        screen_navMenuLayout.setHorizontalGroup(
+            screen_navMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(navMenu_Banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(screen_navMenuLayout.createSequentialGroup()
+                .addComponent(navMenu_BackButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(screen_navMenuLayout.createSequentialGroup()
+                .addGroup(screen_navMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(navMenu_startLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(screen_navMenuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(screen_navMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(navMenu_startComboB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(navMenu_endComboB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(screen_navMenuLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+            .addGroup(screen_navMenuLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        screen_navMenuLayout.setVerticalGroup(
+            screen_navMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_navMenuLayout.createSequentialGroup()
+                .addComponent(navMenu_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(navMenu_startLabel)
+                .addGap(18, 18, 18)
+                .addComponent(navMenu_startComboB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(navMenu_endComboB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                .addComponent(navMenu_BackButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        parentPanel.add(screen_navMenu, "card7");
 
         screen_NavDirections.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -541,61 +668,65 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
 
     
-//////////      LOGIN SCREEN        //////////
-    private void login_UsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_UsernameFocusGained
-        if (login_Username.getText().equals("Student ID / Pearson Email")) {        //code for showing text hints the login screentextboxes
-            login_Username.setText("");
-            login_Username.setForeground(Color.black);
+
+    private void login_usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusGained
+        if (login_username.getText().equals("Student ID / Pearson Email")) {        //code for showing text hints the login screentextboxes
+            login_username.setText("");
+            login_username.setForeground(Color.black);
         } 
-    }//GEN-LAST:event_login_UsernameFocusGained
+    }//GEN-LAST:event_login_usernameFocusGained
 
-    private void login_UsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_UsernameFocusLost
-        if (login_Username.getText().equals("")) {
-            login_Username.setText("Student ID / Pearson Email");
-            login_Username.setForeground(new Color(153,153,153));
+    private void login_usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusLost
+        if (login_username.getText().equals("")) {
+            login_username.setText("Student ID / Pearson Email");
+            login_username.setForeground(new Color(153,153,153));
         }    
-    }//GEN-LAST:event_login_UsernameFocusLost
+    }//GEN-LAST:event_login_usernameFocusLost
 
-    private void login_PasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_PasswordFocusGained
-        if (login_Password.getText().equals("Password")) {
-            login_Password.setText("");
-            login_Password.setForeground(Color.black);
+    private void login_passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_passwordFocusGained
+        if (login_password.getText().equals("Password")) {
+            login_password.setText("");
+            login_password.setForeground(Color.black);
         }
-    }//GEN-LAST:event_login_PasswordFocusGained
+    }//GEN-LAST:event_login_passwordFocusGained
 
-    private void login_PasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_PasswordFocusLost
-        if (login_Password.getText().equals("")) {
-            login_Password.setText("Password");
-            login_Password.setForeground(new Color(153,153,153));
+    private void login_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_passwordFocusLost
+        if (login_password.getText().equals("")) {
+            login_password.setText("Password");
+            login_password.setForeground(new Color(153,153,153));
         }
-    }//GEN-LAST:event_login_PasswordFocusLost
+    }//GEN-LAST:event_login_passwordFocusLost
 
+    
+    
+    
+    
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
         User user = new User();
-        if (user.userLoginTest(login_Username.getText(), login_Password.getText())) {//test login button, will work with database
+        if (user.userLoginTest(login_username.getText(), login_password.getText())) {//test login button, will work with database
             parentPanel.removeAll();
             parentPanel.add(screen_studentMain);
             parentPanel.repaint();
             parentPanel.revalidate();
             if (!login_RememberDetails.isSelected()) {
-                login_Password.setText("Password");
-                login_Password.setForeground(new Color(153,153,153));
-                login_Username.setText("Student ID / Pearson Email");
-                login_Username.setForeground(new Color(153,153,153));
+                login_password.setText("Password");
+                login_password.setForeground(new Color(153,153,153));
+                login_username.setText("Student ID / Pearson Email");
+                login_username.setForeground(new Color(153,153,153));
             }
         } else {
-            login_Password.setText("Password");
-            login_Password.setForeground(new Color(153,153,153));
-            login_Username.setText("Student ID / Pearson Email");
-            login_Username.setForeground(new Color(153,153,153));
+            login_password.setText("Password");
+            login_password.setForeground(new Color(153,153,153));
+            login_username.setText("Student ID / Pearson Email");
+            login_username.setForeground(new Color(153,153,153));
             JOptionPane.showMessageDialog(parentPanel,"Incorrect Username or Password", "", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_login_ButtonActionPerformed
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     
 
-//////////          MAIN SCREEN         //////////
+
 private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_studentSchedule);
@@ -605,13 +736,13 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
 	
     private void main_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_BackButtonActionPerformed
         parentPanel.removeAll();
-        parentPanel.add(screen_Login);
+        parentPanel.add(screen_login);
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_main_BackButtonActionPerformed
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     
-//////////          StudentScheduleScreen         //////////   
+  
     private void sSchedule_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSchedule_BackButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_studentMain);
@@ -619,11 +750,28 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         parentPanel.revalidate();
     }//GEN-LAST:event_sSchedule_BackButtonActionPerformed
 
+    private void navMenu_BackButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_navMenu_BackButton1ActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_studentMain);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        
+        navMenu_startComboB.setSelectedIndex(0);
+        navMenu_endComboB.setSelectedIndex(0);
+    }//GEN-LAST:event_navMenu_BackButton1ActionPerformed
+
+    private void main_NavigateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NavigateButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_navMenu);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }//GEN-LAST:event_main_NavigateButtonActionPerformed
+
 
 
 
     
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * @param args the command line arguments
      */
@@ -660,6 +808,8 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
@@ -668,11 +818,11 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JPanel login_ExtraPanel;
     private javax.swing.JLabel login_ForgottenLink;
     private javax.swing.JLabel login_Logo;
-    private javax.swing.JTextField login_Password;
     private javax.swing.JCheckBox login_RememberDetails;
-    private javax.swing.JTextField login_Username;
     private javax.swing.JLabel login_detailsHeader;
     private javax.swing.JPanel login_detailsPanel;
+    private javax.swing.JTextField login_password;
+    private javax.swing.JTextField login_username;
     private javax.swing.JButton main_BackButton;
     private javax.swing.JButton main_CalendarButton;
     private javax.swing.JTable main_CalendarEvents;
@@ -686,6 +836,13 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JButton main_NextClassesButton;
     private javax.swing.JLabel main_WelcomeBackMessage;
     private javax.swing.JLabel main_nextClassDuration;
+    private javax.swing.JLabel main_nextClassVenue;
+    private javax.swing.JButton navMenu_BackButton1;
+    private javax.swing.JPanel navMenu_Banner;
+    private javax.swing.JLabel navMenu_BannerText;
+    private javax.swing.JComboBox<String> navMenu_endComboB;
+    private javax.swing.JComboBox<String> navMenu_startComboB;
+    private javax.swing.JLabel navMenu_startLabel;
     private javax.swing.JPanel parentPanel;
     private javax.swing.JButton sSchedule_BackButton;
     private javax.swing.JPanel sSchedule_Banner;
@@ -693,10 +850,10 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JTable sSchedule_scheduleTable;
     private javax.swing.JPanel screen_ChatMenu;
     private javax.swing.JPanel screen_ChatRoom;
-    private javax.swing.JPanel screen_Login;
     private javax.swing.JPanel screen_NavDirections;
-    private javax.swing.JPanel screen_NavMenu;
     private javax.swing.JPanel screen_StudentCalendar;
+    private javax.swing.JPanel screen_login;
+    private javax.swing.JPanel screen_navMenu;
     private javax.swing.JPanel screen_studentMain;
     private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
