@@ -1,6 +1,9 @@
 
 package timeMinusMain;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.optionalusertools.DateHighlightPolicy;
+import com.github.lgooddatepicker.zinternaltools.HighlightInformation;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -32,7 +35,17 @@ public class frmTimeMinus extends javax.swing.JFrame {
         sScheduleTableModel.addColumn("");// no need for a column name if header is removed
         
         sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
-        
+       
+        /* //used for testing LGoodDatePicker stuff
+       int day = 17;
+       String month = "AUGUST";
+       int year = 2020;
+       String descriptionEvent = "ITCO211 Take Home Test 2";
+       
+       
+       setDateHighlights(day, month, year, descriptionEvent);
+       setDateHighlights(19, "AUGUST", 2020, "Test Highlight");
+       */
     }
 
     /**
@@ -58,7 +71,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         login_ForgottenLink = new javax.swing.JLabel();
         login_CookiesLink = new javax.swing.JLabel();
         login_Background = new javax.swing.JLabel();
-        screen_studentMain = new javax.swing.JPanel();
+        screen_sMain = new javax.swing.JPanel();
         main_BackButton = new javax.swing.JButton();
         main_WelcomeBackMessage = new javax.swing.JLabel();
         main_NextClassLabel = new javax.swing.JPanel();
@@ -79,7 +92,12 @@ public class frmTimeMinus extends javax.swing.JFrame {
         sSchedule_BackButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         sSchedule_scheduleTable = new javax.swing.JTable();
-        screen_StudentCalendar = new javax.swing.JPanel();
+        screen_sCalendar = new javax.swing.JPanel();
+        sCalendar_Banner = new javax.swing.JPanel();
+        sCalendar_BannerText = new javax.swing.JLabel();
+        sCalendar_BackButton = new javax.swing.JButton();
+        sCalendar_calendarPanel = new com.github.lgooddatepicker.components.CalendarPanel();
+        jPanel1 = new javax.swing.JPanel();
         screen_ChatMenu = new javax.swing.JPanel();
         screen_ChatRoom = new javax.swing.JPanel();
         screen_navMenu = new javax.swing.JPanel();
@@ -115,11 +133,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
         login_detailsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         login_detailsHeader.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        login_detailsHeader.setForeground(new java.awt.Color(0, 0, 0));
         login_detailsHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login_detailsHeader.setText("Please enter your login details below:");
 
-        login_username.setBackground(new java.awt.Color(255, 255, 255));
         login_username.setForeground(new java.awt.Color(153, 153, 153));
         login_username.setText("Student ID / Pearson Email");
         login_username.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -131,7 +147,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
-        login_password.setBackground(new java.awt.Color(255, 255, 255));
         login_password.setForeground(new java.awt.Color(153, 153, 153));
         login_password.setText("Password");
         login_password.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -236,12 +251,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
         parentPanel.add(screen_login, "card2");
 
-        screen_studentMain.setBackground(new java.awt.Color(255, 255, 255));
-        screen_studentMain.setPreferredSize(new java.awt.Dimension(360, 640));
+        screen_sMain.setBackground(new java.awt.Color(255, 255, 255));
+        screen_sMain.setPreferredSize(new java.awt.Dimension(360, 640));
 
         main_BackButton.setBackground(new java.awt.Color(255, 255, 255));
         main_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        main_BackButton.setForeground(new java.awt.Color(0, 0, 0));
         main_BackButton.setText("< Back");
         main_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
         main_BackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +266,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
         main_WelcomeBackMessage.setBackground(new java.awt.Color(0, 0, 0));
         main_WelcomeBackMessage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        main_WelcomeBackMessage.setForeground(new java.awt.Color(0, 0, 0));
         main_WelcomeBackMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         main_WelcomeBackMessage.setText("Welcome Back USER_NAME USER_SURNAME");
         main_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -360,6 +373,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_CalendarButton.setBackground(new java.awt.Color(2, 31, 84));
         main_CalendarButton.setForeground(new java.awt.Color(255, 255, 255));
         main_CalendarButton.setText("Open Calendar View");
+        main_CalendarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                main_CalendarButtonActionPerformed(evt);
+            }
+        });
 
         main_NextClassesButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NextClassesButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -371,47 +389,43 @@ public class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout screen_studentMainLayout = new javax.swing.GroupLayout(screen_studentMain);
-        screen_studentMain.setLayout(screen_studentMainLayout);
-        screen_studentMainLayout.setHorizontalGroup(
-            screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(screen_studentMainLayout.createSequentialGroup()
-                .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(screen_studentMainLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(main_CalendarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(main_NextClassLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_studentMainLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(screen_studentMainLayout.createSequentialGroup()
-                        .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(screen_studentMainLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout screen_sMainLayout = new javax.swing.GroupLayout(screen_sMain);
+        screen_sMain.setLayout(screen_sMainLayout);
+        screen_sMainLayout.setHorizontalGroup(
+            screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_sMainLayout.createSequentialGroup()
+                .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(screen_sMainLayout.createSequentialGroup()
+                        .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(screen_studentMainLayout.createSequentialGroup()
+                            .addGroup(screen_sMainLayout.createSequentialGroup()
                                 .addGap(59, 59, 59)
                                 .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
                                 .addComponent(main_NextClassesButton)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_studentMainLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addGroup(screen_sMainLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(main_CalendarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(main_NavigateButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(main_ChatButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(main_NextClassLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_sMainLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
-        screen_studentMainLayout.setVerticalGroup(
-            screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(screen_studentMainLayout.createSequentialGroup()
+        screen_sMainLayout.setVerticalGroup(
+            screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_sMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(main_NavToClassButton)
                     .addComponent(main_NextClassesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
@@ -426,7 +440,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        parentPanel.add(screen_studentMain, "card3");
+        parentPanel.add(screen_sMain, "card3");
 
         screen_studentSchedule.setBackground(new java.awt.Color(255, 255, 255));
         screen_studentSchedule.setMaximumSize(new java.awt.Dimension(360, 640));
@@ -457,7 +471,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
         sSchedule_BackButton.setBackground(new java.awt.Color(255, 255, 255));
         sSchedule_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        sSchedule_BackButton.setForeground(new java.awt.Color(0, 0, 0));
         sSchedule_BackButton.setText("< Back");
         sSchedule_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
         sSchedule_BackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -502,20 +515,80 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
         parentPanel.add(screen_studentSchedule, "card4");
 
-        screen_StudentCalendar.setBackground(new java.awt.Color(255, 255, 255));
+        screen_sCalendar.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout screen_StudentCalendarLayout = new javax.swing.GroupLayout(screen_StudentCalendar);
-        screen_StudentCalendar.setLayout(screen_StudentCalendarLayout);
-        screen_StudentCalendarLayout.setHorizontalGroup(
-            screen_StudentCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        sCalendar_Banner.setBackground(new java.awt.Color(2, 31, 84));
+
+        sCalendar_BannerText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        sCalendar_BannerText.setForeground(new java.awt.Color(255, 255, 255));
+        sCalendar_BannerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sCalendar_BannerText.setText("Student Calendar");
+
+        javax.swing.GroupLayout sCalendar_BannerLayout = new javax.swing.GroupLayout(sCalendar_Banner);
+        sCalendar_Banner.setLayout(sCalendar_BannerLayout);
+        sCalendar_BannerLayout.setHorizontalGroup(
+            sCalendar_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sCalendar_BannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sCalendar_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        sCalendar_BannerLayout.setVerticalGroup(
+            sCalendar_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sCalendar_BannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sCalendar_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        sCalendar_BackButton.setBackground(new java.awt.Color(255, 255, 255));
+        sCalendar_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        sCalendar_BackButton.setText("< Back");
+        sCalendar_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
+        sCalendar_BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sCalendar_BackButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 360, Short.MAX_VALUE)
         );
-        screen_StudentCalendarLayout.setVerticalGroup(
-            screen_StudentCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 276, Short.MAX_VALUE)
         );
 
-        parentPanel.add(screen_StudentCalendar, "card9");
+        javax.swing.GroupLayout screen_sCalendarLayout = new javax.swing.GroupLayout(screen_sCalendar);
+        screen_sCalendar.setLayout(screen_sCalendarLayout);
+        screen_sCalendarLayout.setHorizontalGroup(
+            screen_sCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sCalendar_Banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(screen_sCalendarLayout.createSequentialGroup()
+                .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(screen_sCalendarLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(sCalendar_calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        screen_sCalendarLayout.setVerticalGroup(
+            screen_sCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_sCalendarLayout.createSequentialGroup()
+                .addComponent(sCalendar_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sCalendar_calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        parentPanel.add(screen_sCalendar, "card9");
 
         screen_ChatMenu.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -575,7 +648,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
 
         navMenu_BackButton1.setBackground(new java.awt.Color(255, 255, 255));
         navMenu_BackButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        navMenu_BackButton1.setForeground(new java.awt.Color(0, 0, 0));
         navMenu_BackButton1.setText("< Back");
         navMenu_BackButton1.setPreferredSize(new java.awt.Dimension(90, 40));
         navMenu_BackButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -589,11 +661,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
         navMenu_endComboB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select your desired venue" }));
 
         navMenu_startLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        navMenu_startLabel.setForeground(new java.awt.Color(0, 0, 0));
         navMenu_startLabel.setText("Start:");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("End:");
 
         jButton1.setBackground(new java.awt.Color(2, 31, 84));
@@ -705,7 +775,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         User user = new User();
         if (user.userLoginTest(login_username.getText(), login_password.getText())) {//test login button, will work with database
             parentPanel.removeAll();
-            parentPanel.add(screen_studentMain);
+            parentPanel.add(screen_sMain);
             parentPanel.repaint();
             parentPanel.revalidate();
             if (!login_RememberDetails.isSelected()) {
@@ -745,14 +815,14 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
   
     private void sSchedule_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSchedule_BackButtonActionPerformed
         parentPanel.removeAll();
-        parentPanel.add(screen_studentMain);
+        parentPanel.add(screen_sMain);
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_sSchedule_BackButtonActionPerformed
 
     private void navMenu_BackButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_navMenu_BackButton1ActionPerformed
         parentPanel.removeAll();
-        parentPanel.add(screen_studentMain);
+        parentPanel.add(screen_sMain);
         parentPanel.repaint();
         parentPanel.revalidate();
         
@@ -766,6 +836,20 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_main_NavigateButtonActionPerformed
+
+    private void sCalendar_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_BackButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_sMain);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }//GEN-LAST:event_sCalendar_BackButtonActionPerformed
+
+    private void main_CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_CalendarButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_sCalendar);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }//GEN-LAST:event_main_CalendarButtonActionPerformed
 
 
 
@@ -810,6 +894,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
@@ -844,6 +929,10 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JComboBox<String> navMenu_startComboB;
     private javax.swing.JLabel navMenu_startLabel;
     private javax.swing.JPanel parentPanel;
+    private javax.swing.JButton sCalendar_BackButton;
+    private javax.swing.JPanel sCalendar_Banner;
+    private javax.swing.JLabel sCalendar_BannerText;
+    private com.github.lgooddatepicker.components.CalendarPanel sCalendar_calendarPanel;
     private javax.swing.JButton sSchedule_BackButton;
     private javax.swing.JPanel sSchedule_Banner;
     private javax.swing.JLabel sSchedule_BannerText;
@@ -851,10 +940,19 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JPanel screen_ChatMenu;
     private javax.swing.JPanel screen_ChatRoom;
     private javax.swing.JPanel screen_NavDirections;
-    private javax.swing.JPanel screen_StudentCalendar;
     private javax.swing.JPanel screen_login;
     private javax.swing.JPanel screen_navMenu;
-    private javax.swing.JPanel screen_studentMain;
+    private javax.swing.JPanel screen_sCalendar;
+    private javax.swing.JPanel screen_sMain;
     private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
+
+   /* private void setDateHighlights(int day, String month, int year, String descriptionEvent) {
+        
+       MyHighlightPolicy studentHighlightPolicy = new MyHighlightPolicy(day, month, year, descriptionEvent); 
+       
+       DatePickerSettings settings = new DatePickerSettings();
+       settings.setHighlightPolicy(studentHighlightPolicy);
+       sCalendar_calendarPanel.setSettings(settings);
+    }*/ //used for testing LGoodDatePicker stuff
 }
