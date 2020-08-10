@@ -3,6 +3,9 @@ package timeMinusMain;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,14 +16,22 @@ public class frmTimeMinus extends javax.swing.JFrame {
     /**
      * Creates new form frmTimeMinus
      */
-    public frmTimeMinus() {
+    public frmTimeMinus() {//Constructor
         initComponents();
-        screen_Login.setFocusable(true);
+        screen_Login.setFocusable(true);//shows login screen by defual when program starts
         parentPanel.removeAll();
         parentPanel.add(screen_Login);
         parentPanel.repaint();
         parentPanel.revalidate();
         
+        
+        DefaultTableModel scheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
+        DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
+        scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+        sSchedule_scheduleTable.setModel(scheduleTableModel);
+        scheduleTableModel.addColumn("");// no need for a column name if header is removed
+        
+        sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
         
     }
 
@@ -327,12 +338,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(screen_studentMainLayout.createSequentialGroup()
                 .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(screen_studentMainLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 4, Short.MAX_VALUE))
-                    .addGroup(screen_studentMainLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(main_CalendarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -340,15 +345,21 @@ public class frmTimeMinus extends javax.swing.JFrame {
                             .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_studentMainLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(screen_studentMainLayout.createSequentialGroup()
+                        .addGroup(screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(screen_studentMainLayout.createSequentialGroup()
-                                .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(6, 6, 6)
+                                .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(screen_studentMainLayout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(screen_studentMainLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 4, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(screen_studentMainLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         screen_studentMainLayout.setVerticalGroup(
             screen_studentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,11 +376,10 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addComponent(main_CalendarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(12, 12, 12)
+                .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         parentPanel.add(screen_studentMain, "card3");
@@ -582,7 +592,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_login_ButtonActionPerformed
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 
 //////////          MAIN SCREEN         //////////
@@ -599,14 +609,16 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_main_BackButtonActionPerformed
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+//////////          StudentScheduleScreen         //////////   
     private void sSchedule_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSchedule_BackButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_studentMain);
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_sSchedule_BackButtonActionPerformed
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
