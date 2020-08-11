@@ -766,7 +766,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
     
     
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
-        User user = new User();
+        LoginClass user = new LoginClass();
         if (user.userLoginTest(login_username.getText(), login_password.getText())) {//test login button, will work with database
             parentPanel.removeAll();
             parentPanel.add(screen_sMain);
