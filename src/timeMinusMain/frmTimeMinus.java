@@ -1,9 +1,7 @@
 
 package timeMinusMain;
 
-import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.optionalusertools.DateHighlightPolicy;
-import com.github.lgooddatepicker.zinternaltools.HighlightInformation;
+
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -36,16 +34,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         
         sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
        
-        /* //used for testing LGoodDatePicker stuff
-       int day = 17;
-       String month = "AUGUST";
-       int year = 2020;
-       String descriptionEvent = "ITCO211 Take Home Test 2";
-       
-       
-       setDateHighlights(day, month, year, descriptionEvent);
-       setDateHighlights(19, "AUGUST", 2020, "Test Highlight");
-       */
+        
     }
 
     /**
@@ -96,7 +85,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
         sCalendar_Banner = new javax.swing.JPanel();
         sCalendar_BannerText = new javax.swing.JLabel();
         sCalendar_BackButton = new javax.swing.JButton();
-        sCalendar_calendarPanel = new com.github.lgooddatepicker.components.CalendarPanel();
         jPanel1 = new javax.swing.JPanel();
         screen_ChatMenu = new javax.swing.JPanel();
         screen_ChatRoom = new javax.swing.JPanel();
@@ -570,19 +558,13 @@ public class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(screen_sCalendarLayout.createSequentialGroup()
                 .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(screen_sCalendarLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(sCalendar_calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         screen_sCalendarLayout.setVerticalGroup(
             screen_sCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(screen_sCalendarLayout.createSequentialGroup()
                 .addComponent(sCalendar_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sCalendar_calendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(239, 239, 239)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(32, 32, 32)
                 .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -932,7 +914,6 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JButton sCalendar_BackButton;
     private javax.swing.JPanel sCalendar_Banner;
     private javax.swing.JLabel sCalendar_BannerText;
-    private com.github.lgooddatepicker.components.CalendarPanel sCalendar_calendarPanel;
     private javax.swing.JButton sSchedule_BackButton;
     private javax.swing.JPanel sSchedule_Banner;
     private javax.swing.JLabel sSchedule_BannerText;
@@ -947,12 +928,5 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
 
-   /* private void setDateHighlights(int day, String month, int year, String descriptionEvent) {
-        
-       MyHighlightPolicy studentHighlightPolicy = new MyHighlightPolicy(day, month, year, descriptionEvent); 
-       
-       DatePickerSettings settings = new DatePickerSettings();
-       settings.setHighlightPolicy(studentHighlightPolicy);
-       sCalendar_calendarPanel.setSettings(settings);
-    }*/ //used for testing LGoodDatePicker stuff
+   
 }
