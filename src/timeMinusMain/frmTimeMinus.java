@@ -3,7 +3,9 @@ package timeMinusMain;
 
 
 import java.awt.Color;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -761,30 +763,100 @@ public class frmTimeMinus extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_login_passwordFocusLost
 
+     public Connection con;
+        public java.sql.Statement st;
+        public ResultSet resSet;
     
-    
-    
+     public void DBconnect() 
+    {
+          try {
+             Class.forName("com.mysql.jdbc.Driver");
+             System.out.println("Driver connected");
+             String path = "jdbc:mysql://localhost:3307/timeminus";
+             con = DriverManager.getConnection(path,"root","");
+             System.out.println("database connected");
+             st = con.createStatement();
+  
+         } catch (Exception ex) {
+             System.out.println("error" + ex);
+         }
+     
+    }
     
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
-        LoginClass user = new LoginClass();
-        if (user.userLoginTest(login_username.getText(), login_password.getText())) {//test login button, will work with database
-            parentPanel.removeAll();
-            parentPanel.add(screen_sMain);
-            parentPanel.repaint();
-            parentPanel.revalidate();
-            if (!login_RememberDetails.isSelected()) {
-                login_password.setText("Password");
-                login_password.setForeground(new Color(153,153,153));
-                login_username.setText("Student ID / Pearson Email");
-                login_username.setForeground(new Color(153,153,153));
+   
+        DBconnect();
+        
+        String user = login_username.getText();
+        String pass = login_password.getText();
+       
+    
+            
+           try{
+               
+               String query = "select * from students";
+            resSet = st.executeQuery(query);
+            
+             String username = null;
+              String password = null;
+              String name = null;
+              String surname = null;
+              boolean userFound = false;
+          
+            while(resSet.next())
+            {
+                username = resSet.getString("StudentUserName");
+                password = resSet.getString("StudentPassword");
+                name = resSet.getString("StudentName");
+                surname = resSet.getString("StudentSurname");
+                
+                        if (user.equalsIgnoreCase(username) && pass.equalsIgnoreCase(password))
+                     {
+                         
+                        JOptionPane.showMessageDialog(null, "Hi "+ name +" "+ surname + " you have logged in successfully");
+                         parentPanel.removeAll();
+                         parentPanel.add(screen_sMain);
+                         parentPanel.repaint();
+                        parentPanel.revalidate();
+                         if (!login_RememberDetails.isSelected()) {
+                           login_password.setText("Password");
+                                   login_password.setForeground(new Color(153,153,153));
+                                  login_username.setText("Student ID / Pearson Email");
+                                    login_username.setForeground(new Color(153,153,153));
+                                 
+                         }
+                        userFound = true;   
+                      break;
+            
+                       }
+                        
             }
-        } else {
-            login_password.setText("Password");
-            login_password.setForeground(new Color(153,153,153));
-            login_username.setText("Student ID / Pearson Email");
-            login_username.setForeground(new Color(153,153,153));
-            JOptionPane.showMessageDialog(parentPanel,"Incorrect Username or Password", "", JOptionPane.WARNING_MESSAGE);
-        }
+               
+            if(userFound == false){
+              
+                          
+                            login_password.setText("Password");
+                            login_password.setForeground(new Color(153,153,153));
+                            login_username.setText("Student ID / Pearson Email");
+                            login_username.setForeground(new Color(153,153,153));
+                             JOptionPane.showMessageDialog(parentPanel,"Incorrect Username or Password", "", JOptionPane.WARNING_MESSAGE);
+                                
+                        }
+             
+                  
+                     
+            }catch(Exception ex)
+            {
+                System.out.println(ex);
+            
+            }
+           
+         
+        
+       
+       
+            
+        
         
     }//GEN-LAST:event_login_ButtonActionPerformed
 
