@@ -3,6 +3,7 @@ package timeMinusMain;
 
 
 import java.awt.Color;
+import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -17,6 +18,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
     /**
      * Creates new form frmTimeMinus
      */
+    
     public frmTimeMinus() {//Constructor
         initComponents();
         screen_login.setFocusable(true);//shows login screen by defual when program starts
@@ -134,6 +136,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 login_usernameFocusLost(evt);
             }
         });
+        login_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_usernameActionPerformed(evt);
+            }
+        });
 
         login_password.setForeground(new java.awt.Color(153, 153, 153));
         login_password.setText("Password");
@@ -143,6 +150,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 login_passwordFocusLost(evt);
+            }
+        });
+        login_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_passwordActionPerformed(evt);
             }
         });
 
@@ -191,7 +203,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         );
 
         screen_login.add(login_detailsPanel);
-        login_detailsPanel.setBounds(26, 155, 313, 310);
+        login_detailsPanel.setBounds(26, 155, 321, 309);
 
         login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
         screen_login.add(login_Logo);
@@ -231,7 +243,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         );
 
         screen_login.add(login_ExtraPanel);
-        login_ExtraPanel.setBounds(0, 570, 360, 79);
+        login_ExtraPanel.setBounds(0, 570, 368, 83);
 
         login_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
         screen_login.add(login_Background);
@@ -288,7 +300,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addGroup(main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(main_NextClassLabelLayout.createSequentialGroup()
                         .addComponent(main_NextClassHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(main_NextClassLabelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -832,6 +844,14 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_main_CalendarButtonActionPerformed
+
+    private void login_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_login_usernameActionPerformed
+
+    private void login_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_login_passwordActionPerformed
 
 
 
