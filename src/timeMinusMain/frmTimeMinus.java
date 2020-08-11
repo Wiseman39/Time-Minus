@@ -6,6 +6,11 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -16,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Justin ,kieran
  */
 public class frmTimeMinus extends javax.swing.JFrame {
+    DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
     
+    DefaultTableModel mainEventsTable = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
     /**
      * Creates new form frmTimeMinus
      */
@@ -30,7 +37,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.revalidate();
         
         
-        DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
+        
+        
         DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
         scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
         sSchedule_scheduleTable.setModel(sScheduleTableModel);
@@ -76,7 +84,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_NavigateButton = new javax.swing.JButton();
         main_ChatButton = new javax.swing.JButton();
         main_CalendarScrollPane = new javax.swing.JScrollPane();
-        main_CalendarEvents = new javax.swing.JTable();
+        main_calendarEvents = new javax.swing.JTable();
         main_CalendarButton = new javax.swing.JButton();
         main_NextClassesButton = new javax.swing.JButton();
         screen_studentSchedule = new javax.swing.JPanel();
@@ -89,7 +97,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
         sCalendar_Banner = new javax.swing.JPanel();
         sCalendar_BannerText = new javax.swing.JLabel();
         sCalendar_BackButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        sCalendar_monthCombo = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        sCalendar_calendarTable = new javax.swing.JTable();
+        sCalendar_eventTypeCombo = new javax.swing.JComboBox<>();
+        sCalendar_tableHeader = new javax.swing.JLabel();
         screen_ChatMenu = new javax.swing.JPanel();
         screen_ChatRoom = new javax.swing.JPanel();
         screen_navMenu = new javax.swing.JPanel();
@@ -205,7 +217,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         );
 
         screen_login.add(login_detailsPanel);
-        login_detailsPanel.setBounds(26, 155, 321, 309);
+        login_detailsPanel.setBounds(26, 155, 313, 310);
 
         login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
         screen_login.add(login_Logo);
@@ -245,7 +257,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         );
 
         screen_login.add(login_ExtraPanel);
-        login_ExtraPanel.setBounds(0, 570, 368, 83);
+        login_ExtraPanel.setBounds(0, 570, 360, 79);
 
         login_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
         screen_login.add(login_Background);
@@ -341,16 +353,12 @@ public class frmTimeMinus extends javax.swing.JFrame {
         main_ChatButton.setForeground(new java.awt.Color(255, 255, 255));
         main_ChatButton.setText("Chat with an SRC member or Lecturer");
 
-        main_CalendarEvents.setBackground(new java.awt.Color(2, 31, 84));
-        main_CalendarEvents.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        main_CalendarEvents.setForeground(new java.awt.Color(255, 255, 255));
-        main_CalendarEvents.setModel(new javax.swing.table.DefaultTableModel(
+        main_calendarEvents.setBackground(new java.awt.Color(2, 31, 84));
+        main_calendarEvents.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        main_calendarEvents.setForeground(new java.awt.Color(255, 255, 255));
+        main_calendarEvents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"19 Feb: Career Expo in Cafeteria"},
-                {"20 Feb: ITMP221 CAS Presentation"},
-                {"23 Feb: ITSP200: Feedback Session"},
-                {"3 Mar: ITDA211 Take Home Test 2"},
-                {"x Month: ?????????????????????????????????????????????"}
+
             },
             new String [] {
                 "Upcomming Events"
@@ -364,13 +372,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        main_CalendarEvents.setFocusable(false);
-        main_CalendarEvents.setGridColor(new java.awt.Color(255, 255, 255));
-        main_CalendarEvents.setRowHeight(50);
-        main_CalendarEvents.setRowSelectionAllowed(false);
-        main_CalendarEvents.getTableHeader().setResizingAllowed(false);
-        main_CalendarEvents.getTableHeader().setReorderingAllowed(false);
-        main_CalendarScrollPane.setViewportView(main_CalendarEvents);
+        main_calendarEvents.setFocusable(false);
+        main_calendarEvents.setGridColor(new java.awt.Color(255, 255, 255));
+        main_calendarEvents.setRowHeight(50);
+        main_calendarEvents.setRowSelectionAllowed(false);
+        main_CalendarScrollPane.setViewportView(main_calendarEvents);
 
         main_CalendarButton.setBackground(new java.awt.Color(2, 31, 84));
         main_CalendarButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -553,16 +559,27 @@ public class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
-        );
+        sCalendar_monthCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "August" }));
+
+        sCalendar_calendarTable.setBackground(new java.awt.Color(2, 31, 84));
+        sCalendar_calendarTable.setForeground(new java.awt.Color(255, 255, 255));
+        sCalendar_calendarTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                ""
+            }
+        ));
+        sCalendar_calendarTable.setRowSelectionAllowed(false);
+        jScrollPane2.setViewportView(sCalendar_calendarTable);
+
+        sCalendar_eventTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+
+        sCalendar_tableHeader.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        sCalendar_tableHeader.setForeground(new java.awt.Color(0, 0, 0));
+        sCalendar_tableHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sCalendar_tableHeader.setText("Assessments and Activities");
 
         javax.swing.GroupLayout screen_sCalendarLayout = new javax.swing.GroupLayout(screen_sCalendar);
         screen_sCalendar.setLayout(screen_sCalendarLayout);
@@ -572,15 +589,28 @@ public class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(screen_sCalendarLayout.createSequentialGroup()
                 .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(screen_sCalendarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(screen_sCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sCalendar_tableHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(sCalendar_monthCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sCalendar_eventTypeCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         screen_sCalendarLayout.setVerticalGroup(
             screen_sCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(screen_sCalendarLayout.createSequentialGroup()
                 .addComponent(sCalendar_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(239, 239, 239)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sCalendar_monthCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sCalendar_eventTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sCalendar_tableHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -857,7 +887,11 @@ public class frmTimeMinus extends javax.swing.JFrame {
        
             
         
-        
+        try {
+            updateMainScreenCalendar();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_login_ButtonActionPerformed
 
     
@@ -968,8 +1002,8 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
     private javax.swing.JButton login_Button;
@@ -984,7 +1018,6 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JTextField login_username;
     private javax.swing.JButton main_BackButton;
     private javax.swing.JButton main_CalendarButton;
-    private javax.swing.JTable main_CalendarEvents;
     private javax.swing.JScrollPane main_CalendarScrollPane;
     private javax.swing.JButton main_ChatButton;
     private javax.swing.JButton main_NavToClassButton;
@@ -994,6 +1027,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JLabel main_NextClassNameCode;
     private javax.swing.JButton main_NextClassesButton;
     private javax.swing.JLabel main_WelcomeBackMessage;
+    private javax.swing.JTable main_calendarEvents;
     private javax.swing.JLabel main_nextClassDuration;
     private javax.swing.JLabel main_nextClassVenue;
     private javax.swing.JButton navMenu_BackButton1;
@@ -1006,6 +1040,10 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JButton sCalendar_BackButton;
     private javax.swing.JPanel sCalendar_Banner;
     private javax.swing.JLabel sCalendar_BannerText;
+    private javax.swing.JTable sCalendar_calendarTable;
+    private javax.swing.JComboBox<String> sCalendar_eventTypeCombo;
+    private javax.swing.JComboBox<String> sCalendar_monthCombo;
+    private javax.swing.JLabel sCalendar_tableHeader;
     private javax.swing.JButton sSchedule_BackButton;
     private javax.swing.JPanel sSchedule_Banner;
     private javax.swing.JLabel sSchedule_BannerText;
@@ -1019,6 +1057,29 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JPanel screen_sMain;
     private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
+
+    
+    
+    private void updateMainScreenCalendar() throws SQLException {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int currentDay = calendar.get(Calendar.DATE);
+        System.out.println(currentDay);
+        String currentMonth = "August";
+        main_calendarEvents.setModel(mainEventsTable);
+        
+        mainEventsTable.addColumn("Upcomming Tests and Events");
+        
+         
+        String query = "SELECT DateDay, DateMonth, EventDesc, EventType FROM eventstable WHERE DateDay >= " + currentDay + " AND DateMonth = '" + currentMonth + "' LIMIT 5";
+        
+        resSet = st.executeQuery(query);
+        
+        while (resSet.next()){
+            mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[] {resSet.getString(1) + " " + resSet.getString(2) +  ": " + resSet.getString(3) + " " + resSet.getString(4)});
+        }
+        
+        
+    }
 
    
 }
