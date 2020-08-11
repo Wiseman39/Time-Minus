@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmTimeMinus extends javax.swing.JFrame {
     DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
     
-    DefaultTableModel mainEventsTable = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
+    DefaultTableModel mainEventsTable = new DefaultTableModel(); //create tableModel object to manipulate the main screen upcomming table
     /**
      * Creates new form frmTimeMinus
      */
@@ -46,6 +47,13 @@ public class frmTimeMinus extends javax.swing.JFrame {
         
         sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
        
+        
+        DBconnect(); // connects to the database
+        try {
+            updateMainScreenCalendar(); //Updates main screen upcomming calendar when program starts.
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -815,7 +823,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
     
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
    
-        DBconnect();
+        //DBconnect();
         
         String user = login_username.getText();
         String pass = login_password.getText();
@@ -855,7 +863,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
                                     login_username.setForeground(new Color(153,153,153));
                                  
                          }
-                        userFound = true;   
+                        userFound = true;
+                        
                       break;
             
                        }
@@ -887,11 +896,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
        
             
         
-        try {
-            updateMainScreenCalendar();
-        } catch (SQLException ex) {
-            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_login_ButtonActionPerformed
 
     
@@ -1064,7 +1069,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         int currentDay = calendar.get(Calendar.DATE);
         System.out.println(currentDay);
-        String currentMonth = "August";
+        String currentMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         main_calendarEvents.setModel(mainEventsTable);
         
         mainEventsTable.addColumn("Upcomming Tests and Events");
