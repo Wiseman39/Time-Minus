@@ -25,6 +25,10 @@ public class frmTimeMinus extends javax.swing.JFrame {
     DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
     
     DefaultTableModel mainEventsTable = new DefaultTableModel(); //create tableModel object to manipulate the main screen upcomming table
+    
+    DefaultTableModel sCalendarTableModel = new DefaultTableModel(); //create tableModel object to manipulate the calendar screen table
+    
+    Calendar calendar = Calendar.getInstance(TimeZone.getDefault());//creates calendar object for functions requiring date information
     /**
      * Creates new form frmTimeMinus
      */
@@ -277,8 +281,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
         screen_sMain.setPreferredSize(new java.awt.Dimension(360, 640));
 
         main_BackButton.setBackground(new java.awt.Color(255, 255, 255));
-        main_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        main_BackButton.setText("< Back");
+        main_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        main_BackButton.setText("<<");
         main_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
         main_BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,7 +326,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addGroup(main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(main_NextClassLabelLayout.createSequentialGroup()
                         .addComponent(main_NextClassHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(main_NextClassLabelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,15 +416,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(screen_sMainLayout.createSequentialGroup()
                 .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(screen_sMainLayout.createSequentialGroup()
-                        .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(screen_sMainLayout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(main_NextClassesButton)))
-                        .addGap(0, 8, Short.MAX_VALUE))
-                    .addGroup(screen_sMainLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(main_CalendarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -430,7 +425,15 @@ public class frmTimeMinus extends javax.swing.JFrame {
                             .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_sMainLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(screen_sMainLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(main_NextClassesButton))
+                    .addGroup(screen_sMainLayout.createSequentialGroup()
+                        .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         screen_sMainLayout.setVerticalGroup(
@@ -440,8 +443,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(main_NavToClassButton)
                     .addComponent(main_NextClassesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
@@ -450,7 +453,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addComponent(main_CalendarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -486,8 +489,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
         );
 
         sSchedule_BackButton.setBackground(new java.awt.Color(255, 255, 255));
-        sSchedule_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        sSchedule_BackButton.setText("< Back");
+        sSchedule_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        sSchedule_BackButton.setText("<<");
         sSchedule_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
         sSchedule_BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -516,7 +519,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
             .addComponent(sSchedule_Banner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(screen_studentScheduleLayout.createSequentialGroup()
-                .addComponent(sSchedule_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sSchedule_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         screen_studentScheduleLayout.setVerticalGroup(
@@ -558,8 +561,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
         );
 
         sCalendar_BackButton.setBackground(new java.awt.Color(255, 255, 255));
-        sCalendar_BackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        sCalendar_BackButton.setText("< Back");
+        sCalendar_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        sCalendar_BackButton.setText("<<");
         sCalendar_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
         sCalendar_BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -567,7 +570,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
-        sCalendar_monthCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "August" }));
+        sCalendar_monthCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
         sCalendar_calendarTable.setBackground(new java.awt.Color(2, 31, 84));
         sCalendar_calendarTable.setForeground(new java.awt.Color(255, 255, 255));
@@ -582,7 +585,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         sCalendar_calendarTable.setRowSelectionAllowed(false);
         jScrollPane2.setViewportView(sCalendar_calendarTable);
 
-        sCalendar_eventTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        sCalendar_eventTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Event", "Test" }));
 
         sCalendar_tableHeader.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         sCalendar_tableHeader.setForeground(new java.awt.Color(0, 0, 0));
@@ -595,9 +598,6 @@ public class frmTimeMinus extends javax.swing.JFrame {
             screen_sCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sCalendar_Banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(screen_sCalendarLayout.createSequentialGroup()
-                .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(screen_sCalendarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(screen_sCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sCalendar_tableHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -605,6 +605,9 @@ public class frmTimeMinus extends javax.swing.JFrame {
                     .addComponent(sCalendar_monthCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sCalendar_eventTypeCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(screen_sCalendarLayout.createSequentialGroup()
+                .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         screen_sCalendarLayout.setVerticalGroup(
             screen_sCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -617,8 +620,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sCalendar_tableHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sCalendar_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -823,8 +826,10 @@ public class frmTimeMinus extends javax.swing.JFrame {
     
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
    
-        //DBconnect();
+        testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
         
+        //Actual Login with database
+        /*
         String user = login_username.getText();
         String pass = login_password.getText();
        
@@ -893,7 +898,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
          
         
        
-       
+       */
             
         
         
@@ -950,10 +955,52 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     }//GEN-LAST:event_sCalendar_BackButtonActionPerformed
 
     private void main_CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_CalendarButtonActionPerformed
+        String query;
+        
         parentPanel.removeAll();
         parentPanel.add(screen_sCalendar);
         parentPanel.repaint();
         parentPanel.revalidate();
+        
+        sCalendar_monthCombo.setSelectedItem(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+        sCalendar_eventTypeCombo.setSelectedItem("All");
+        
+        
+        
+        
+        sCalendar_calendarTable.setModel(sCalendarTableModel);
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
+        
+        renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+        
+        
+        sCalendarTableModel.addColumn(sCalendar_monthCombo.getSelectedItem());
+        sCalendar_calendarTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+        if (sCalendar_eventTypeCombo.getSelectedItem() != "All") {
+            query = "SELECT DateDay, DateMonth, DateYear, EventDesc, EventType FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "' AND EventType = '" + sCalendar_eventTypeCombo.getSelectedItem() + "'";
+        } else{
+            query = "SELECT DateDay, DateMonth, DateYear ,EventDesc, EventType FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "'";
+        }
+         
+        
+        
+        try {
+            resSet = st.executeQuery(query);
+            while (resSet.next()){
+            String day = resSet.getString(1);
+            String month = resSet.getString(2);
+            String year = resSet.getString(3);
+            String desc = resSet.getString(4);
+            String type = resSet.getString(5);
+            
+            
+                sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[] {day + month + year + desc + type});
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_main_CalendarButtonActionPerformed
 
     private void login_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_usernameActionPerformed
@@ -1066,9 +1113,9 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     
     
     private void updateMainScreenCalendar() throws SQLException {
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        
         int currentDay = calendar.get(Calendar.DATE);
-        System.out.println(currentDay);
+        //System.out.println(currentDay);
         String currentMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         main_calendarEvents.setModel(mainEventsTable);
         
@@ -1084,6 +1131,13 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         }
         
         
+    }
+
+    private void testingLoginBypass() {//used to bypass login for validating GUI layout. MUST REMOVE
+        parentPanel.removeAll();
+        parentPanel.add(screen_sMain);
+        parentPanel.repaint();
+        parentPanel.revalidate();
     }
 
    
