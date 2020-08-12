@@ -43,7 +43,8 @@ public class frmTimeMinus extends javax.swing.JFrame {
         
         
         
-        
+        main_calendarEvents.setShowGrid(true);
+        sCalendar_calendarTable.setShowGrid(true);
         DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
         scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
         sSchedule_scheduleTable.setModel(sScheduleTableModel);
@@ -386,6 +387,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
         });
         main_calendarEvents.setFocusable(false);
         main_calendarEvents.setGridColor(new java.awt.Color(255, 255, 255));
+        main_calendarEvents.setIntercellSpacing(new java.awt.Dimension(1, 2));
         main_calendarEvents.setRowHeight(50);
         main_calendarEvents.setRowSelectionAllowed(false);
         main_CalendarScrollPane.setViewportView(main_calendarEvents);
@@ -571,8 +573,14 @@ public class frmTimeMinus extends javax.swing.JFrame {
         });
 
         sCalendar_monthCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        sCalendar_monthCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sCalendar_monthComboActionPerformed(evt);
+            }
+        });
 
         sCalendar_calendarTable.setBackground(new java.awt.Color(2, 31, 84));
+        sCalendar_calendarTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         sCalendar_calendarTable.setForeground(new java.awt.Color(255, 255, 255));
         sCalendar_calendarTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -582,10 +590,17 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 ""
             }
         ));
+        sCalendar_calendarTable.setGridColor(new java.awt.Color(255, 255, 255));
+        sCalendar_calendarTable.setRowHeight(100);
         sCalendar_calendarTable.setRowSelectionAllowed(false);
         jScrollPane2.setViewportView(sCalendar_calendarTable);
 
-        sCalendar_eventTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Event", "Test" }));
+        sCalendar_eventTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Assessment", "Event", " " }));
+        sCalendar_eventTypeCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sCalendar_eventTypeComboActionPerformed(evt);
+            }
+        });
 
         sCalendar_tableHeader.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         sCalendar_tableHeader.setForeground(new java.awt.Color(0, 0, 0));
@@ -955,7 +970,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     }//GEN-LAST:event_sCalendar_BackButtonActionPerformed
 
     private void main_CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_CalendarButtonActionPerformed
-        String query;
+        
         
         parentPanel.removeAll();
         parentPanel.add(screen_sCalendar);
@@ -967,38 +982,8 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         
         
         
+        //updateCalendar();
         
-        sCalendar_calendarTable.setModel(sCalendarTableModel);
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
-        
-        renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
-        
-        
-        sCalendarTableModel.addColumn(sCalendar_monthCombo.getSelectedItem());
-        sCalendar_calendarTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
-        if (sCalendar_eventTypeCombo.getSelectedItem() != "All") {
-            query = "SELECT DateDay, DateMonth, DateYear, EventDesc, EventType FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "' AND EventType = '" + sCalendar_eventTypeCombo.getSelectedItem() + "'";
-        } else{
-            query = "SELECT DateDay, DateMonth, DateYear ,EventDesc, EventType FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "'";
-        }
-         
-        
-        
-        try {
-            resSet = st.executeQuery(query);
-            while (resSet.next()){
-            String day = resSet.getString(1);
-            String month = resSet.getString(2);
-            String year = resSet.getString(3);
-            String desc = resSet.getString(4);
-            String type = resSet.getString(5);
-            
-            
-                sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[] {day + month + year + desc + type});
-        }
-        } catch (SQLException ex) {
-            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         
     }//GEN-LAST:event_main_CalendarButtonActionPerformed
@@ -1010,6 +995,14 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private void login_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_passwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_login_passwordActionPerformed
+
+    private void sCalendar_monthComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_monthComboActionPerformed
+        updateCalendarScreenCalendar();
+    }//GEN-LAST:event_sCalendar_monthComboActionPerformed
+
+    private void sCalendar_eventTypeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_eventTypeComboActionPerformed
+        updateCalendarScreenCalendar();
+    }//GEN-LAST:event_sCalendar_eventTypeComboActionPerformed
 
 
 
@@ -1115,6 +1108,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private void updateMainScreenCalendar() throws SQLException {
         
         int currentDay = calendar.get(Calendar.DATE);
+        //int currentDay = 23;
         //System.out.println(currentDay);
         String currentMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         main_calendarEvents.setModel(mainEventsTable);
@@ -1125,6 +1119,21 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         String query = "SELECT DateDay, DateMonth, EventDesc, EventType FROM eventstable WHERE DateDay >= " + currentDay + " AND DateMonth = '" + currentMonth + "' LIMIT 5";
         
         resSet = st.executeQuery(query);
+        if (!resSet.next()) {
+            calendar.add(Calendar.MONTH, 1);
+            currentMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+            query = "SELECT DateDay, DateMonth, EventDesc, EventType FROM eventstable WHERE DateMonth = '" + currentMonth + "' LIMIT 5";
+            resSet = st.executeQuery(query);
+            while (resSet.next()){
+            mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[] {resSet.getString(1) + " " + resSet.getString(2) +  ": " + resSet.getString(3) + " " + resSet.getString(4)});
+        }
+        } else {
+            resSet.beforeFirst();
+            while (resSet.next()){
+            mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[] {resSet.getString(1) + " " + resSet.getString(2) +  ": " + resSet.getString(3) + " " + resSet.getString(4)});
+        }
+        }
+        
         
         while (resSet.next()){
             mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[] {resSet.getString(1) + " " + resSet.getString(2) +  ": " + resSet.getString(3) + " " + resSet.getString(4)});
@@ -1138,6 +1147,53 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         parentPanel.add(screen_sMain);
         parentPanel.repaint();
         parentPanel.revalidate();
+    }
+
+    private void updateCalendarScreenCalendar() {
+        
+        String query;
+        sCalendar_calendarTable.setModel(sCalendarTableModel);
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
+        
+        renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+        
+        sCalendarTableModel.setColumnCount(0);
+        
+        if (sCalendarTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+                for (int i = sCalendarTableModel.getRowCount() - 1; i > -1; i--) {
+                    sCalendarTableModel.removeRow(i);
+                }
+            }
+        
+        sCalendarTableModel.addColumn(sCalendar_monthCombo.getSelectedItem());
+        sCalendar_calendarTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+        if (sCalendar_eventTypeCombo.getSelectedItem() != "All") {
+            query = "SELECT DateDay, DateMonth, DateYear, EventDesc, EventType, Time FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "' AND EventType = '" + sCalendar_eventTypeCombo.getSelectedItem() + "'";
+        } else{
+            query = "SELECT DateDay, DateMonth, DateYear ,EventDesc, EventType, Time FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "'";
+        }
+         
+        
+        
+        try {
+            resSet = st.executeQuery(query);
+            while (resSet.next()){
+            String day = resSet.getString(1);
+            String month = resSet.getString(2);
+            String year = resSet.getString(3);
+            String desc = resSet.getString(4);
+            String type = resSet.getString(5);
+            String time = resSet.getString(6);
+            
+                sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[] 
+                { "<html><div style=\"text-align:center\"><b>Date: " + day + " " + month + " " + year + ": </b>"
+                        + "<br>Time: <i>" + time 
+                        + "</i><br>" + type 
+                        + "<br>Description: " + desc + "</div></html>"});
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
    
