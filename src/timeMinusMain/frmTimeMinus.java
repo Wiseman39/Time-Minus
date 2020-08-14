@@ -813,10 +813,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
 
-        testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
+        //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
         
         //Actual Login with database
-        /*
+        
         String user = login_username.getText();
         String pass = login_password.getText();
 
@@ -852,7 +852,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
                     }
                     userFound = true;
-
+                    main_WelcomeBackMessage.setText("Welcome Back " + name + " " + surname);
                     break;
 
                 }
@@ -874,8 +874,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         }
 
-        */
-
+        
+        
     }//GEN-LAST:event_login_ButtonActionPerformed
 
 
