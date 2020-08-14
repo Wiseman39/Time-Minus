@@ -1,6 +1,4 @@
-
 package timeMinusMain;
-
 
 import java.awt.Color;
 import java.sql.Connection;
@@ -21,18 +19,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Justin ,kieran
  */
-public class frmTimeMinus extends javax.swing.JFrame {
+public final class frmTimeMinus extends javax.swing.JFrame {
+
     DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
-    
+
     DefaultTableModel mainEventsTable = new DefaultTableModel(); //create tableModel object to manipulate the main screen upcomming table
-    
+
     DefaultTableModel sCalendarTableModel = new DefaultTableModel(); //create tableModel object to manipulate the calendar screen table
-    
+
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());//creates calendar object for functions requiring date information
+
     /**
      * Creates new form frmTimeMinus
      */
-    
     public frmTimeMinus() {//Constructor
         initComponents();
         screen_login.setFocusable(true);//shows login screen by defual when program starts
@@ -40,26 +39,20 @@ public class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.add(screen_login);
         parentPanel.repaint();
         parentPanel.revalidate();
-        
-        
-        
+
         main_calendarEvents.setShowGrid(true);
         sCalendar_calendarTable.setShowGrid(true);
         DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
         scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
-        sSchedule_scheduleTable.setModel(sScheduleTableModel);
-        sScheduleTableModel.addColumn("");// no need for a column name if header is removed
-        
-        sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
-       
-        
+
+        //sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
         DBconnect(); // connects to the database
         try {
             updateMainScreenCalendar(); //Updates main screen upcomming calendar when program starts.
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     /**
@@ -510,6 +503,7 @@ public class frmTimeMinus extends javax.swing.JFrame {
                 ""
             }
         ));
+        sSchedule_scheduleTable.setRowHeight(100);
         sSchedule_scheduleTable.setRowSelectionAllowed(false);
         sSchedule_scheduleTable.setTableHeader(null);
         jScrollPane1.setViewportView(sSchedule_scheduleTable);
@@ -788,21 +782,18 @@ public class frmTimeMinus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-
-    
-
     private void login_usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusGained
         if (login_username.getText().equals("Student ID / Pearson Email")) {        //code for showing text hints the login screentextboxes
             login_username.setText("");
             login_username.setForeground(Color.black);
-        } 
+        }
     }//GEN-LAST:event_login_usernameFocusGained
 
     private void login_usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusLost
         if (login_username.getText().equals("")) {
             login_username.setText("Student ID / Pearson Email");
-            login_username.setForeground(new Color(153,153,153));
-        }    
+            login_username.setForeground(new Color(153, 153, 153));
+        }
     }//GEN-LAST:event_login_usernameFocusLost
 
     private void login_passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_passwordFocusGained
@@ -815,120 +806,148 @@ public class frmTimeMinus extends javax.swing.JFrame {
     private void login_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_passwordFocusLost
         if (login_password.getText().equals("")) {
             login_password.setText("Password");
-            login_password.setForeground(new Color(153,153,153));
+            login_password.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_login_passwordFocusLost
 
-     public Connection con;
-        public java.sql.Statement st;
-        public ResultSet resSet;
-    
-     public void DBconnect() 
-    {
-          try {
-             Class.forName("com.mysql.jdbc.Driver");
-             System.out.println("Driver connected");
-             String path = "jdbc:mysql://localhost:3307/timeminus";
-             con = DriverManager.getConnection(path,"root","");
-             System.out.println("database connected");
-             st = con.createStatement();
-  
-         } catch (Exception ex) {
-             System.out.println("error" + ex);
-         }
-     
+    public Connection con;
+    public java.sql.Statement st;
+    public ResultSet resSet;
+
+    public void DBconnect() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Driver connected");
+            String path = "jdbc:mysql://localhost:3307/timeminus";
+            con = DriverManager.getConnection(path, "root", "");
+            System.out.println("database connected");
+            st = con.createStatement();
+
+        } catch (Exception ex) {
+            System.out.println("error" + ex);
+        }
+
     }
-    
+
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
-   
-        testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
-        
+
+        //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
         //Actual Login with database
         /*
         String user = login_username.getText();
         String pass = login_password.getText();
-       
-    
-            
-           try{
-               
-               String query = "select * from students";
+
+        try {
+
+            String query = "select * from students";
             resSet = st.executeQuery(query);
-            
-             String username = null;
-              String password = null;
-              String name = null;
-              String surname = null;
-              boolean userFound = false;
-          
-            while(resSet.next())
-            {
+
+            String username = null;
+            String password = null;
+            String name = null;
+            String surname = null;
+            boolean userFound = false;
+
+            while (resSet.next()) {
                 username = resSet.getString("StudentUserName");
                 password = resSet.getString("StudentPassword");
                 name = resSet.getString("StudentName");
                 surname = resSet.getString("StudentSurname");
-                
-                        if (user.equalsIgnoreCase(username) && pass.equalsIgnoreCase(password))
-                     {
-                         
-                        JOptionPane.showMessageDialog(null, "Hi "+ name +" "+ surname + " you have logged in successfully");
-                         parentPanel.removeAll();
-                         parentPanel.add(screen_sMain);
-                         parentPanel.repaint();
-                        parentPanel.revalidate();
-                         if (!login_RememberDetails.isSelected()) {
-                           login_password.setText("Password");
-                                   login_password.setForeground(new Color(153,153,153));
-                                  login_username.setText("Student ID / Pearson Email");
-                                    login_username.setForeground(new Color(153,153,153));
-                                 
-                         }
-                        userFound = true;
-                        
-                      break;
-            
-                       }
-                        
-            }
-               
-            if(userFound == false){
-              
-                          
-                            login_password.setText("Password");
-                            login_password.setForeground(new Color(153,153,153));
-                            login_username.setText("Student ID / Pearson Email");
-                            login_username.setForeground(new Color(153,153,153));
-                             JOptionPane.showMessageDialog(parentPanel,"Incorrect Username or Password", "", JOptionPane.WARNING_MESSAGE);
-                                
-                        }
-             
-                  
-                     
-            }catch(Exception ex)
-            {
-                System.out.println(ex);
-            
-            }
-           
-         
-        
-       
-       */
-            
-        
-        
-    }//GEN-LAST:event_login_ButtonActionPerformed
 
-    
+                if (user.equalsIgnoreCase(username) && pass.equalsIgnoreCase(password)) {
+
+                    JOptionPane.showMessageDialog(null, "Hi " + name + " " + surname + " you have logged in successfully");
+                    parentPanel.removeAll();
+                    parentPanel.add(screen_sMain);
+                    parentPanel.repaint();
+                    parentPanel.revalidate();
+                    if (!login_RememberDetails.isSelected()) {
+                        login_password.setText("Password");
+                        login_password.setForeground(new Color(153, 153, 153));
+                        login_username.setText("Student ID / Pearson Email");
+                        login_username.setForeground(new Color(153, 153, 153));
+
+                    }
+                    userFound = true;
+
+                    break;
+
+                }
+
+            }
+
+            if (userFound == false) {
+
+                login_password.setText("Password");
+                login_password.setForeground(new Color(153, 153, 153));
+                login_username.setText("Student ID / Pearson Email");
+                login_username.setForeground(new Color(153, 153, 153));
+                JOptionPane.showMessageDialog(parentPanel, "Incorrect Username or Password", "", JOptionPane.WARNING_MESSAGE);
+
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+
+        }
+
+        */
+
+    }//GEN-LAST:event_login_ButtonActionPerformed
 
 
 private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
-        parentPanel.removeAll();
-        parentPanel.add(screen_studentSchedule);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+    parentPanel.removeAll();
+    parentPanel.add(screen_studentSchedule);
+    parentPanel.repaint();
+    parentPanel.revalidate();
+
+    //show schedule for student:
+    //String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+    String dayOfWeek = "Thursday";
+    //System.out.println(dayOfWeek);
+
+    String query = "";
+    sSchedule_scheduleTable.setModel(sScheduleTableModel);
+    DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
+
+    renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+
+    sScheduleTableModel.setColumnCount(0);
+
+    if (sScheduleTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+        for (int i = sScheduleTableModel.getRowCount() - 1; i > -1; i--) {
+            sScheduleTableModel.removeRow(i);
+        }
+    }
+
+    sScheduleTableModel.addColumn("");// no need for a column name if header is removed
+    sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+
+    query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + dayOfWeek + "'";
+
+    try {
+        resSet = st.executeQuery(query);
+        while (resSet.next()) {
+            String SubjectName = resSet.getString(1);
+            String SubjectCode = resSet.getString(2);
+            String Venue = resSet.getString(3);
+            String StartTime = resSet.getString(4);
+            String EndTime = resSet.getString(5);
+            //String time = resSet.getString(6);
+
+            sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
+                + "<br>Subject Code: " + SubjectCode
+                + "<br>Venue Number: " + Venue
+                + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+
     }//GEN-LAST:event_main_NextClassesButtonActionPerformed
-	
+
     private void main_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_BackButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_login);
@@ -936,8 +955,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         parentPanel.revalidate();
     }//GEN-LAST:event_main_BackButtonActionPerformed
 
-    
-  
+
     private void sSchedule_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSchedule_BackButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_sMain);
@@ -950,7 +968,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         parentPanel.add(screen_sMain);
         parentPanel.repaint();
         parentPanel.revalidate();
-        
+
         navMenu_startComboB.setSelectedIndex(0);
         navMenu_endComboB.setSelectedIndex(0);
     }//GEN-LAST:event_navMenu_BackButton1ActionPerformed
@@ -970,22 +988,17 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     }//GEN-LAST:event_sCalendar_BackButtonActionPerformed
 
     private void main_CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_CalendarButtonActionPerformed
-        
-        
+
         parentPanel.removeAll();
         parentPanel.add(screen_sCalendar);
         parentPanel.repaint();
         parentPanel.revalidate();
-        
+
         sCalendar_monthCombo.setSelectedItem(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
         sCalendar_eventTypeCombo.setSelectedItem("All");
-        
-        
-        
-        //updateCalendar();
-        
-        
-        
+
+        //updateCalendarScreen(); Apparently do not need this for the calendar screen to work?
+
     }//GEN-LAST:event_main_CalendarButtonActionPerformed
 
     private void login_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_usernameActionPerformed
@@ -997,17 +1010,12 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     }//GEN-LAST:event_login_passwordActionPerformed
 
     private void sCalendar_monthComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_monthComboActionPerformed
-        updateCalendarScreenCalendar();
+        updateCalendarScreen();
     }//GEN-LAST:event_sCalendar_monthComboActionPerformed
 
     private void sCalendar_eventTypeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_eventTypeComboActionPerformed
-        updateCalendarScreenCalendar();
+        updateCalendarScreen();
     }//GEN-LAST:event_sCalendar_eventTypeComboActionPerformed
-
-
-
-
-    
 
     /**
      * @param args the command line arguments
@@ -1103,43 +1111,38 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
 
-    
-    
     private void updateMainScreenCalendar() throws SQLException {
-        
+
         int currentDay = calendar.get(Calendar.DATE);
         //int currentDay = 23;
         //System.out.println(currentDay);
         String currentMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         main_calendarEvents.setModel(mainEventsTable);
-        
-        mainEventsTable.addColumn("Upcomming Tests and Events");
-        
-         
+
+        mainEventsTable.addColumn("Upcomming Assessments and Events");
+
         String query = "SELECT DateDay, DateMonth, EventDesc, EventType FROM eventstable WHERE DateDay >= " + currentDay + " AND DateMonth = '" + currentMonth + "' LIMIT 5";
-        
+
         resSet = st.executeQuery(query);
         if (!resSet.next()) {
             calendar.add(Calendar.MONTH, 1);
             currentMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
             query = "SELECT DateDay, DateMonth, EventDesc, EventType FROM eventstable WHERE DateMonth = '" + currentMonth + "' LIMIT 5";
             resSet = st.executeQuery(query);
-            while (resSet.next()){
-            mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[] {resSet.getString(1) + " " + resSet.getString(2) +  ": " + resSet.getString(3) + " " + resSet.getString(4)});
-        }
+            while (resSet.next()) {
+                mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[]{resSet.getString(1) + " " + resSet.getString(2) + ": " + resSet.getString(3) + " " + resSet.getString(4)});
+            }
         } else {
             resSet.beforeFirst();
-            while (resSet.next()){
-            mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[] {resSet.getString(1) + " " + resSet.getString(2) +  ": " + resSet.getString(3) + " " + resSet.getString(4)});
+            while (resSet.next()) {
+                mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[]{resSet.getString(1) + " " + resSet.getString(2) + ": " + resSet.getString(3) + " " + resSet.getString(4)});
+            }
         }
+
+        while (resSet.next()) {
+            mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[]{resSet.getString(1) + " " + resSet.getString(2) + ": " + resSet.getString(3) + " " + resSet.getString(4)});
         }
-        
-        
-        while (resSet.next()){
-            mainEventsTable.insertRow(mainEventsTable.getRowCount(), new Object[] {resSet.getString(1) + " " + resSet.getString(2) +  ": " + resSet.getString(3) + " " + resSet.getString(4)});
-        }
-        
-        
+
     }
 
     private void testingLoginBypass() {//used to bypass login for validating GUI layout. MUST REMOVE
@@ -1149,52 +1152,48 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         parentPanel.revalidate();
     }
 
-    private void updateCalendarScreenCalendar() {
-        
+    private void updateCalendarScreen() {
+
         String query;
         sCalendar_calendarTable.setModel(sCalendarTableModel);
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
-        
+
         renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
-        
+
         sCalendarTableModel.setColumnCount(0);
-        
+
         if (sCalendarTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
-                for (int i = sCalendarTableModel.getRowCount() - 1; i > -1; i--) {
-                    sCalendarTableModel.removeRow(i);
-                }
+            for (int i = sCalendarTableModel.getRowCount() - 1; i > -1; i--) {
+                sCalendarTableModel.removeRow(i);
             }
-        
+        }
+
         sCalendarTableModel.addColumn(sCalendar_monthCombo.getSelectedItem());
         sCalendar_calendarTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
         if (sCalendar_eventTypeCombo.getSelectedItem() != "All") {
             query = "SELECT DateDay, DateMonth, DateYear, EventDesc, EventType, Time FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "' AND EventType = '" + sCalendar_eventTypeCombo.getSelectedItem() + "'";
-        } else{
+        } else {
             query = "SELECT DateDay, DateMonth, DateYear ,EventDesc, EventType, Time FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "'";
         }
-         
-        
-        
+
         try {
             resSet = st.executeQuery(query);
-            while (resSet.next()){
-            String day = resSet.getString(1);
-            String month = resSet.getString(2);
-            String year = resSet.getString(3);
-            String desc = resSet.getString(4);
-            String type = resSet.getString(5);
-            String time = resSet.getString(6);
-            
-                sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[] 
-                { "<html><div style=\"text-align:center\"><b>Date: " + day + " " + month + " " + year + ": </b>"
-                        + "<br>Time: <i>" + time 
-                        + "</i><br>" + type 
-                        + "<br>Description: " + desc + "</div></html>"});
-        }
+            while (resSet.next()) {
+                String day = resSet.getString(1);
+                String month = resSet.getString(2);
+                String year = resSet.getString(3);
+                String desc = resSet.getString(4);
+                String type = resSet.getString(5);
+                String time = resSet.getString(6);
+
+                sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>Date: " + day + " " + month + " " + year + ": </b>"
+                    + "<br>Time: <i>" + time
+                    + "</i><br>" + type
+                    + "<br>Description: " + desc + "</div></html>"});
+            }
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-   
 }
