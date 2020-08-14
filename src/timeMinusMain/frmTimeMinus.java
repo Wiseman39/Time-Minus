@@ -30,7 +30,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     DefaultTableModel sCalendarTableModel = new DefaultTableModel(); //create tableModel object to manipulate the calendar screen table
 
     DefaultTableModel MainNextClassTableModel = new DefaultTableModel();
-    
+
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());//creates calendar object for functions requiring date information
 
     /**
@@ -47,10 +47,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         main_calendarEvents.setShowGrid(true);
         sCalendar_calendarTable.setShowGrid(true);
         sSchedule_scheduleTable.setShowGrid(true);
-        
+
         //DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
         //scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
-
         //sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
         DBconnect(); // connects to the database
         try {
@@ -813,10 +812,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
 
-        //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
-        
+        testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
+
+        /*
         //Actual Login with database
-        
         String user = login_username.getText();
         String pass = login_password.getText();
 
@@ -874,10 +873,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         }
 
-        
-        
+         */
     }//GEN-LAST:event_login_ButtonActionPerformed
-
 
 
     private void sSchedule_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSchedule_BackButtonActionPerformed
@@ -1141,117 +1138,107 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void updateStudentSchedule() {
         //show schedule for student:
-    
-    //String dayOfWeek = "Thursday";
-    //System.out.println(dayOfWeek);
 
-    String query;
-    sSchedule_scheduleTable.setModel(sScheduleTableModel);
-    DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
+        //String dayOfWeek = "Thursday";
+        //System.out.println(dayOfWeek);
+        String query;
+        sSchedule_scheduleTable.setModel(sScheduleTableModel);
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
 
-    renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+        renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
 
-    sScheduleTableModel.setColumnCount(0);
+        sScheduleTableModel.setColumnCount(0);
 
-    if (sScheduleTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
-        for (int i = sScheduleTableModel.getRowCount() - 1; i > -1; i--) {
-            sScheduleTableModel.removeRow(i);
+        if (sScheduleTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+            for (int i = sScheduleTableModel.getRowCount() - 1; i > -1; i--) {
+                sScheduleTableModel.removeRow(i);
+            }
         }
-    }
 
-    sScheduleTableModel.addColumn("");// no need for a column name if header is removed
-    sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+        sScheduleTableModel.addColumn("");// no need for a column name if header is removed
+        sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
-    query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "'";
+        query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "'";
 
-    
-    
-    try {
-        
-        resSet = st.executeQuery(query);
-        
-        if (!resSet.next()) {
-             sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>You have no classes on " + sSchedule_dayOfWeekCombo.getSelectedItem() + ", YAY!</b></div></html>"});
-        } else{
-            resSet.beforeFirst();
-            while (resSet.next()) {
-            String SubjectName = resSet.getString(1);
-            String SubjectCode = resSet.getString(2);
-            String Venue = resSet.getString(3);
-            String StartTime = resSet.getString(4);
-            String EndTime = resSet.getString(5);
-            
+        try {
 
-            sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
-                + "<br>Subject Code: " + SubjectCode
-                + "<br>Venue Number: " + Venue
-                + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
+            resSet = st.executeQuery(query);
+
+            if (!resSet.next()) {
+                sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>You have no classes on " + sSchedule_dayOfWeekCombo.getSelectedItem() + ", YAY!</b></div></html>"});
+            } else {
+                resSet.beforeFirst();
+                while (resSet.next()) {
+                    String SubjectName = resSet.getString(1);
+                    String SubjectCode = resSet.getString(2);
+                    String Venue = resSet.getString(3);
+                    String StartTime = resSet.getString(4);
+                    String EndTime = resSet.getString(5);
+
+                    sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
+                        + "<br>Subject Code: " + SubjectCode
+                        + "<br>Venue Number: " + Venue
+                        + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
-        
-        
-    } catch (SQLException ex) {
-        Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }
 
     private void updateMainNextClass() {
-                
-    
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-    LocalDateTime now = LocalDateTime.now();
-    String currentTime = dtf.format(now);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = dtf.format(now);
         //System.out.println(currentTime);
-    
+
         String query;
-    sMain_nextClassTable.setModel(MainNextClassTableModel);
-    DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
+        sMain_nextClassTable.setModel(MainNextClassTableModel);
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
 
-    renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+        renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
 
-    MainNextClassTableModel.setColumnCount(0);
+        MainNextClassTableModel.setColumnCount(0);
 
-    if (MainNextClassTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
-        for (int i = MainNextClassTableModel.getRowCount() - 1; i > -1; i--) {
-            MainNextClassTableModel.removeRow(i);
+        if (MainNextClassTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+            for (int i = MainNextClassTableModel.getRowCount() - 1; i > -1; i--) {
+                MainNextClassTableModel.removeRow(i);
+            }
         }
-    }
 
-    MainNextClassTableModel.addColumn("Your next class:");
-    sMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+        MainNextClassTableModel.addColumn("Your next class:");
+        sMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
-    query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + "' AND EndTime >= '" + currentTime + "' LIMIT 1";
-    //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + "Monday" + "' AND EndTime >= '" + "11:00:01" + "' LIMIT 1";
+        query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + "' AND EndTime >= '" + currentTime + "' LIMIT 1";
+        //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + "Monday" + "' AND EndTime >= '" + "11:00:01" + "' LIMIT 1";
 
-    
-    
-    try {
-        
-        resSet = st.executeQuery(query);
-        
-        if (!resSet.next()) {
-             MainNextClassTableModel.insertRow(MainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>You have no classes on " + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", YAY!</b></div></html>"});
-        } else{
-            resSet.beforeFirst();
-            while (resSet.next()) {
-            String SubjectName = resSet.getString(1);
-            String SubjectCode = resSet.getString(2);
-            String Venue = resSet.getString(3);
-            String StartTime = resSet.getString(4);
-            String EndTime = resSet.getString(5);
-            
+        try {
 
-            MainNextClassTableModel.insertRow(MainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
-                + "<br>Subject Code: " + SubjectCode
-                + "<br>Venue Number: " + Venue
-                + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
+            resSet = st.executeQuery(query);
+
+            if (!resSet.next()) {
+                MainNextClassTableModel.insertRow(MainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>You have no classes on " + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", YAY!</b></div></html>"});
+            } else {
+                resSet.beforeFirst();
+                while (resSet.next()) {
+                    String SubjectName = resSet.getString(1);
+                    String SubjectCode = resSet.getString(2);
+                    String Venue = resSet.getString(3);
+                    String StartTime = resSet.getString(4);
+                    String EndTime = resSet.getString(5);
+
+                    MainNextClassTableModel.insertRow(MainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
+                        + "<br>Subject Code: " + SubjectCode
+                        + "<br>Venue Number: " + Venue
+                        + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
-        
-        
-    } catch (SQLException ex) {
-        Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }
 
 }
