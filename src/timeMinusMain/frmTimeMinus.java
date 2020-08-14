@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -27,6 +29,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     DefaultTableModel sCalendarTableModel = new DefaultTableModel(); //create tableModel object to manipulate the calendar screen table
 
+    DefaultTableModel MainNextClassTableModel = new DefaultTableModel();
+    
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());//creates calendar object for functions requiring date information
 
     /**
@@ -43,13 +47,15 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         main_calendarEvents.setShowGrid(true);
         sCalendar_calendarTable.setShowGrid(true);
         sSchedule_scheduleTable.setShowGrid(true);
-        DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
-        scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+        
+        //DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
+        //scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
 
         //sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
         DBconnect(); // connects to the database
         try {
             updateMainScreenCalendar(); //Updates main screen upcomming calendar when program starts.
+            updateMainNextClass();
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,11 +88,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         screen_sMain = new javax.swing.JPanel();
         main_BackButton = new javax.swing.JButton();
         main_WelcomeBackMessage = new javax.swing.JLabel();
-        main_NextClassLabel = new javax.swing.JPanel();
-        main_NextClassHeader = new javax.swing.JLabel();
-        main_NextClassNameCode = new javax.swing.JLabel();
-        main_nextClassDuration = new javax.swing.JLabel();
-        main_nextClassVenue = new javax.swing.JLabel();
         main_NavToClassButton = new javax.swing.JButton();
         main_NavigateButton = new javax.swing.JButton();
         main_ChatButton = new javax.swing.JButton();
@@ -94,6 +95,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         main_calendarEvents = new javax.swing.JTable();
         main_CalendarButton = new javax.swing.JButton();
         main_NextClassesButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        sMain_nextClassTable = new javax.swing.JTable();
         screen_studentSchedule = new javax.swing.JPanel();
         sSchedule_Banner = new javax.swing.JPanel();
         sSchedule_BannerText = new javax.swing.JLabel();
@@ -292,58 +295,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         main_WelcomeBackMessage.setText("Welcome Back USER_NAME USER_SURNAME");
         main_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        main_NextClassLabel.setBackground(new java.awt.Color(2, 31, 84));
-
-        main_NextClassHeader.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        main_NextClassHeader.setForeground(new java.awt.Color(255, 255, 255));
-        main_NextClassHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        main_NextClassHeader.setText("Your next class:");
-
-        main_NextClassNameCode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        main_NextClassNameCode.setForeground(new java.awt.Color(255, 255, 255));
-        main_NextClassNameCode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        main_NextClassNameCode.setText("CLASS_NAME — CLASS_CODE");
-
-        main_nextClassDuration.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        main_nextClassDuration.setForeground(new java.awt.Color(255, 255, 255));
-        main_nextClassDuration.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        main_nextClassDuration.setText("Duration : START_TIME — END_TIME");
-
-        main_nextClassVenue.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        main_nextClassVenue.setForeground(new java.awt.Color(255, 255, 255));
-        main_nextClassVenue.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        main_nextClassVenue.setText("Venue: VENUE-_NUMBER");
-
-        javax.swing.GroupLayout main_NextClassLabelLayout = new javax.swing.GroupLayout(main_NextClassLabel);
-        main_NextClassLabel.setLayout(main_NextClassLabelLayout);
-        main_NextClassLabelLayout.setHorizontalGroup(
-            main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_NextClassLabelLayout.createSequentialGroup()
-                .addGroup(main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(main_NextClassLabelLayout.createSequentialGroup()
-                        .addComponent(main_NextClassHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addGroup(main_NextClassLabelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(main_NextClassNameCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(main_nextClassVenue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(main_nextClassDuration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        main_NextClassLabelLayout.setVerticalGroup(
-            main_NextClassLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_NextClassLabelLayout.createSequentialGroup()
-                .addComponent(main_NextClassHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_NextClassNameCode)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_nextClassDuration)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_nextClassVenue)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
         main_NavToClassButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NavToClassButton.setForeground(new java.awt.Color(255, 255, 255));
         main_NavToClassButton.setText("Navigate to Class");
@@ -406,6 +357,19 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
+        sMain_nextClassTable.setBackground(new java.awt.Color(2, 31, 84));
+        sMain_nextClassTable.setForeground(new java.awt.Color(255, 255, 255));
+        sMain_nextClassTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        sMain_nextClassTable.setRowHeight(97);
+        jScrollPane3.setViewportView(sMain_nextClassTable);
+
         javax.swing.GroupLayout screen_sMainLayout = new javax.swing.GroupLayout(screen_sMain);
         screen_sMain.setLayout(screen_sMainLayout);
         screen_sMainLayout.setHorizontalGroup(
@@ -413,24 +377,25 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(screen_sMainLayout.createSequentialGroup()
                 .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(screen_sMainLayout.createSequentialGroup()
+                        .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(screen_sMainLayout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(main_NextClassesButton))
+                            .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(screen_sMainLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(main_CalendarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(main_NavigateButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(main_ChatButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(main_NextClassLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_sMainLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(screen_sMainLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(main_NextClassesButton))
-                    .addGroup(screen_sMainLayout.createSequentialGroup()
-                        .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 8, Short.MAX_VALUE)
+                                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         screen_sMainLayout.setVerticalGroup(
@@ -439,20 +404,20 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_NextClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(main_NavToClassButton)
                     .addComponent(main_NextClassesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_CalendarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(main_CalendarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(main_NavigateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(main_ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -914,26 +879,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     }//GEN-LAST:event_login_ButtonActionPerformed
 
 
-private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
-    parentPanel.removeAll();
-    parentPanel.add(screen_studentSchedule);
-    parentPanel.repaint();
-    parentPanel.revalidate();
-    
-    sSchedule_dayOfWeekCombo.setSelectedItem(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
-    updateStudentSchedule();
-    
-
-
-    }//GEN-LAST:event_main_NextClassesButtonActionPerformed
-
-    private void main_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_BackButtonActionPerformed
-        parentPanel.removeAll();
-        parentPanel.add(screen_login);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-    }//GEN-LAST:event_main_BackButtonActionPerformed
-
 
     private void sSchedule_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSchedule_BackButtonActionPerformed
         parentPanel.removeAll();
@@ -952,33 +897,12 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         navMenu_endComboB.setSelectedIndex(0);
     }//GEN-LAST:event_navMenu_BackButton1ActionPerformed
 
-    private void main_NavigateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NavigateButtonActionPerformed
-        parentPanel.removeAll();
-        parentPanel.add(screen_navMenu);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-    }//GEN-LAST:event_main_NavigateButtonActionPerformed
-
     private void sCalendar_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_BackButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_sMain);
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_sCalendar_BackButtonActionPerformed
-
-    private void main_CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_CalendarButtonActionPerformed
-
-        parentPanel.removeAll();
-        parentPanel.add(screen_sCalendar);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-
-        sCalendar_monthCombo.setSelectedItem(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
-        sCalendar_eventTypeCombo.setSelectedItem("All");
-
-        //updateCalendarScreen(); Apparently do not need this for the calendar screen to work?
-
-    }//GEN-LAST:event_main_CalendarButtonActionPerformed
 
     private void login_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_usernameActionPerformed
         // TODO add your handling code here:
@@ -999,6 +923,44 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private void sSchedule_dayOfWeekComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSchedule_dayOfWeekComboActionPerformed
         updateStudentSchedule();
     }//GEN-LAST:event_sSchedule_dayOfWeekComboActionPerformed
+
+    private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_studentSchedule);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+
+        sSchedule_dayOfWeekCombo.setSelectedItem(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+        updateStudentSchedule();
+
+    }//GEN-LAST:event_main_NextClassesButtonActionPerformed
+
+    private void main_CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_CalendarButtonActionPerformed
+
+        parentPanel.removeAll();
+        parentPanel.add(screen_sCalendar);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+
+        sCalendar_monthCombo.setSelectedItem(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+        sCalendar_eventTypeCombo.setSelectedItem("All");
+
+        //updateCalendarScreen(); Apparently do not need this for the calendar screen to work?
+    }//GEN-LAST:event_main_CalendarButtonActionPerformed
+
+    private void main_NavigateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NavigateButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_navMenu);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }//GEN-LAST:event_main_NavigateButtonActionPerformed
+
+    private void main_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_BackButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_login);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }//GEN-LAST:event_main_BackButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1040,6 +1002,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
     private javax.swing.JButton login_Button;
@@ -1058,14 +1021,9 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JButton main_ChatButton;
     private javax.swing.JButton main_NavToClassButton;
     private javax.swing.JButton main_NavigateButton;
-    private javax.swing.JLabel main_NextClassHeader;
-    private javax.swing.JPanel main_NextClassLabel;
-    private javax.swing.JLabel main_NextClassNameCode;
     private javax.swing.JButton main_NextClassesButton;
     private javax.swing.JLabel main_WelcomeBackMessage;
     private javax.swing.JTable main_calendarEvents;
-    private javax.swing.JLabel main_nextClassDuration;
-    private javax.swing.JLabel main_nextClassVenue;
     private javax.swing.JButton navMenu_BackButton1;
     private javax.swing.JPanel navMenu_Banner;
     private javax.swing.JLabel navMenu_BannerText;
@@ -1080,6 +1038,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JComboBox<String> sCalendar_eventTypeCombo;
     private javax.swing.JComboBox<String> sCalendar_monthCombo;
     private javax.swing.JLabel sCalendar_tableHeader;
+    private javax.swing.JTable sMain_nextClassTable;
     private javax.swing.JButton sSchedule_BackButton;
     private javax.swing.JPanel sSchedule_Banner;
     private javax.swing.JLabel sSchedule_BannerText;
@@ -1224,6 +1183,65 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
             
 
             sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
+                + "<br>Subject Code: " + SubjectCode
+                + "<br>Venue Number: " + Venue
+                + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
+        }
+        }
+        
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+
+    private void updateMainNextClass() {
+                
+    
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+    LocalDateTime now = LocalDateTime.now();
+    String currentTime = dtf.format(now);
+        //System.out.println(currentTime);
+    
+        String query;
+    sMain_nextClassTable.setModel(MainNextClassTableModel);
+    DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
+
+    renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+
+    MainNextClassTableModel.setColumnCount(0);
+
+    if (MainNextClassTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+        for (int i = MainNextClassTableModel.getRowCount() - 1; i > -1; i--) {
+            MainNextClassTableModel.removeRow(i);
+        }
+    }
+
+    MainNextClassTableModel.addColumn("Your next class:");
+    sMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+
+    query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + "' AND EndTime >= '" + currentTime + "' LIMIT 1";
+    //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + "Monday" + "' AND EndTime >= '" + "11:00:01" + "' LIMIT 1";
+
+    
+    
+    try {
+        
+        resSet = st.executeQuery(query);
+        
+        if (!resSet.next()) {
+             MainNextClassTableModel.insertRow(MainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>You have no classes on " + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", YAY!</b></div></html>"});
+        } else{
+            resSet.beforeFirst();
+            while (resSet.next()) {
+            String SubjectName = resSet.getString(1);
+            String SubjectCode = resSet.getString(2);
+            String Venue = resSet.getString(3);
+            String StartTime = resSet.getString(4);
+            String EndTime = resSet.getString(5);
+            
+
+            MainNextClassTableModel.insertRow(MainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
                 + "<br>Subject Code: " + SubjectCode
                 + "<br>Venue Number: " + Venue
                 + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
