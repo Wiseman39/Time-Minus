@@ -42,6 +42,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         main_calendarEvents.setShowGrid(true);
         sCalendar_calendarTable.setShowGrid(true);
+        sSchedule_scheduleTable.setShowGrid(true);
         DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
         scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
 
@@ -99,6 +100,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sSchedule_BackButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         sSchedule_scheduleTable = new javax.swing.JTable();
+        sSchedule_dayOfWeekCombo = new javax.swing.JComboBox<>();
         screen_sCalendar = new javax.swing.JPanel();
         sCalendar_Banner = new javax.swing.JPanel();
         sCalendar_BannerText = new javax.swing.JLabel();
@@ -494,6 +496,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         });
 
         sSchedule_scheduleTable.setBackground(new java.awt.Color(2, 31, 84));
+        sSchedule_scheduleTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         sSchedule_scheduleTable.setForeground(new java.awt.Color(255, 255, 255));
         sSchedule_scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -503,10 +506,18 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 ""
             }
         ));
+        sSchedule_scheduleTable.setGridColor(new java.awt.Color(255, 255, 255));
         sSchedule_scheduleTable.setRowHeight(100);
         sSchedule_scheduleTable.setRowSelectionAllowed(false);
         sSchedule_scheduleTable.setTableHeader(null);
         jScrollPane1.setViewportView(sSchedule_scheduleTable);
+
+        sSchedule_dayOfWeekCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
+        sSchedule_dayOfWeekCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sSchedule_dayOfWeekComboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout screen_studentScheduleLayout = new javax.swing.GroupLayout(screen_studentSchedule);
         screen_studentSchedule.setLayout(screen_studentScheduleLayout);
@@ -517,13 +528,19 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(screen_studentScheduleLayout.createSequentialGroup()
                 .addComponent(sSchedule_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(screen_studentScheduleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sSchedule_dayOfWeekCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         screen_studentScheduleLayout.setVerticalGroup(
             screen_studentScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(screen_studentScheduleLayout.createSequentialGroup()
                 .addComponent(sSchedule_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                .addComponent(sSchedule_dayOfWeekCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sSchedule_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -831,7 +848,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
 
-        //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
+        testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
+        
         //Actual Login with database
         /*
         String user = login_username.getText();
@@ -901,49 +919,10 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     parentPanel.add(screen_studentSchedule);
     parentPanel.repaint();
     parentPanel.revalidate();
-
-    //show schedule for student:
-    //String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-    String dayOfWeek = "Thursday";
-    //System.out.println(dayOfWeek);
-
-    String query = "";
-    sSchedule_scheduleTable.setModel(sScheduleTableModel);
-    DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
-
-    renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
-
-    sScheduleTableModel.setColumnCount(0);
-
-    if (sScheduleTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
-        for (int i = sScheduleTableModel.getRowCount() - 1; i > -1; i--) {
-            sScheduleTableModel.removeRow(i);
-        }
-    }
-
-    sScheduleTableModel.addColumn("");// no need for a column name if header is removed
-    sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
-
-    query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + dayOfWeek + "'";
-
-    try {
-        resSet = st.executeQuery(query);
-        while (resSet.next()) {
-            String SubjectName = resSet.getString(1);
-            String SubjectCode = resSet.getString(2);
-            String Venue = resSet.getString(3);
-            String StartTime = resSet.getString(4);
-            String EndTime = resSet.getString(5);
-            //String time = resSet.getString(6);
-
-            sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
-                + "<br>Subject Code: " + SubjectCode
-                + "<br>Venue Number: " + Venue
-                + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    
+    sSchedule_dayOfWeekCombo.setSelectedItem(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+    updateStudentSchedule();
+    
 
 
     }//GEN-LAST:event_main_NextClassesButtonActionPerformed
@@ -1016,6 +995,10 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private void sCalendar_eventTypeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_eventTypeComboActionPerformed
         updateCalendarScreen();
     }//GEN-LAST:event_sCalendar_eventTypeComboActionPerformed
+
+    private void sSchedule_dayOfWeekComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSchedule_dayOfWeekComboActionPerformed
+        updateStudentSchedule();
+    }//GEN-LAST:event_sSchedule_dayOfWeekComboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1100,6 +1083,7 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JButton sSchedule_BackButton;
     private javax.swing.JPanel sSchedule_Banner;
     private javax.swing.JLabel sSchedule_BannerText;
+    private javax.swing.JComboBox<String> sSchedule_dayOfWeekCombo;
     private javax.swing.JTable sSchedule_scheduleTable;
     private javax.swing.JPanel screen_ChatMenu;
     private javax.swing.JPanel screen_ChatRoom;
@@ -1194,6 +1178,62 @@ private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent ev
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void updateStudentSchedule() {
+        //show schedule for student:
+    
+    //String dayOfWeek = "Thursday";
+    //System.out.println(dayOfWeek);
+
+    String query;
+    sSchedule_scheduleTable.setModel(sScheduleTableModel);
+    DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
+
+    renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+
+    sScheduleTableModel.setColumnCount(0);
+
+    if (sScheduleTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+        for (int i = sScheduleTableModel.getRowCount() - 1; i > -1; i--) {
+            sScheduleTableModel.removeRow(i);
+        }
+    }
+
+    sScheduleTableModel.addColumn("");// no need for a column name if header is removed
+    sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+
+    query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "'";
+
+    
+    
+    try {
+        
+        resSet = st.executeQuery(query);
+        
+        if (!resSet.next()) {
+             sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>You have no classes on " + sSchedule_dayOfWeekCombo.getSelectedItem() + ", YAY!</b></div></html>"});
+        } else{
+            resSet.beforeFirst();
+            while (resSet.next()) {
+            String SubjectName = resSet.getString(1);
+            String SubjectCode = resSet.getString(2);
+            String Venue = resSet.getString(3);
+            String StartTime = resSet.getString(4);
+            String EndTime = resSet.getString(5);
+            
+
+            sScheduleTableModel.insertRow(sScheduleTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
+                + "<br>Subject Code: " + SubjectCode
+                + "<br>Venue Number: " + Venue
+                + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
+        }
+        }
+        
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
 }
