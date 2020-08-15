@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -791,6 +792,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
+        navDirections_DirectionsTable.setBackground(new java.awt.Color(2, 31, 84));
+        navDirections_DirectionsTable.setForeground(new java.awt.Color(255, 255, 255));
         navDirections_DirectionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -799,6 +802,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
             }
         ));
+        navDirections_DirectionsTable.setRowHeight(160);
         jScrollPane4.setViewportView(navDirections_DirectionsTable);
 
         javax.swing.GroupLayout screen_navDirectionsLayout = new javax.swing.GroupLayout(screen_navDirections);
@@ -809,10 +813,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(screen_navDirectionsLayout.createSequentialGroup()
                 .addComponent(sNavScreen_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(screen_navDirectionsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         screen_navDirectionsLayout.setVerticalGroup(
             screen_navDirectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -863,6 +864,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     public Connection con;
     public java.sql.Statement st;
     public ResultSet resSet;
+    
+    public ResultSet resSet2;
+    
 
     public void DBconnect() {
         try {
@@ -1041,11 +1045,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.repaint();
         parentPanel.revalidate();
         
-        try {
+        
             navToNextClass();
-        } catch (SQLException ex) {
-            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_main_NavToClassButtonActionPerformed
 
     /**
@@ -1290,7 +1292,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     }
 
     private void updateMainNextClass() {
-
+        String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String currentTime = dtf.format(now);
@@ -1313,7 +1315,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         mainNextClassTableModel.addColumn("Your next class:");
         sMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
-        query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + "' AND EndTime >= '" + currentTime + "' LIMIT 1";
+        if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
+                currentDay = "Monday";
+                currentTime = "00:00:01";
+            }
+        
+        query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 1";
         //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + "Monday" + "' AND EndTime >= '" + "11:00:01" + "' LIMIT 1";
 
         try {
@@ -1343,57 +1350,102 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         }
     }
 
-    private void navToNextClass() throws SQLException {
-        
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String currentTime = dtf.format(now);
-        String query = "SELECT Lesson FROM timetableyear1 WHERE EndTime >= " + currentTime + " AND Day = " + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())  + " LIMIT 1";
-        
-        resSet = st.executeQuery(query);
-        int lessonNo = resSet.getInt(1);
-        
-        switch(lessonNo)
-                {
-                    case 1:
-                    query = "SELECT  * FROM 0to1";
-                    resSet = st.executeQuery(query);
-                    break;
-                    
-                    case 2:
-                    query = "SELECT  * FROM 1to2";
-                    resSet = st.executeQuery(query);    
-                    break;
-                    
-                    case 3:
-                    query = "SELECT  * FROM 2to3";
-                    resSet = st.executeQuery(query);    
-                    break;
-                    
-                    case 4:
-                    query = "SELECT  * FROM 3to4";
-                    resSet = st.executeQuery(query);    
-                    break;
-                    
-                    case 5:
-                    query = "SELECT  * FROM 4to5";
-                    resSet = st.executeQuery(query);    
-                    break;
-                    
-                    default:
-                        System.out.println("No lesson number found");
-                    break;
-                }
-        
-        ImageIcon image = new ImageIcon(getClass().getResource("/testimage/entrance1Icon.jpg"));
-        
-        /*sCalendarTableModel.setColumnCount(0);
-
-        if (sCalendarTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
-            for (int i = sCalendarTableModel.getRowCount() - 1; i > -1; i--) {
-                sCalendarTableModel.removeRow(i);
+    private void navToNextClass() {
+        try {
+            int i = 1;
+            String query;
+            ImageIcon image;
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String currentTime = dtf.format(now);
+            String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+            
+           if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
+                currentDay = "Monday";
+                currentTime = "00:00:01";
             }
-        }*/
+        
+        query = "SELECT Lesson FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 2";
+            
+            resSet2 = st.executeQuery(query);
+            //System.out.println(resSet2.toString());
+            resSet2.first();
+            String lessonNo = resSet2.getString(1);
+            //String lessonNo = "1";
+            
+            switch(lessonNo)
+            {
+                case "1":
+                    query = "SELECT * FROM 0to1";
+                    resSet2 = st.executeQuery(query);
+                    break;
+                    
+                case "2":
+                    query = "SELECT * FROM 1to2";
+                    resSet2 = st.executeQuery(query);    
+                    break;
+                    
+                case "3":
+                    query = "SELECT * FROM 2to3";
+                    resSet2 = st.executeQuery(query);    
+                    break;
+                    
+                case "4":
+                    query = "SELECT * FROM 3to4";
+                    resSet2 = st.executeQuery(query);    
+                    break;
+                    
+                case "5":
+                    query = "SELECT * FROM 4to5";
+                    resSet2 = st.executeQuery(query);    
+                    break;
+                    
+                default:
+                    System.out.println("No lesson number found");
+                    break;
+            }
+            
+            DefaultTableModel navScreenTableModel = new DefaultTableModel(){
+                @Override
+                public Class getColumnClass(int column){
+                    if (column == 1) {
+                        return javax.swing.ImageIcon.class;
+                    } else return String.class;
+                    
+                }
+            };
+            navScreenTableModel.addColumn("Directions");
+            navScreenTableModel.addColumn("Guide Image");
+            
+            navDirections_DirectionsTable.setModel(navScreenTableModel);
+            while(resSet2.next()){
+                
+                image = new ImageIcon(getClass().getResource("/NavigationImages/0to1-" + i + ".jpg"));
+                i++;
+                navScreenTableModel.insertRow(navScreenTableModel.getRowCount(), new Object[]{resSet2.getString(2), image});
+            }
+            
+            
+            
+            
+            
+            
+            
+            /*sCalendarTableModel.setColumnCount(0);
+            
+            if (sCalendarTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+            for (int i = sCalendarTableModel.getRowCount() - 1; i > -1; i--) {
+            sCalendarTableModel.removeRow(i);
+            }
+            }*/
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
+       
+           
+    
+    
 
 }
