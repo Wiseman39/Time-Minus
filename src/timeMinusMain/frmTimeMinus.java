@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,7 +30,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     DefaultTableModel sCalendarTableModel = new DefaultTableModel(); //create tableModel object to manipulate the calendar screen table
 
-    DefaultTableModel MainNextClassTableModel = new DefaultTableModel();
+    DefaultTableModel mainNextClassTableModel = new DefaultTableModel();
+    
+    //DefaultTableModel navScreenTableModel = new DefaultTableModel();
 
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());//creates calendar object for functions requiring date information
 
@@ -72,17 +75,17 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         parentPanel = new javax.swing.JPanel();
         screen_login = new javax.swing.JPanel();
-        login_AppName = new javax.swing.JLabel();
         login_detailsPanel = new javax.swing.JPanel();
         login_detailsHeader = new javax.swing.JLabel();
         login_username = new javax.swing.JTextField();
         login_password = new javax.swing.JTextField();
         login_RememberDetails = new javax.swing.JCheckBox();
         login_Button = new javax.swing.JButton();
-        login_Logo = new javax.swing.JLabel();
         login_ExtraPanel = new javax.swing.JPanel();
         login_ForgottenLink = new javax.swing.JLabel();
         login_CookiesLink = new javax.swing.JLabel();
+        login_AppName = new javax.swing.JLabel();
+        login_Logo = new javax.swing.JLabel();
         login_Background = new javax.swing.JLabel();
         screen_sMain = new javax.swing.JPanel();
         main_BackButton = new javax.swing.JButton();
@@ -123,7 +126,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         navMenu_startLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        screen_NavDirections = new javax.swing.JPanel();
+        screen_navDirections = new javax.swing.JPanel();
+        sCalendar_Banner1 = new javax.swing.JPanel();
+        sCalendar_BannerText1 = new javax.swing.JLabel();
+        sNavScreen_BackButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        navDirections_DirectionsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(750, 200, 0, 0));
@@ -135,14 +143,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         screen_login.setBackground(new java.awt.Color(0, 0, 255));
         screen_login.setLayout(null);
-
-        login_AppName.setBackground(new java.awt.Color(255, 255, 255));
-        login_AppName.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
-        login_AppName.setForeground(new java.awt.Color(255, 255, 255));
-        login_AppName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        login_AppName.setText("Time - Minus");
-        screen_login.add(login_AppName);
-        login_AppName.setBounds(6, 105, 354, 44);
 
         login_detailsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -229,10 +229,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         screen_login.add(login_detailsPanel);
         login_detailsPanel.setBounds(26, 155, 313, 310);
 
-        login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
-        screen_login.add(login_Logo);
-        login_Logo.setBounds(6, 27, 200, 60);
-
         login_ExtraPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         login_ForgottenLink.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -269,6 +265,18 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         screen_login.add(login_ExtraPanel);
         login_ExtraPanel.setBounds(0, 570, 360, 79);
 
+        login_AppName.setBackground(new java.awt.Color(255, 255, 255));
+        login_AppName.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        login_AppName.setForeground(new java.awt.Color(255, 255, 255));
+        login_AppName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        login_AppName.setText("Time - Minus");
+        screen_login.add(login_AppName);
+        login_AppName.setBounds(6, 105, 354, 44);
+
+        login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
+        screen_login.add(login_Logo);
+        login_Logo.setBounds(6, 27, 200, 60);
+
         login_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
         screen_login.add(login_Background);
         login_Background.setBounds(0, 0, 360, 640);
@@ -297,6 +305,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         main_NavToClassButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NavToClassButton.setForeground(new java.awt.Color(255, 255, 255));
         main_NavToClassButton.setText("Navigate to Class");
+        main_NavToClassButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                main_NavToClassButtonActionPerformed(evt);
+            }
+        });
 
         main_NavigateButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NavigateButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -742,20 +755,76 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         parentPanel.add(screen_navMenu, "card7");
 
-        screen_NavDirections.setBackground(new java.awt.Color(255, 255, 255));
+        screen_navDirections.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout screen_NavDirectionsLayout = new javax.swing.GroupLayout(screen_NavDirections);
-        screen_NavDirections.setLayout(screen_NavDirectionsLayout);
-        screen_NavDirectionsLayout.setHorizontalGroup(
-            screen_NavDirectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+        sCalendar_Banner1.setBackground(new java.awt.Color(2, 31, 84));
+
+        sCalendar_BannerText1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        sCalendar_BannerText1.setForeground(new java.awt.Color(255, 255, 255));
+        sCalendar_BannerText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sCalendar_BannerText1.setText("X000 to X001");
+
+        javax.swing.GroupLayout sCalendar_Banner1Layout = new javax.swing.GroupLayout(sCalendar_Banner1);
+        sCalendar_Banner1.setLayout(sCalendar_Banner1Layout);
+        sCalendar_Banner1Layout.setHorizontalGroup(
+            sCalendar_Banner1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sCalendar_Banner1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sCalendar_BannerText1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        screen_NavDirectionsLayout.setVerticalGroup(
-            screen_NavDirectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+        sCalendar_Banner1Layout.setVerticalGroup(
+            sCalendar_Banner1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sCalendar_Banner1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sCalendar_BannerText1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        parentPanel.add(screen_NavDirections, "card8");
+        sNavScreen_BackButton.setBackground(new java.awt.Color(255, 255, 255));
+        sNavScreen_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        sNavScreen_BackButton.setText("<<");
+        sNavScreen_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
+        sNavScreen_BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sNavScreen_BackButtonActionPerformed(evt);
+            }
+        });
+
+        navDirections_DirectionsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(navDirections_DirectionsTable);
+
+        javax.swing.GroupLayout screen_navDirectionsLayout = new javax.swing.GroupLayout(screen_navDirections);
+        screen_navDirections.setLayout(screen_navDirectionsLayout);
+        screen_navDirectionsLayout.setHorizontalGroup(
+            screen_navDirectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sCalendar_Banner1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(screen_navDirectionsLayout.createSequentialGroup()
+                .addComponent(sNavScreen_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(screen_navDirectionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        screen_navDirectionsLayout.setVerticalGroup(
+            screen_navDirectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_navDirectionsLayout.createSequentialGroup()
+                .addComponent(sCalendar_Banner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sNavScreen_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        parentPanel.add(screen_navDirections, "card8");
 
         getContentPane().add(parentPanel, java.awt.BorderLayout.CENTER);
 
@@ -959,6 +1028,26 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.revalidate();
     }//GEN-LAST:event_main_BackButtonActionPerformed
 
+    private void sNavScreen_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sNavScreen_BackButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_sMain);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }//GEN-LAST:event_sNavScreen_BackButtonActionPerformed
+
+    private void main_NavToClassButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NavToClassButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_navDirections);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        
+        try {
+            navToNextClass();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_main_NavToClassButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1000,6 +1089,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
     private javax.swing.JButton login_Button;
@@ -1021,6 +1111,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JButton main_NextClassesButton;
     private javax.swing.JLabel main_WelcomeBackMessage;
     private javax.swing.JTable main_calendarEvents;
+    private javax.swing.JTable navDirections_DirectionsTable;
     private javax.swing.JButton navMenu_BackButton1;
     private javax.swing.JPanel navMenu_Banner;
     private javax.swing.JLabel navMenu_BannerText;
@@ -1030,12 +1121,15 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPanel parentPanel;
     private javax.swing.JButton sCalendar_BackButton;
     private javax.swing.JPanel sCalendar_Banner;
+    private javax.swing.JPanel sCalendar_Banner1;
     private javax.swing.JLabel sCalendar_BannerText;
+    private javax.swing.JLabel sCalendar_BannerText1;
     private javax.swing.JTable sCalendar_calendarTable;
     private javax.swing.JComboBox<String> sCalendar_eventTypeCombo;
     private javax.swing.JComboBox<String> sCalendar_monthCombo;
     private javax.swing.JLabel sCalendar_tableHeader;
     private javax.swing.JTable sMain_nextClassTable;
+    private javax.swing.JButton sNavScreen_BackButton;
     private javax.swing.JButton sSchedule_BackButton;
     private javax.swing.JPanel sSchedule_Banner;
     private javax.swing.JLabel sSchedule_BannerText;
@@ -1043,8 +1137,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JTable sSchedule_scheduleTable;
     private javax.swing.JPanel screen_ChatMenu;
     private javax.swing.JPanel screen_ChatRoom;
-    private javax.swing.JPanel screen_NavDirections;
     private javax.swing.JPanel screen_login;
+    private javax.swing.JPanel screen_navDirections;
     private javax.swing.JPanel screen_navMenu;
     private javax.swing.JPanel screen_sCalendar;
     private javax.swing.JPanel screen_sMain;
@@ -1203,20 +1297,20 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         //System.out.println(currentTime);
 
         String query;
-        sMain_nextClassTable.setModel(MainNextClassTableModel);
+        sMain_nextClassTable.setModel(mainNextClassTableModel);
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
 
         renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
 
-        MainNextClassTableModel.setColumnCount(0);
+        mainNextClassTableModel.setColumnCount(0);
 
-        if (MainNextClassTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
-            for (int i = MainNextClassTableModel.getRowCount() - 1; i > -1; i--) {
-                MainNextClassTableModel.removeRow(i);
+        if (mainNextClassTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+            for (int i = mainNextClassTableModel.getRowCount() - 1; i > -1; i--) {
+                mainNextClassTableModel.removeRow(i);
             }
         }
 
-        MainNextClassTableModel.addColumn("Your next class:");
+        mainNextClassTableModel.addColumn("Your next class:");
         sMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
         query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + "' AND EndTime >= '" + currentTime + "' LIMIT 1";
@@ -1227,7 +1321,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             resSet = st.executeQuery(query);
 
             if (!resSet.next()) {
-                MainNextClassTableModel.insertRow(MainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>You have no classes on " + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", YAY!</b></div></html>"});
+                mainNextClassTableModel.insertRow(mainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>You have no classes on " + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + ", YAY!</b></div></html>"});
             } else {
                 resSet.beforeFirst();
                 while (resSet.next()) {
@@ -1237,7 +1331,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     String StartTime = resSet.getString(4);
                     String EndTime = resSet.getString(5);
 
-                    MainNextClassTableModel.insertRow(MainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
+                    mainNextClassTableModel.insertRow(mainNextClassTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b> " + SubjectName + ": </b>"
                         + "<br>Subject Code: " + SubjectCode
                         + "<br>Venue Number: " + Venue
                         + "<br>Duration: " + StartTime.substring(0, 5) + " — " + EndTime.substring(0, 5) + "</div></html>"});
@@ -1247,6 +1341,59 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void navToNextClass() throws SQLException {
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = dtf.format(now);
+        String query = "SELECT Lesson FROM timetableyear1 WHERE EndTime >= " + currentTime + " AND Day = " + calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())  + " LIMIT 1";
+        
+        resSet = st.executeQuery(query);
+        int lessonNo = resSet.getInt(1);
+        
+        switch(lessonNo)
+                {
+                    case 1:
+                    query = "SELECT  * FROM 0to1";
+                    resSet = st.executeQuery(query);
+                    break;
+                    
+                    case 2:
+                    query = "SELECT  * FROM 1to2";
+                    resSet = st.executeQuery(query);    
+                    break;
+                    
+                    case 3:
+                    query = "SELECT  * FROM 2to3";
+                    resSet = st.executeQuery(query);    
+                    break;
+                    
+                    case 4:
+                    query = "SELECT  * FROM 3to4";
+                    resSet = st.executeQuery(query);    
+                    break;
+                    
+                    case 5:
+                    query = "SELECT  * FROM 4to5";
+                    resSet = st.executeQuery(query);    
+                    break;
+                    
+                    default:
+                        System.out.println("No lesson number found");
+                    break;
+                }
+        
+        ImageIcon image = new ImageIcon(getClass().getResource("/testimage/entrance1Icon.jpg"));
+        
+        /*sCalendarTableModel.setColumnCount(0);
+
+        if (sCalendarTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+            for (int i = sCalendarTableModel.getRowCount() - 1; i > -1; i--) {
+                sCalendarTableModel.removeRow(i);
+            }
+        }*/
     }
 
 }
