@@ -1118,7 +1118,13 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         try {
             resSet = st.executeQuery(query);
-            while (resSet.next()) {
+            
+            if (!resSet.next()) {
+                sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\">There are no events / assessments in " + sCalendar_monthCombo.getSelectedItem() + "</div></html>"});
+            } else {
+                resSet.beforeFirst();
+                
+                while (resSet.next()) {
                 String day = resSet.getString(1);
                 String month = resSet.getString(2);
                 String year = resSet.getString(3);
@@ -1131,6 +1137,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     + "</i><br>" + type
                     + "<br>Description: " + desc + "</div></html>"});
             }
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
