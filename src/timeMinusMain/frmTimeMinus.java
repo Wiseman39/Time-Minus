@@ -15,14 +15,13 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import javax.swing.table.AbstractTableModel;
+
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author Justin ,kieran
+ * @author Justin ,Kieran
  */
 public final class frmTimeMinus extends javax.swing.JFrame {
 
@@ -886,9 +885,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
 
-        testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
+        //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
 
-        /*
+        
         //Actual Login with database
         String user = login_username.getText();
         String pass = login_password.getText();
@@ -947,7 +946,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         }
 
-         */
     }//GEN-LAST:event_login_ButtonActionPerformed
 
 
@@ -1046,7 +1044,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.repaint();
         parentPanel.revalidate();
 
-        navToNextClass();
+        try {
+            navToNextClass();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_main_NavToClassButtonActionPerformed
 
@@ -1350,31 +1352,36 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         }
     }
 
-    private void navToNextClass() {
-        
-        
-        try {
-            int i = 1;
-            String query, venue1 = "Navigate to ", venue2 = null;
-            ImageIcon image;
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            String currentTime = dtf.format(now);
-            String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+    private void navToNextClass() throws SQLException {
 
-            if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
-                currentDay = "Monday";
-                currentTime = "00:00:01";
-            }
+        int i = 1;
+        String query, venue2 = null;
+        ImageIcon image;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = dtf.format(now);
+        String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
-            query = "SELECT Lesson, Venue FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 2";
+        //if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
+        //    currentDay = "Monday";
+        //    currentTime = "00:00:01";
+        //}
 
-            resSet = st.executeQuery(query);
-            //System.out.println(resSet2.toString());
+        query = "SELECT Lesson, Venue FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 2";
+
+        resSet = st.executeQuery(query);    //if the result set is empty, I.E. no next class for the day, a warning message will be displayed and user is left on the main screen
+        if (!resSet.next()) {
+            parentPanel.removeAll();
+            parentPanel.add(screen_sMain);
+            parentPanel.repaint();
+            parentPanel.revalidate();
+            JOptionPane.showMessageDialog(parentPanel, "There are no more classes left to navigate to", "", JOptionPane.WARNING_MESSAGE);
+
+        } else {
             resSet.first();
             String lessonNo = resSet.getString(1);
-            //String lessonNo = "1";
-
+            String imagePath = null;
+            //lessonNo = null;
             switch (lessonNo) {
                 case "1":
                     resSet.first();
@@ -1383,6 +1390,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     //venue2 = resSet.getString(2);
                     query = "SELECT * FROM 0to1";
                     resSet = st.executeQuery(query);
+                    imagePath = "/NavigationImages/0to1-";
                     break;
 
                 case "2":
@@ -1392,15 +1400,17 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     //venue2 = resSet.getString(2);
                     query = "SELECT * FROM 1to2";
                     resSet = st.executeQuery(query);
+                    imagePath = "/NavigationImages/1to2-";
                     break;
 
                 case "3":
                     resSet.first();
                     venue2 = resSet.getString(2);
                     //resSet.next();
-                   //venue2 = resSet.getString(2);
-                    query = "SELECT * FROM 2to3";
+                    //venue2 = resSet.getString(2);
+                    query = "SELECT * FROM 0to3";
                     resSet = st.executeQuery(query);
+                    imagePath = "/NavigationImages/0to3-";
                     break;
 
                 case "4":
@@ -1408,8 +1418,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     venue2 = resSet.getString(2);
                     //resSet.next();
                     //venue2 = resSet.getString(2);
-                    query = "SELECT * FROM 3to4";
+                    query = "SELECT * FROM 0to4";
                     resSet = st.executeQuery(query);
+                    imagePath = "/NavigationImages/0to4-";
                     break;
 
                 case "5":
@@ -1419,10 +1430,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     //venue2 = resSet.getString(2);
                     query = "SELECT * FROM 4to5";
                     resSet = st.executeQuery(query);
+                    imagePath = "/NavigationImages/4to5-";
                     break;
 
                 default:
-                    System.out.println("No lesson number found");
+
                     break;
             }
 
@@ -1438,38 +1450,31 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 }
             };
             navScreenTableModel.setColumnCount(0);
-            
+
             if (navScreenTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
-            for (int j = navScreenTableModel.getRowCount() - 1; j > -1; j--) {
-            navScreenTableModel.removeRow(j);
+                for (int j = navScreenTableModel.getRowCount() - 1; j > -1; j--) {
+                    navScreenTableModel.removeRow(j);
+                }
             }
-            }
-            
+
             navScreenTableModel.addColumn("Directions");
             navScreenTableModel.addColumn("Guide Image");
             navDirections_DirectionsTable.setModel(navScreenTableModel);
-            //TableColumnModel columnModel = navDirections_DirectionsTable.getColumnModel();
-            //columnModel.getColumn(0).setPreferredWidth(WIDTH);
-            //columnModel.getColumn(1).setPreferredWidth(100);
+
             DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
             renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
             renderer.setVerticalAlignment(SwingConstants.TOP);
             navDirections_DirectionsTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
             navDirections_DirectionsTable.setShowGrid(true);
-            navDirections_BannerText.setText(venue1 + " to " + venue2);
+            navDirections_BannerText.setText("Navigate to " + venue2);
             while (resSet.next()) {
 
-                image = new ImageIcon(getClass().getResource("/NavigationImages/0to1-" + i + ".jpg"));
+                image = new ImageIcon(getClass().getResource(imagePath + i + ".jpg"));
                 i++;
                 navScreenTableModel.insertRow(navScreenTableModel.getRowCount(), new Object[]{resSet.getString(2), image});
             }
-
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
 
-    
+    }
 
 }
