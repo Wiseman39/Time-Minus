@@ -793,6 +793,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         });
 
         navDirections_DirectionsTable.setBackground(new java.awt.Color(2, 31, 84));
+        navDirections_DirectionsTable.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         navDirections_DirectionsTable.setForeground(new java.awt.Color(255, 255, 255));
         navDirections_DirectionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1350,9 +1351,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     }
 
     private void navToNextClass() {
+        
+        
         try {
             int i = 1;
-            String query, venue1 = null, venue2 = null;
+            String query, venue1 = "Navigate to ", venue2 = null;
             ImageIcon image;
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
@@ -1375,45 +1378,45 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             switch (lessonNo) {
                 case "1":
                     resSet.first();
-                    venue1 = resSet.getString(2);
-                    resSet.next();
                     venue2 = resSet.getString(2);
+                    //resSet.next();
+                    //venue2 = resSet.getString(2);
                     query = "SELECT * FROM 0to1";
                     resSet = st.executeQuery(query);
                     break;
 
                 case "2":
                     resSet.first();
-                    venue1 = resSet.getString(2);
-                    resSet.next();
                     venue2 = resSet.getString(2);
+                    //resSet.next();
+                    //venue2 = resSet.getString(2);
                     query = "SELECT * FROM 1to2";
                     resSet = st.executeQuery(query);
                     break;
 
                 case "3":
                     resSet.first();
-                    venue1 = resSet.getString(2);
-                    resSet.next();
                     venue2 = resSet.getString(2);
+                    //resSet.next();
+                   //venue2 = resSet.getString(2);
                     query = "SELECT * FROM 2to3";
                     resSet = st.executeQuery(query);
                     break;
 
                 case "4":
                     resSet.first();
-                    venue1 = resSet.getString(2);
-                    resSet.next();
                     venue2 = resSet.getString(2);
+                    //resSet.next();
+                    //venue2 = resSet.getString(2);
                     query = "SELECT * FROM 3to4";
                     resSet = st.executeQuery(query);
                     break;
 
                 case "5":
                     resSet.first();
-                    venue1 = resSet.getString(2);
-                    resSet.next();
                     venue2 = resSet.getString(2);
+                    //resSet.next();
+                    //venue2 = resSet.getString(2);
                     query = "SELECT * FROM 4to5";
                     resSet = st.executeQuery(query);
                     break;
@@ -1434,6 +1437,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
                 }
             };
+            navScreenTableModel.setColumnCount(0);
+            
+            if (navScreenTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
+            for (int j = navScreenTableModel.getRowCount() - 1; j > -1; j--) {
+            navScreenTableModel.removeRow(j);
+            }
+            }
+            
             navScreenTableModel.addColumn("Directions");
             navScreenTableModel.addColumn("Guide Image");
             navDirections_DirectionsTable.setModel(navScreenTableModel);
@@ -1453,13 +1464,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 navScreenTableModel.insertRow(navScreenTableModel.getRowCount(), new Object[]{resSet.getString(2), image});
             }
 
-            /*sCalendarTableModel.setColumnCount(0);
             
-            if (sCalendarTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
-            for (int i = sCalendarTableModel.getRowCount() - 1; i > -1; i--) {
-            sCalendarTableModel.removeRow(i);
-            }
-            }*/
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
