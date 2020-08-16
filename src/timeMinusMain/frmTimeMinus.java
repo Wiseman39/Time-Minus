@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -32,9 +33,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     DefaultTableModel sCalendarTableModel = new DefaultTableModel(); //create tableModel object to manipulate the calendar screen table
 
     DefaultTableModel mainNextClassTableModel = new DefaultTableModel();
-    
-    //DefaultTableModel navScreenTableModel = new DefaultTableModel();
 
+    //DefaultTableModel navScreenTableModel = new DefaultTableModel();
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());//creates calendar object for functions requiring date information
 
     /**
@@ -129,7 +129,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         screen_navDirections = new javax.swing.JPanel();
         sCalendar_Banner1 = new javax.swing.JPanel();
-        sCalendar_BannerText1 = new javax.swing.JLabel();
+        navDirections_BannerText = new javax.swing.JLabel();
         sNavScreen_BackButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         navDirections_DirectionsTable = new javax.swing.JTable();
@@ -760,10 +760,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         sCalendar_Banner1.setBackground(new java.awt.Color(2, 31, 84));
 
-        sCalendar_BannerText1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        sCalendar_BannerText1.setForeground(new java.awt.Color(255, 255, 255));
-        sCalendar_BannerText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sCalendar_BannerText1.setText("X000 to X001");
+        navDirections_BannerText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        navDirections_BannerText.setForeground(new java.awt.Color(255, 255, 255));
+        navDirections_BannerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        navDirections_BannerText.setText("X000 to X001");
 
         javax.swing.GroupLayout sCalendar_Banner1Layout = new javax.swing.GroupLayout(sCalendar_Banner1);
         sCalendar_Banner1.setLayout(sCalendar_Banner1Layout);
@@ -771,14 +771,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             sCalendar_Banner1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sCalendar_Banner1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sCalendar_BannerText1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(navDirections_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addContainerGap())
         );
         sCalendar_Banner1Layout.setVerticalGroup(
             sCalendar_Banner1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sCalendar_Banner1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sCalendar_BannerText1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addComponent(navDirections_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -802,6 +802,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
             }
         ));
+        navDirections_DirectionsTable.setGridColor(new java.awt.Color(255, 255, 255));
         navDirections_DirectionsTable.setRowHeight(160);
         jScrollPane4.setViewportView(navDirections_DirectionsTable);
 
@@ -864,9 +865,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     public Connection con;
     public java.sql.Statement st;
     public ResultSet resSet;
-    
+
     public ResultSet resSet2;
-    
 
     public void DBconnect() {
         try {
@@ -1044,10 +1044,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.add(screen_navDirections);
         parentPanel.repaint();
         parentPanel.revalidate();
-        
-        
-            navToNextClass();
-        
+
+        navToNextClass();
+
     }//GEN-LAST:event_main_NavToClassButtonActionPerformed
 
     /**
@@ -1113,6 +1112,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JButton main_NextClassesButton;
     private javax.swing.JLabel main_WelcomeBackMessage;
     private javax.swing.JTable main_calendarEvents;
+    private javax.swing.JLabel navDirections_BannerText;
     private javax.swing.JTable navDirections_DirectionsTable;
     private javax.swing.JButton navMenu_BackButton1;
     private javax.swing.JPanel navMenu_Banner;
@@ -1125,7 +1125,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPanel sCalendar_Banner;
     private javax.swing.JPanel sCalendar_Banner1;
     private javax.swing.JLabel sCalendar_BannerText;
-    private javax.swing.JLabel sCalendar_BannerText1;
     private javax.swing.JTable sCalendar_calendarTable;
     private javax.swing.JComboBox<String> sCalendar_eventTypeCombo;
     private javax.swing.JComboBox<String> sCalendar_monthCombo;
@@ -1214,27 +1213,27 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         try {
             resSet = st.executeQuery(query);
-            
+
             if (!resSet.next()) {
                 sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\">There are no events / assessments in " + sCalendar_monthCombo.getSelectedItem() + "</div></html>"});
             } else {
                 resSet.beforeFirst();
-                
-                while (resSet.next()) {
-                String day = resSet.getString(1);
-                String month = resSet.getString(2);
-                String year = resSet.getString(3);
-                String desc = resSet.getString(4);
-                String type = resSet.getString(5);
-                String time = resSet.getString(6);
 
-                sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>Date: " + day + " " + month + " " + year + ": </b>"
-                    + "<br>Time: <i>" + time
-                    + "</i><br>" + type
-                    + "<br>Description: " + desc + "</div></html>"});
+                while (resSet.next()) {
+                    String day = resSet.getString(1);
+                    String month = resSet.getString(2);
+                    String year = resSet.getString(3);
+                    String desc = resSet.getString(4);
+                    String type = resSet.getString(5);
+                    String time = resSet.getString(6);
+
+                    sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>Date: " + day + " " + month + " " + year + ": </b>"
+                        + "<br>Time: <i>" + time
+                        + "</i><br>" + type
+                        + "<br>Description: " + desc + "</div></html>"});
+                }
             }
-            }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1316,10 +1315,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
         if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
-                currentDay = "Monday";
-                currentTime = "00:00:01";
-            }
-        
+            currentDay = "Monday";
+            currentTime = "00:00:01";
+        }
+
         query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 1";
         //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + "Monday" + "' AND EndTime >= '" + "11:00:01" + "' LIMIT 1";
 
@@ -1353,84 +1352,107 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private void navToNextClass() {
         try {
             int i = 1;
-            String query;
+            String query, venue1 = null, venue2 = null;
             ImageIcon image;
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             String currentTime = dtf.format(now);
             String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-            
-           if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
+
+            if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
                 currentDay = "Monday";
                 currentTime = "00:00:01";
             }
-        
-        query = "SELECT Lesson FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 2";
-            
-            resSet2 = st.executeQuery(query);
+
+            query = "SELECT Lesson, Venue FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 2";
+
+            resSet = st.executeQuery(query);
             //System.out.println(resSet2.toString());
-            resSet2.first();
-            String lessonNo = resSet2.getString(1);
+            resSet.first();
+            String lessonNo = resSet.getString(1);
             //String lessonNo = "1";
-            
-            switch(lessonNo)
-            {
+
+            switch (lessonNo) {
                 case "1":
+                    resSet.first();
+                    venue1 = resSet.getString(2);
+                    resSet.next();
+                    venue2 = resSet.getString(2);
                     query = "SELECT * FROM 0to1";
-                    resSet2 = st.executeQuery(query);
+                    resSet = st.executeQuery(query);
                     break;
-                    
+
                 case "2":
+                    resSet.first();
+                    venue1 = resSet.getString(2);
+                    resSet.next();
+                    venue2 = resSet.getString(2);
                     query = "SELECT * FROM 1to2";
-                    resSet2 = st.executeQuery(query);    
+                    resSet = st.executeQuery(query);
                     break;
-                    
+
                 case "3":
+                    resSet.first();
+                    venue1 = resSet.getString(2);
+                    resSet.next();
+                    venue2 = resSet.getString(2);
                     query = "SELECT * FROM 2to3";
-                    resSet2 = st.executeQuery(query);    
+                    resSet = st.executeQuery(query);
                     break;
-                    
+
                 case "4":
+                    resSet.first();
+                    venue1 = resSet.getString(2);
+                    resSet.next();
+                    venue2 = resSet.getString(2);
                     query = "SELECT * FROM 3to4";
-                    resSet2 = st.executeQuery(query);    
+                    resSet = st.executeQuery(query);
                     break;
-                    
+
                 case "5":
+                    resSet.first();
+                    venue1 = resSet.getString(2);
+                    resSet.next();
+                    venue2 = resSet.getString(2);
                     query = "SELECT * FROM 4to5";
-                    resSet2 = st.executeQuery(query);    
+                    resSet = st.executeQuery(query);
                     break;
-                    
+
                 default:
                     System.out.println("No lesson number found");
                     break;
             }
-            
-            DefaultTableModel navScreenTableModel = new DefaultTableModel(){
+
+            DefaultTableModel navScreenTableModel = new DefaultTableModel() {
                 @Override
-                public Class getColumnClass(int column){
+                public Class getColumnClass(int column) {
                     if (column == 1) {
                         return javax.swing.ImageIcon.class;
-                    } else return String.class;
-                    
+                    } else {
+                        return String.class;
+                    }
+
                 }
             };
             navScreenTableModel.addColumn("Directions");
             navScreenTableModel.addColumn("Guide Image");
-            
             navDirections_DirectionsTable.setModel(navScreenTableModel);
-            while(resSet2.next()){
-                
+            //TableColumnModel columnModel = navDirections_DirectionsTable.getColumnModel();
+            //columnModel.getColumn(0).setPreferredWidth(WIDTH);
+            //columnModel.getColumn(1).setPreferredWidth(100);
+            DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
+            renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
+            renderer.setVerticalAlignment(SwingConstants.TOP);
+            navDirections_DirectionsTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+            navDirections_DirectionsTable.setShowGrid(true);
+            navDirections_BannerText.setText(venue1 + " to " + venue2);
+            while (resSet.next()) {
+
                 image = new ImageIcon(getClass().getResource("/NavigationImages/0to1-" + i + ".jpg"));
                 i++;
-                navScreenTableModel.insertRow(navScreenTableModel.getRowCount(), new Object[]{resSet2.getString(2), image});
+                navScreenTableModel.insertRow(navScreenTableModel.getRowCount(), new Object[]{resSet.getString(2), image});
             }
-            
-            
-            
-            
-            
-            
-            
+
             /*sCalendarTableModel.setColumnCount(0);
             
             if (sCalendarTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
@@ -1442,10 +1464,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-       
-           
-    
+
     
 
 }
