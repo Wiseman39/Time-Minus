@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\justi\Desktop\College\Year 2\ITSP200\Deliverable 4\Time - Minus\Time-Minus\dist\Time_-_Minus.jar</jar>
+  <outfile>C:\Users\justi\Desktop\College\Year 2\ITSP200\Deliverable 4\Time - Minus\Time-Minus\TimeMinusDistTest\TimeMinus.exe</outfile>
+  <errTitle>This program requires Java to be installed run properly. </errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\justi\Desktop\College\Year 2\ITSP200\Deliverable 4\images\TimeMinusIcon.ico</icon>
+  <singleInstance>
+    <mutexName>TimeMinus</mutexName>
+    <windowTitle>Time Minus</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <versionInfo>
+    <fileVersion>0.8.1.0</fileVersion>
+    <txtFileVersion>0.8.1.0</txtFileVersion>
+    <fileDescription>TimeMinus Improved Testing Build</fileDescription>
+    <copyright>SkyTreeTech</copyright>
+    <productVersion>0.8.1.0</productVersion>
+    <txtProductVersion>0.8.1.0</txtProductVersion>
+    <productName>Time-Minus</productName>
+    <companyName>Sky Tree Tech</companyName>
+    <internalName>TimeMinus</internalName>
+    <originalFilename>TimeMinus.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+</launch4jConfig>
