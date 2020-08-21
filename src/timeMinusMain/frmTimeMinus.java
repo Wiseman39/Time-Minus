@@ -885,9 +885,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
 
-        //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
+        testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
 
-        
+        /*
         //Actual Login with database
         String user = login_username.getText();
         String pass = login_password.getText();
@@ -944,7 +944,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println(ex);
 
-        }
+        }*/
 
     }//GEN-LAST:event_login_ButtonActionPerformed
 
@@ -1363,8 +1363,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
         //if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
-        //    currentDay = "Monday";
-        //    currentTime = "00:00:01";
+       //    currentDay = "Monday";
+        //    currentTime = "08:00:00";
         //}
 
         query = "SELECT Lesson, Venue FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 2";
@@ -1375,7 +1375,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             parentPanel.add(screen_sMain);
             parentPanel.repaint();
             parentPanel.revalidate();
-            JOptionPane.showMessageDialog(parentPanel, "There are no more classes left to navigate to", "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(parentPanel, "You have no more classes for the rest of the day", "", JOptionPane.WARNING_MESSAGE);
 
         } else {
             resSet.first();
