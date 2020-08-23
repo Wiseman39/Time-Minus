@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Justin ,Kieran
  */
 public final class frmTimeMinus extends javax.swing.JFrame {
-
+    private int TimeTableID;
     DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
 
     DefaultTableModel mainEventsTableModel = new DefaultTableModel(); //create tableModel object to manipulate the main screen upcomming table
@@ -411,16 +411,16 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_sMainLayout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(main_CalendarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(screen_sMainLayout.createSequentialGroup()
                         .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(screen_sMainLayout.createSequentialGroup()
                         .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(main_NextClassesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(main_CalendarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(main_NextClassesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         screen_sMainLayout.setVerticalGroup(
@@ -917,7 +917,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 password = resSet.getString("StudentPassword");
                 name = resSet.getString("StudentName");
                 surname = resSet.getString("StudentSurname");
-
+                TimeTableID = resSet.getInt("TimeTableID");
                 if (user.equalsIgnoreCase(username) && pass.equalsIgnoreCase(password)) {
 
                     JOptionPane.showMessageDialog(null, "Hi " + name + " " + surname + " you have logged in successfully");
@@ -1205,6 +1205,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.add(screen_sMain);
         parentPanel.repaint();
         parentPanel.revalidate();
+        TimeTableID = 1;
     }
 
     private void updateCalendarScreen() {
@@ -1284,8 +1285,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sScheduleTableModel.addColumn("");// no need for a column name if header is removed
         sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
-        query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "'";
-
+        //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "'"; // Older database query
+        query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay =  '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "' and module.TimeTableID = " + TimeTableID;
         try {
 
             resSet = st.executeQuery(query);
