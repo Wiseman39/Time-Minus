@@ -73,9 +73,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         login_detailsPanel = new javax.swing.JPanel();
         login_detailsHeader = new javax.swing.JLabel();
         login_username = new javax.swing.JTextField();
-        login_password = new javax.swing.JTextField();
         login_RememberDetails = new javax.swing.JCheckBox();
         login_Button = new javax.swing.JButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         login_ExtraPanel = new javax.swing.JPanel();
         login_ForgottenLink = new javax.swing.JLabel();
         login_CookiesLink = new javax.swing.JLabel();
@@ -148,8 +150,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         login_detailsHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login_detailsHeader.setText("Please enter your login details below:");
 
-        login_username.setForeground(new java.awt.Color(153, 153, 153));
-        login_username.setText("Student ID / Pearson Email");
+        login_username.setForeground(new java.awt.Color(0, 0, 0));
         login_username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 login_usernameFocusGained(evt);
@@ -161,22 +162,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         login_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 login_usernameActionPerformed(evt);
-            }
-        });
-
-        login_password.setForeground(new java.awt.Color(153, 153, 153));
-        login_password.setText("Password");
-        login_password.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                login_passwordFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                login_passwordFocusLost(evt);
-            }
-        });
-        login_password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                login_passwordActionPerformed(evt);
             }
         });
 
@@ -192,6 +177,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
+        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel3.setText("Username / Student Email:");
+
+        jLabel4.setText("Password:");
+
         javax.swing.GroupLayout login_detailsPanelLayout = new javax.swing.GroupLayout(login_detailsPanel);
         login_detailsPanel.setLayout(login_detailsPanelLayout);
         login_detailsPanelLayout.setHorizontalGroup(
@@ -200,11 +191,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(login_detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(login_password)
                     .addComponent(login_detailsHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(login_username, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPasswordField1)
                     .addGroup(login_detailsPanelLayout.createSequentialGroup()
-                        .addComponent(login_RememberDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(login_detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(login_RememberDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -213,15 +207,19 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(login_detailsPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(login_detailsHeader)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(login_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(login_password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(login_RememberDetails)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         screen_login.add(login_detailsPanel);
@@ -844,32 +842,18 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
 
     private void login_usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusGained
-        if (login_username.getText().equals("Student ID / Pearson Email")) {        //code for showing text hints the login screentextboxes
+        /*if (login_username.getText().equals("Student ID / Pearson Email")) {        //code for showing text hints the login screentextboxes
             login_username.setText("");
             login_username.setForeground(Color.black);
-        }
+        }*/
     }//GEN-LAST:event_login_usernameFocusGained
 
     private void login_usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_usernameFocusLost
-        if (login_username.getText().equals("")) {
+        /*if (login_username.getText().equals("")) {
             login_username.setText("Student ID / Pearson Email");
             login_username.setForeground(new Color(153, 153, 153));
-        }
+        }*/
     }//GEN-LAST:event_login_usernameFocusLost
-
-    private void login_passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_passwordFocusGained
-        if (login_password.getText().equals("Password")) {
-            login_password.setText("");
-            login_password.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_login_passwordFocusGained
-
-    private void login_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_login_passwordFocusLost
-        if (login_password.getText().equals("")) {
-            login_password.setText("Password");
-            login_password.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_login_passwordFocusLost
 
     public Connection con;
     public java.sql.Statement st;
@@ -993,10 +977,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_login_usernameActionPerformed
 
-    private void login_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_login_passwordActionPerformed
-
     private void sCalendar_monthComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_monthComboActionPerformed
         updateCalendarScreen();
     }//GEN-LAST:event_sCalendar_monthComboActionPerformed
@@ -1102,7 +1082,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1117,7 +1100,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JCheckBox login_RememberDetails;
     private javax.swing.JLabel login_detailsHeader;
     private javax.swing.JPanel login_detailsPanel;
-    private javax.swing.JTextField login_password;
     private javax.swing.JTextField login_username;
     private javax.swing.JButton main_BackButton;
     private javax.swing.JButton main_CalendarButton;
