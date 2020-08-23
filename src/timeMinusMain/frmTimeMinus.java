@@ -1344,8 +1344,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             currentTime = "00:00:01";
         }
 
-        query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 1";
-        //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + "Monday" + "' AND EndTime >= '" + "11:00:01" + "' LIMIT 1";
+        //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 1"; //Uses old database model
+        query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay = '" + currentDay + "' AND ModuleEnd >= '" + currentTime + "' AND module.TimeTableID = " + TimeTableID + " LIMIT 1";
 
         try {
 
