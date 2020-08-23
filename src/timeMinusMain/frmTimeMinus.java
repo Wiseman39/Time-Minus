@@ -408,18 +408,19 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(screen_sMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(main_CalendarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_sMainLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 8, Short.MAX_VALUE)
                         .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(screen_sMainLayout.createSequentialGroup()
-                        .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(screen_sMainLayout.createSequentialGroup()
+                        .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
-                        .addComponent(main_NextClassesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(main_NextClassesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(main_CalendarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         screen_sMainLayout.setVerticalGroup(
@@ -587,7 +588,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
         ));
         sCalendar_calendarTable.setGridColor(new java.awt.Color(255, 255, 255));
-        sCalendar_calendarTable.setRowHeight(100);
+        sCalendar_calendarTable.setRowHeight(125);
         sCalendar_calendarTable.setRowSelectionAllowed(false);
         jScrollPane2.setViewportView(sCalendar_calendarTable);
 
@@ -1224,10 +1225,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         sCalendarTableModel.addColumn(sCalendar_monthCombo.getSelectedItem());
         sCalendar_calendarTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+        
         if (sCalendar_eventTypeCombo.getSelectedItem() != "All") {
-            query = "SELECT DateDay, DateMonth, DateYear, EventDesc, EventType, Time FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "' AND EventType = '" + sCalendar_eventTypeCombo.getSelectedItem() + "'";
+            query = "SELECT DateDay, DateMonth, DateYear, EventDesc, EventType, Time, EventVenue FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "' AND EventType = '" + sCalendar_eventTypeCombo.getSelectedItem() + "'";
         } else {
-            query = "SELECT DateDay, DateMonth, DateYear ,EventDesc, EventType, Time FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "'";
+            query = "SELECT DateDay, DateMonth, DateYear ,EventDesc, EventType, Time, EventVenue FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "'";
         }
 
         try {
@@ -1245,11 +1247,13 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     String desc = resSet.getString(4);
                     String type = resSet.getString(5);
                     String time = resSet.getString(6);
-
+                    String venue = resSet.getString(7);
+                    
                     sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>Date: " + day + " " + month + " " + year + ": </b>"
                         + "<br>Time: <i>" + time
                         + "</i><br>" + type
-                        + "<br>Description: " + desc + "</div></html>"});
+                        + "<br>Description: " + desc 
+                        + "<br>Venue: " + venue + "</div></html>"});
                 }
             }
 
@@ -1507,5 +1511,5 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         
         return (String) Debug_Time.getSelectedItem();//use for testing and Debugging MUST REMOVE
     }
-
+/////////////
 }
