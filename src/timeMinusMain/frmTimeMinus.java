@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Justin ,Kieran
  */
 public final class frmTimeMinus extends javax.swing.JFrame {
-    private int TimeTableID;
+    private int timeTableID;
     DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
 
     DefaultTableModel mainEventsTableModel = new DefaultTableModel(); //create tableModel object to manipulate the main screen upcomming table
@@ -917,7 +917,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 password = resSet.getString("StudentPassword");
                 name = resSet.getString("StudentName");
                 surname = resSet.getString("StudentSurname");
-                TimeTableID = resSet.getInt("TimeTableID");
+                timeTableID = resSet.getInt("timeTableID");
                 if (user.equalsIgnoreCase(username) && pass.equalsIgnoreCase(password)) {
 
                     JOptionPane.showMessageDialog(null, "Hi " + name + " " + surname + " you have logged in successfully");
@@ -1205,7 +1205,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.add(screen_sMain);
         parentPanel.repaint();
         parentPanel.revalidate();
-        TimeTableID = 1;
+        timeTableID = 1;
     }
 
     private void updateCalendarScreen() {
@@ -1286,7 +1286,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
         //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "'"; // Older database query
-        query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay =  '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "' and module.TimeTableID = " + TimeTableID;
+        query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay =  '" + sSchedule_dayOfWeekCombo.getSelectedItem() + "' and module.TimeTableID = " + timeTableID;
         try {
 
             resSet = st.executeQuery(query);
@@ -1344,8 +1344,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             currentTime = "00:00:01";
         }
 
-        //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 1"; //Uses old database model
-        query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay = '" + currentDay + "' AND ModuleEnd >= '" + currentTime + "' AND module.TimeTableID = " + TimeTableID + " LIMIT 1";
+        //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 1"; //Uses old database
+        query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay = '" + currentDay + "' AND ModuleEnd >= '" + currentTime + "' AND module.TimeTableID = " + timeTableID + " LIMIT 1";
 
         try {
 
@@ -1377,7 +1377,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private void navToNextClass() throws SQLException {
 
         int i = 1;
-        String query, venue2 = null;
+        String query;
         ImageIcon image;
         
         
@@ -1389,8 +1389,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         //    currentTime = "08:00:00";
         //}
 
-        query = "SELECT Lesson, Venue FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 2";
-
+        
+        query = "SELECT LessonNo, PrevLessonNo, ModuleVenue FROM module WHERE ModuleDay = '" + currentDay + "' AND ModuleEnd >= '" + currentTime + "' AND module.TimeTableID = " + timeTableID + " LIMIT 1";
         resSet = st.executeQuery(query);    //if the result set is empty, I.E. no next class for the day, a warning message will be displayed and user is left on the main screen
         if (!resSet.next()) {
             parentPanel.removeAll();
@@ -1402,63 +1402,13 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         } else {
             resSet.first();
             String lessonNo = resSet.getString(1);
-            String imagePath = null;
-            //lessonNo = null;
-            switch (lessonNo) {
-                case "1":
-                    resSet.first();
-                    venue2 = resSet.getString(2);
-                    //resSet.next();
-                    //venue2 = resSet.getString(2);
-                    query = "SELECT * FROM 0to1";
-                    resSet = st.executeQuery(query);
-                    imagePath = "/NavigationImages/0to1-";
-                    break;
-
-                case "2":
-                    resSet.first();
-                    venue2 = resSet.getString(2);
-                    //resSet.next();
-                    //venue2 = resSet.getString(2);
-                    query = "SELECT * FROM 1to2";
-                    resSet = st.executeQuery(query);
-                    imagePath = "/NavigationImages/1to2-";
-                    break;
-
-                case "3":
-                    resSet.first();
-                    venue2 = resSet.getString(2);
-                    //resSet.next();
-                    //venue2 = resSet.getString(2);
-                    query = "SELECT * FROM 0to3";
-                    resSet = st.executeQuery(query);
-                    imagePath = "/NavigationImages/0to3-";
-                    break;
-
-                case "4":
-                    resSet.first();
-                    venue2 = resSet.getString(2);
-                    //resSet.next();
-                    //venue2 = resSet.getString(2);
-                    query = "SELECT * FROM 0to4";
-                    resSet = st.executeQuery(query);
-                    imagePath = "/NavigationImages/0to4-";
-                    break;
-
-                case "5":
-                    resSet.first();
-                    venue2 = resSet.getString(2);
-                    //resSet.next();
-                    //venue2 = resSet.getString(2);
-                    query = "SELECT * FROM 4to5";
-                    resSet = st.executeQuery(query);
-                    imagePath = "/NavigationImages/4to5-";
-                    break;
-
-                default:
-
-                    break;
-            }
+            String prevLessonNo = resSet.getString(2);
+            String venue = resSet.getString(3);
+            String directionGroup = prevLessonNo + "to" + lessonNo;
+            
+            String imagePath = "/NavigationImages/" + directionGroup + "-";
+            query = "SELECT DirectDesc FROM directions WHERE DirectionGroup = '" + directionGroup + "' AND TimeTableID = " + timeTableID + " ORDER BY DirectNo";
+            resSet = st.executeQuery(query);
 
             DefaultTableModel navScreenTableModel = new DefaultTableModel() {
                 @Override
@@ -1488,12 +1438,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             renderer.setVerticalAlignment(SwingConstants.TOP);
             navDirections_DirectionsTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
             navDirections_DirectionsTable.setShowGrid(true);
-            navDirections_BannerText.setText("Navigate to " + venue2);
+            navDirections_BannerText.setText("Navigate to " + venue);
             while (resSet.next()) {
 
                 image = new ImageIcon(getClass().getResource(imagePath + i + ".jpg"));
                 i++;
-                navScreenTableModel.insertRow(navScreenTableModel.getRowCount(), new Object[]{resSet.getString(2), image});
+                navScreenTableModel.insertRow(navScreenTableModel.getRowCount(), new Object[]{resSet.getString(1), image});
             }
         }
 
