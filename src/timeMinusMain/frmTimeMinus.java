@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 
 /**
  *
@@ -75,9 +76,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         login_username = new javax.swing.JTextField();
         login_RememberDetails = new javax.swing.JCheckBox();
         login_Button = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        login_password = new javax.swing.JPasswordField();
+        login_UserNameLabel = new javax.swing.JLabel();
+        login_PasswordLabel = new javax.swing.JLabel();
+        login_userTypeCombo = new javax.swing.JComboBox<>();
+        login_UserTypeLabel = new javax.swing.JLabel();
         login_ExtraPanel = new javax.swing.JPanel();
         login_ForgottenLink = new javax.swing.JLabel();
         login_CookiesLink = new javax.swing.JLabel();
@@ -177,11 +180,15 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
+        login_password.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel3.setText("Username / Student Email:");
+        login_UserNameLabel.setText("Username / Student Email:");
 
-        jLabel4.setText("Password:");
+        login_PasswordLabel.setText("Password:");
+
+        login_userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Lecturer" }));
+
+        login_UserTypeLabel.setText("User Type:");
 
         javax.swing.GroupLayout login_detailsPanelLayout = new javax.swing.GroupLayout(login_detailsPanel);
         login_detailsPanel.setLayout(login_detailsPanelLayout);
@@ -193,12 +200,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(login_detailsHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(login_username, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPasswordField1)
+                    .addComponent(login_password)
+                    .addComponent(login_userTypeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(login_detailsPanelLayout.createSequentialGroup()
                         .addGroup(login_detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(login_RememberDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(login_UserNameLabel)
+                            .addComponent(login_PasswordLabel)
+                            .addComponent(login_UserTypeLabel))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -207,15 +216,19 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             .addGroup(login_detailsPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(login_detailsHeader)
+                .addGap(14, 14, 14)
+                .addComponent(login_UserTypeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(login_userTypeCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(login_UserNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(login_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(login_PasswordLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(login_password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(login_RememberDetails)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,7 +236,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         );
 
         screen_login.add(login_detailsPanel);
-        login_detailsPanel.setBounds(30, 170, 313, 290);
+        login_detailsPanel.setBounds(30, 110, 313, 350);
 
         login_ExtraPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -267,11 +280,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         login_AppName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login_AppName.setText("Time - Minus");
         screen_login.add(login_AppName);
-        login_AppName.setBounds(6, 105, 354, 44);
+        login_AppName.setBounds(0, 60, 354, 44);
 
         login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
         screen_login.add(login_Logo);
-        login_Logo.setBounds(6, 27, 200, 60);
+        login_Logo.setBounds(0, 0, 200, 60);
 
         Debug_DayOfWeek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
 
@@ -878,16 +891,17 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
 
-        testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
+        //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
 
-        /*
+        
         //Actual Login with database
         String user = login_username.getText();
         String pass = login_password.getText();
-
+        String userType = toLowerCase((String) login_userTypeCombo.getSelectedItem());
         try {
-
-            String query = "select * from students";
+            
+            //String query = "select * from students";
+            String query = "SELECT * FROM " + userType;
             resSet = st.executeQuery(query);
 
             String username = null;
@@ -910,10 +924,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     parentPanel.repaint();
                     parentPanel.revalidate();
                     if (!login_RememberDetails.isSelected()) {
-                        login_password.setText("Password");
+                        /*login_password.setText("Password");
                         login_password.setForeground(new Color(153, 153, 153));
                         login_username.setText("Student ID / Pearson Email");
-                        login_username.setForeground(new Color(153, 153, 153));
+                        login_username.setForeground(new Color(153, 153, 153));*/
+                        login_password.setText("");
+                        login_username.setText("");
 
                     }
                     userFound = true;
@@ -926,10 +942,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
             if (userFound == false) {
 
-                login_password.setText("Password");
+                /*login_password.setText("Password");
                 login_password.setForeground(new Color(153, 153, 153));
                 login_username.setText("Student ID / Pearson Email");
-                login_username.setForeground(new Color(153, 153, 153));
+                login_username.setForeground(new Color(153, 153, 153));*/
+                login_password.setText("");
+                login_username.setText("");
                 JOptionPane.showMessageDialog(parentPanel, "Incorrect Username or Password", "", JOptionPane.WARNING_MESSAGE);
 
             }
@@ -938,7 +956,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             System.out.println(ex);
 
         }
-        */
+        
         
         try {
             updateMainScreenCalendar(); //Updates main screen upcomming calendar when program starts.
@@ -1082,10 +1100,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1097,9 +1112,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPanel login_ExtraPanel;
     private javax.swing.JLabel login_ForgottenLink;
     private javax.swing.JLabel login_Logo;
+    private javax.swing.JLabel login_PasswordLabel;
     private javax.swing.JCheckBox login_RememberDetails;
+    private javax.swing.JLabel login_UserNameLabel;
+    private javax.swing.JLabel login_UserTypeLabel;
     private javax.swing.JLabel login_detailsHeader;
     private javax.swing.JPanel login_detailsPanel;
+    private javax.swing.JPasswordField login_password;
+    private javax.swing.JComboBox<String> login_userTypeCombo;
     private javax.swing.JTextField login_username;
     private javax.swing.JButton main_BackButton;
     private javax.swing.JButton main_CalendarButton;
