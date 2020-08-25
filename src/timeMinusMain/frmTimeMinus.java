@@ -186,7 +186,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         login_PasswordLabel.setText("Password:");
 
-        login_userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Lecturer" }));
+        login_userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student" }));
 
         login_UserTypeLabel.setText("User Type:");
 
@@ -910,7 +910,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             String surname = null;
             boolean userFound = false;
 
-            while (resSet.next()) {
+            switch(userType){
+                
+                case "student":
+                    while (resSet.next()) {
                 username = resSet.getString("StudentUserName");
                 password = resSet.getString("StudentPassword");
                 name = resSet.getString("StudentName");
@@ -932,13 +935,21 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                         login_username.setText("");
 
                     }
-                    userFound = true;
+                    userFound = true;                                                         
                     main_WelcomeBackMessage.setText("Welcome Back " + name + " " + surname);
                     break;
 
                 }
 
             }
+                    break;
+                    
+                case "lecturer":
+                    
+                    break;
+            }
+            
+            
 
             if (userFound == false) {
 
@@ -1189,6 +1200,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             while (resSet.next()) {
                 mainEventsTableModel.insertRow(mainEventsTableModel.getRowCount(), new Object[]{resSet.getString(1) + " " + resSet.getString(2) + ": " + resSet.getString(3) + " " + resSet.getString(4)});
             }
+            calendar.add(Calendar.MONTH, -1);
         } else {
             resSet.beforeFirst();
             while (resSet.next()) {
