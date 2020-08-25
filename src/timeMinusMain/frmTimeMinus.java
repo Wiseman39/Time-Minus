@@ -148,8 +148,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sCalendar_eventTypeCombo = new javax.swing.JComboBox<>();
         sCalendar_tableHeader = new javax.swing.JLabel();
         screen_forgottenPassword = new javax.swing.JPanel();
-        sCalendar_Banner2 = new javax.swing.JPanel();
-        sCalendar_BannerText1 = new javax.swing.JLabel();
+        forgotten_Banner = new javax.swing.JPanel();
+        forgotten_BannerText = new javax.swing.JLabel();
         forgotten_typeCombo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -683,22 +683,22 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         screen_forgottenPassword.setBackground(new java.awt.Color(255, 255, 255));
         screen_forgottenPassword.setForeground(new java.awt.Color(0, 0, 0));
 
-        sCalendar_Banner2.setBackground(new java.awt.Color(2, 31, 84));
+        forgotten_Banner.setBackground(new java.awt.Color(2, 31, 84));
 
-        sCalendar_BannerText1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        sCalendar_BannerText1.setForeground(new java.awt.Color(255, 255, 255));
-        sCalendar_BannerText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sCalendar_BannerText1.setText("Forgotten Password");
+        forgotten_BannerText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        forgotten_BannerText.setForeground(new java.awt.Color(255, 255, 255));
+        forgotten_BannerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        forgotten_BannerText.setText("Forgotten Password");
 
-        javax.swing.GroupLayout sCalendar_Banner2Layout = new javax.swing.GroupLayout(sCalendar_Banner2);
-        sCalendar_Banner2.setLayout(sCalendar_Banner2Layout);
-        sCalendar_Banner2Layout.setHorizontalGroup(
-            sCalendar_Banner2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sCalendar_BannerText1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout forgotten_BannerLayout = new javax.swing.GroupLayout(forgotten_Banner);
+        forgotten_Banner.setLayout(forgotten_BannerLayout);
+        forgotten_BannerLayout.setHorizontalGroup(
+            forgotten_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(forgotten_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        sCalendar_Banner2Layout.setVerticalGroup(
-            sCalendar_Banner2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sCalendar_BannerText1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+        forgotten_BannerLayout.setVerticalGroup(
+            forgotten_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(forgotten_BannerText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
         );
 
         forgotten_typeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Username", "Email" }));
@@ -716,6 +716,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(2, 31, 84));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Send");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -737,7 +739,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         screen_forgottenPassword.setLayout(screen_forgottenPasswordLayout);
         screen_forgottenPasswordLayout.setHorizontalGroup(
             screen_forgottenPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sCalendar_Banner2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(forgotten_Banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(screen_forgottenPasswordLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(screen_forgottenPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -756,7 +758,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         screen_forgottenPasswordLayout.setVerticalGroup(
             screen_forgottenPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(screen_forgottenPasswordLayout.createSequentialGroup()
-                .addComponent(sCalendar_Banner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(forgotten_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1257,6 +1259,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPanel Debug_Panel;
     private javax.swing.JComboBox<String> Debug_Time;
     private javax.swing.JButton forgotten_BackButton;
+    private javax.swing.JPanel forgotten_Banner;
+    private javax.swing.JLabel forgotten_BannerText;
     private javax.swing.JComboBox<String> forgotten_typeCombo;
     private javax.swing.JTextField forgotten_username;
     private javax.swing.JButton jButton1;
@@ -1303,9 +1307,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JButton sCalendar_BackButton;
     private javax.swing.JPanel sCalendar_Banner;
     private javax.swing.JPanel sCalendar_Banner1;
-    private javax.swing.JPanel sCalendar_Banner2;
     private javax.swing.JLabel sCalendar_BannerText;
-    private javax.swing.JLabel sCalendar_BannerText1;
     private javax.swing.JTable sCalendar_calendarTable;
     private javax.swing.JComboBox<String> sCalendar_eventTypeCombo;
     private javax.swing.JComboBox<String> sCalendar_monthCombo;
