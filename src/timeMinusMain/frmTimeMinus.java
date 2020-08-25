@@ -1,6 +1,8 @@
 package timeMinusMain;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,6 +28,9 @@ import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
  */
 public final class frmTimeMinus extends javax.swing.JFrame {
     private int timeTableID;
+    
+    
+    
     DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
 
     DefaultTableModel mainEventsTableModel = new DefaultTableModel(); //create tableModel object to manipulate the main screen upcomming table
@@ -51,7 +56,33 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         main_calendarEvents.setShowGrid(true);
         sCalendar_calendarTable.setShowGrid(true);
         sSchedule_scheduleTable.setShowGrid(true);
+        
+        login_forgottenLink.addMouseListener(new MouseListener() {
+            
+            public void mouseClicked(MouseEvent e) {
+                parentPanel.removeAll();
+                parentPanel.add(screen_forgottenPassword);
+                parentPanel.repaint();
+                parentPanel.revalidate();
+            }
 
+            
+            public void mousePressed(MouseEvent e) {
+            }
+
+            
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            
+            public void mouseExited(MouseEvent me) {
+            }
+        });
+        
         //DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
         //scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
         //sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
@@ -71,6 +102,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         parentPanel = new javax.swing.JPanel();
         screen_login = new javax.swing.JPanel();
+        login_ExtraPanel = new javax.swing.JPanel();
+        login_forgottenLink = new javax.swing.JLabel();
         login_detailsPanel = new javax.swing.JPanel();
         login_detailsHeader = new javax.swing.JLabel();
         login_username = new javax.swing.JTextField();
@@ -81,12 +114,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         login_PasswordLabel = new javax.swing.JLabel();
         login_userTypeCombo = new javax.swing.JComboBox<>();
         login_UserTypeLabel = new javax.swing.JLabel();
-        login_ExtraPanel = new javax.swing.JPanel();
-        login_ForgottenLink = new javax.swing.JLabel();
-        login_CookiesLink = new javax.swing.JLabel();
         login_AppName = new javax.swing.JLabel();
         login_Logo = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        Debug_Panel = new javax.swing.JPanel();
         Debug_DayOfWeek = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         Debug_Time = new javax.swing.JComboBox<>();
@@ -117,7 +147,16 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sCalendar_calendarTable = new javax.swing.JTable();
         sCalendar_eventTypeCombo = new javax.swing.JComboBox<>();
         sCalendar_tableHeader = new javax.swing.JLabel();
-        screen_ChatMenu = new javax.swing.JPanel();
+        screen_forgottenPassword = new javax.swing.JPanel();
+        sCalendar_Banner2 = new javax.swing.JPanel();
+        sCalendar_BannerText1 = new javax.swing.JLabel();
+        forgotten_typeCombo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        forgotten_username = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        forgotten_BackButton = new javax.swing.JButton();
+        screen_chatMenu = new javax.swing.JPanel();
         screen_ChatRoom = new javax.swing.JPanel();
         screen_navMenu = new javax.swing.JPanel();
         navMenu_Banner = new javax.swing.JPanel();
@@ -146,6 +185,33 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         screen_login.setBackground(new java.awt.Color(0, 0, 255));
         screen_login.setLayout(null);
+
+        login_ExtraPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        login_forgottenLink.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        login_forgottenLink.setForeground(new java.awt.Color(20, 100, 246));
+        login_forgottenLink.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        login_forgottenLink.setText("Forgotten Password");
+
+        javax.swing.GroupLayout login_ExtraPanelLayout = new javax.swing.GroupLayout(login_ExtraPanel);
+        login_ExtraPanel.setLayout(login_ExtraPanelLayout);
+        login_ExtraPanelLayout.setHorizontalGroup(
+            login_ExtraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(login_ExtraPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(login_forgottenLink, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        login_ExtraPanelLayout.setVerticalGroup(
+            login_ExtraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, login_ExtraPanelLayout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(login_forgottenLink)
+                .addGap(23, 23, 23))
+        );
+
+        screen_login.add(login_ExtraPanel);
+        login_ExtraPanel.setBounds(0, 599, 360, 50);
 
         login_detailsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -238,42 +304,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         screen_login.add(login_detailsPanel);
         login_detailsPanel.setBounds(30, 110, 313, 350);
 
-        login_ExtraPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        login_ForgottenLink.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        login_ForgottenLink.setForeground(new java.awt.Color(20, 100, 246));
-        login_ForgottenLink.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        login_ForgottenLink.setText("Forgotten username or Password");
-
-        login_CookiesLink.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        login_CookiesLink.setForeground(new java.awt.Color(20, 100, 246));
-        login_CookiesLink.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        login_CookiesLink.setText("Cookies must be enabled in your browser");
-
-        javax.swing.GroupLayout login_ExtraPanelLayout = new javax.swing.GroupLayout(login_ExtraPanel);
-        login_ExtraPanel.setLayout(login_ExtraPanelLayout);
-        login_ExtraPanelLayout.setHorizontalGroup(
-            login_ExtraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(login_ExtraPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(login_ExtraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(login_ForgottenLink, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(login_CookiesLink, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        login_ExtraPanelLayout.setVerticalGroup(
-            login_ExtraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(login_ExtraPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(login_ForgottenLink)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(login_CookiesLink)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-
-        screen_login.add(login_ExtraPanel);
-        login_ExtraPanel.setBounds(0, 570, 360, 79);
-
         login_AppName.setBackground(new java.awt.Color(255, 255, 255));
         login_AppName.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         login_AppName.setForeground(new java.awt.Color(255, 255, 255));
@@ -284,7 +314,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         login_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pearsonLogoResized.png"))); // NOI18N
         screen_login.add(login_Logo);
-        login_Logo.setBounds(0, 0, 200, 60);
+        login_Logo.setBounds(10, 10, 200, 60);
 
         Debug_DayOfWeek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
 
@@ -292,23 +322,23 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         Debug_Time.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00" }));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout Debug_PanelLayout = new javax.swing.GroupLayout(Debug_Panel);
+        Debug_Panel.setLayout(Debug_PanelLayout);
+        Debug_PanelLayout.setHorizontalGroup(
+            Debug_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Debug_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Debug_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Debug_DayOfWeek, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(Debug_PanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 122, Short.MAX_VALUE))
                     .addComponent(Debug_Time, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        Debug_PanelLayout.setVerticalGroup(
+            Debug_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Debug_PanelLayout.createSequentialGroup()
                 .addContainerGap(10, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,8 +348,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
         );
 
-        screen_login.add(jPanel1);
-        jPanel1.setBounds(10, 470, 340, 100);
+        screen_login.add(Debug_Panel);
+        Debug_Panel.setBounds(10, 470, 340, 100);
 
         login_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
         screen_login.add(login_Background);
@@ -650,20 +680,113 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         parentPanel.add(screen_sCalendar, "card9");
 
-        screen_ChatMenu.setBackground(new java.awt.Color(255, 255, 255));
+        screen_forgottenPassword.setBackground(new java.awt.Color(255, 255, 255));
+        screen_forgottenPassword.setForeground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout screen_ChatMenuLayout = new javax.swing.GroupLayout(screen_ChatMenu);
-        screen_ChatMenu.setLayout(screen_ChatMenuLayout);
-        screen_ChatMenuLayout.setHorizontalGroup(
-            screen_ChatMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        sCalendar_Banner2.setBackground(new java.awt.Color(2, 31, 84));
+
+        sCalendar_BannerText1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        sCalendar_BannerText1.setForeground(new java.awt.Color(255, 255, 255));
+        sCalendar_BannerText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sCalendar_BannerText1.setText("Forgotten Password");
+
+        javax.swing.GroupLayout sCalendar_Banner2Layout = new javax.swing.GroupLayout(sCalendar_Banner2);
+        sCalendar_Banner2.setLayout(sCalendar_Banner2Layout);
+        sCalendar_Banner2Layout.setHorizontalGroup(
+            sCalendar_Banner2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sCalendar_BannerText1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        sCalendar_Banner2Layout.setVerticalGroup(
+            sCalendar_Banner2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sCalendar_BannerText1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+        );
+
+        forgotten_typeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Username", "Email" }));
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("<html><div style=\\\"text-align:left\\\">Please enter your username or Email below.</div></html>");
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Select Type:");
+
+        forgotten_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forgotten_usernameActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Send");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        forgotten_BackButton.setBackground(new java.awt.Color(255, 255, 255));
+        forgotten_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        forgotten_BackButton.setText("<<");
+        forgotten_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
+        forgotten_BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forgotten_BackButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout screen_forgottenPasswordLayout = new javax.swing.GroupLayout(screen_forgottenPassword);
+        screen_forgottenPassword.setLayout(screen_forgottenPasswordLayout);
+        screen_forgottenPasswordLayout.setHorizontalGroup(
+            screen_forgottenPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sCalendar_Banner2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(screen_forgottenPasswordLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(screen_forgottenPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                    .addComponent(forgotten_typeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(forgotten_username)
+                    .addGroup(screen_forgottenPasswordLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(screen_forgottenPasswordLayout.createSequentialGroup()
+                .addComponent(forgotten_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        screen_forgottenPasswordLayout.setVerticalGroup(
+            screen_forgottenPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_forgottenPasswordLayout.createSequentialGroup()
+                .addComponent(sCalendar_Banner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(forgotten_typeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(forgotten_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
+                .addComponent(forgotten_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        parentPanel.add(screen_forgottenPassword, "card10");
+
+        screen_chatMenu.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout screen_chatMenuLayout = new javax.swing.GroupLayout(screen_chatMenu);
+        screen_chatMenu.setLayout(screen_chatMenuLayout);
+        screen_chatMenuLayout.setHorizontalGroup(
+            screen_chatMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 360, Short.MAX_VALUE)
         );
-        screen_ChatMenuLayout.setVerticalGroup(
-            screen_ChatMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        screen_chatMenuLayout.setVerticalGroup(
+            screen_chatMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        parentPanel.add(screen_ChatMenu, "card5");
+        parentPanel.add(screen_chatMenu, "card5");
 
         screen_ChatRoom.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1070,6 +1193,30 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     }//GEN-LAST:event_main_NavToClassButtonActionPerformed
 
+    private void forgotten_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotten_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_forgotten_usernameActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String message = "<html>If your " + forgotten_typeCombo.getSelectedItem() + " is found in the database,<br> an email will be sent to your address with<br> instructions on how to get access again<html>";
+        
+        if (!"".equals(forgotten_username.getText())) {
+            JOptionPane.showMessageDialog(this, message, "Note", WIDTH);
+            forgotten_username.setText("");
+            forgotten_typeCombo.setSelectedIndex(0);
+        }else{
+            JOptionPane.showMessageDialog(this, "Please enter a username or Email", message, JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void forgotten_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotten_BackButtonActionPerformed
+        parentPanel.removeAll();
+        parentPanel.add(screen_login);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }//GEN-LAST:event_forgotten_BackButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1107,11 +1254,17 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Debug_DayOfWeek;
+    private javax.swing.JPanel Debug_Panel;
     private javax.swing.JComboBox<String> Debug_Time;
+    private javax.swing.JButton forgotten_BackButton;
+    private javax.swing.JComboBox<String> forgotten_typeCombo;
+    private javax.swing.JTextField forgotten_username;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1119,9 +1272,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
     private javax.swing.JButton login_Button;
-    private javax.swing.JLabel login_CookiesLink;
     private javax.swing.JPanel login_ExtraPanel;
-    private javax.swing.JLabel login_ForgottenLink;
     private javax.swing.JLabel login_Logo;
     private javax.swing.JLabel login_PasswordLabel;
     private javax.swing.JCheckBox login_RememberDetails;
@@ -1129,6 +1280,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JLabel login_UserTypeLabel;
     private javax.swing.JLabel login_detailsHeader;
     private javax.swing.JPanel login_detailsPanel;
+    private javax.swing.JLabel login_forgottenLink;
     private javax.swing.JPasswordField login_password;
     private javax.swing.JComboBox<String> login_userTypeCombo;
     private javax.swing.JTextField login_username;
@@ -1151,7 +1303,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JButton sCalendar_BackButton;
     private javax.swing.JPanel sCalendar_Banner;
     private javax.swing.JPanel sCalendar_Banner1;
+    private javax.swing.JPanel sCalendar_Banner2;
     private javax.swing.JLabel sCalendar_BannerText;
+    private javax.swing.JLabel sCalendar_BannerText1;
     private javax.swing.JTable sCalendar_calendarTable;
     private javax.swing.JComboBox<String> sCalendar_eventTypeCombo;
     private javax.swing.JComboBox<String> sCalendar_monthCombo;
@@ -1163,8 +1317,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JLabel sSchedule_BannerText;
     private javax.swing.JComboBox<String> sSchedule_dayOfWeekCombo;
     private javax.swing.JTable sSchedule_scheduleTable;
-    private javax.swing.JPanel screen_ChatMenu;
     private javax.swing.JPanel screen_ChatRoom;
+    private javax.swing.JPanel screen_chatMenu;
+    private javax.swing.JPanel screen_forgottenPassword;
     private javax.swing.JPanel screen_login;
     private javax.swing.JPanel screen_navDirections;
     private javax.swing.JPanel screen_navMenu;
