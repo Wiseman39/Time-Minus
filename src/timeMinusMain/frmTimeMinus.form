@@ -418,15 +418,15 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="sMain_WelcomeBackMessage" min="-2" pref="340" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="main_CalendarButton" max="32767" attributes="0"/>
+                          <Component id="sMain_CalendarButton" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="main_BackButton" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="sMain_BackButton" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="main_NavToClassButton" min="-2" pref="237" max="-2" attributes="0"/>
+                              <Component id="sMain_NavToClassButton" min="-2" pref="237" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="main_NextClassesButton" max="32767" attributes="0"/>
+                              <Component id="sMain_NextClassesButton" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -442,21 +442,21 @@
                       <Component id="jScrollPane3" min="-2" pref="145" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="main_NavToClassButton" pref="50" max="32767" attributes="0"/>
-                          <Component id="main_NextClassesButton" max="32767" attributes="0"/>
+                          <Component id="sMain_NavToClassButton" pref="50" max="32767" attributes="0"/>
+                          <Component id="sMain_NextClassesButton" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="main_CalendarScrollPane" min="-2" pref="230" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="main_CalendarButton" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="sMain_CalendarButton" min="-2" pref="49" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                      <Component id="main_BackButton" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="sMain_BackButton" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="main_BackButton">
+            <Component class="javax.swing.JButton" name="sMain_BackButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -470,7 +470,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="main_BackButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sMain_BackButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="sMain_WelcomeBackMessage">
@@ -486,7 +486,7 @@
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="main_NavToClassButton">
+            <Component class="javax.swing.JButton" name="sMain_NavToClassButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="54" green="1f" red="2" type="rgb"/>
@@ -497,7 +497,7 @@
                 <Property name="text" type="java.lang.String" value="Navigate to Class"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="main_NavToClassButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sMain_NavToClassButtonActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="main_CalendarScrollPane">
@@ -545,7 +545,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="main_CalendarButton">
+            <Component class="javax.swing.JButton" name="sMain_CalendarButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="54" green="1f" red="2" type="rgb"/>
@@ -556,10 +556,10 @@
                 <Property name="text" type="java.lang.String" value="Open Calendar View"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="main_CalendarButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sMain_CalendarButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="main_NextClassesButton">
+            <Component class="javax.swing.JButton" name="sMain_NextClassesButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="54" green="1f" red="2" type="rgb"/>
@@ -570,7 +570,7 @@
                 <Property name="text" type="java.lang.String" value="Schedule &gt;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="main_NextClassesButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sMain_NextClassesButtonActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">

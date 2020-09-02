@@ -118,13 +118,13 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         Debug_Time = new javax.swing.JComboBox<>();
         login_Background = new javax.swing.JLabel();
         screen_sMain = new javax.swing.JPanel();
-        main_BackButton = new javax.swing.JButton();
+        sMain_BackButton = new javax.swing.JButton();
         sMain_WelcomeBackMessage = new javax.swing.JLabel();
-        main_NavToClassButton = new javax.swing.JButton();
+        sMain_NavToClassButton = new javax.swing.JButton();
         main_CalendarScrollPane = new javax.swing.JScrollPane();
         sMain_calendarEvents = new javax.swing.JTable();
-        main_CalendarButton = new javax.swing.JButton();
-        main_NextClassesButton = new javax.swing.JButton();
+        sMain_CalendarButton = new javax.swing.JButton();
+        sMain_NextClassesButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         sMain_nextClassTable = new javax.swing.JTable();
         screen_lMain = new javax.swing.JPanel();
@@ -365,13 +365,13 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         screen_sMain.setBackground(new java.awt.Color(255, 255, 255));
         screen_sMain.setPreferredSize(new java.awt.Dimension(360, 640));
 
-        main_BackButton.setBackground(new java.awt.Color(255, 255, 255));
-        main_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
-        main_BackButton.setText("<<");
-        main_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
-        main_BackButton.addActionListener(new java.awt.event.ActionListener() {
+        sMain_BackButton.setBackground(new java.awt.Color(255, 255, 255));
+        sMain_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        sMain_BackButton.setText("<<");
+        sMain_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
+        sMain_BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                main_BackButtonActionPerformed(evt);
+                sMain_BackButtonActionPerformed(evt);
             }
         });
 
@@ -381,12 +381,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sMain_WelcomeBackMessage.setText("Welcome Back USER_NAME USER_SURNAME");
         sMain_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        main_NavToClassButton.setBackground(new java.awt.Color(2, 31, 84));
-        main_NavToClassButton.setForeground(new java.awt.Color(255, 255, 255));
-        main_NavToClassButton.setText("Navigate to Class");
-        main_NavToClassButton.addActionListener(new java.awt.event.ActionListener() {
+        sMain_NavToClassButton.setBackground(new java.awt.Color(2, 31, 84));
+        sMain_NavToClassButton.setForeground(new java.awt.Color(255, 255, 255));
+        sMain_NavToClassButton.setText("Navigate to Class");
+        sMain_NavToClassButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                main_NavToClassButtonActionPerformed(evt);
+                sMain_NavToClassButtonActionPerformed(evt);
             }
         });
 
@@ -416,21 +416,21 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sMain_calendarEvents.setRowSelectionAllowed(false);
         main_CalendarScrollPane.setViewportView(sMain_calendarEvents);
 
-        main_CalendarButton.setBackground(new java.awt.Color(2, 31, 84));
-        main_CalendarButton.setForeground(new java.awt.Color(255, 255, 255));
-        main_CalendarButton.setText("Open Calendar View");
-        main_CalendarButton.addActionListener(new java.awt.event.ActionListener() {
+        sMain_CalendarButton.setBackground(new java.awt.Color(2, 31, 84));
+        sMain_CalendarButton.setForeground(new java.awt.Color(255, 255, 255));
+        sMain_CalendarButton.setText("Open Calendar View");
+        sMain_CalendarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                main_CalendarButtonActionPerformed(evt);
+                sMain_CalendarButtonActionPerformed(evt);
             }
         });
 
-        main_NextClassesButton.setBackground(new java.awt.Color(2, 31, 84));
-        main_NextClassesButton.setForeground(new java.awt.Color(255, 255, 255));
-        main_NextClassesButton.setText("Schedule >");
-        main_NextClassesButton.addActionListener(new java.awt.event.ActionListener() {
+        sMain_NextClassesButton.setBackground(new java.awt.Color(2, 31, 84));
+        sMain_NextClassesButton.setForeground(new java.awt.Color(255, 255, 255));
+        sMain_NextClassesButton.setText("Schedule >");
+        sMain_NextClassesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                main_NextClassesButtonActionPerformed(evt);
+                sMain_NextClassesButtonActionPerformed(evt);
             }
         });
 
@@ -459,14 +459,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_sMainLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(sMain_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(main_CalendarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sMain_CalendarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(screen_sMainLayout.createSequentialGroup()
-                        .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sMain_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(screen_sMainLayout.createSequentialGroup()
-                        .addComponent(main_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sMain_NavToClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(main_NextClassesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(sMain_NextClassesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         screen_sMainLayout.setVerticalGroup(
@@ -478,14 +478,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(main_NavToClassButton, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(main_NextClassesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sMain_NavToClassButton, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(sMain_NextClassesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(main_CalendarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(main_CalendarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sMain_CalendarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(sMain_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         parentPanel.add(screen_sMain, "card3");
@@ -1233,8 +1233,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
 
             try {
-                updateMainScreenCalendar(tablePrefix); //Updates main screen upcomming calendar when program starts.
-                updateMainNextClass(tablePrefix);
+                updateMainScreenCalendar(); //Updates main screen upcomming calendar when program starts.
+                updateMainNextClass();
             } catch (SQLException ex) {
                 Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1263,7 +1263,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void sCalendar_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCalendar_BackButtonActionPerformed
         parentPanel.removeAll();
-        parentPanel.add(screen_sMain);
+        if ("s".equals(tablePrefix)) {
+            parentPanel.add(screen_sMain);
+        } else  {
+            parentPanel.add(screen_lMain);
+        }
+        
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_sCalendar_BackButtonActionPerformed
@@ -1284,7 +1289,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         updateStudentSchedule();
     }//GEN-LAST:event_sSchedule_dayOfWeekComboActionPerformed
 
-    private void main_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NextClassesButtonActionPerformed
+    private void sMain_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sMain_NextClassesButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_studentSchedule);
         parentPanel.repaint();
@@ -1293,9 +1298,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sSchedule_dayOfWeekCombo.setSelectedItem(getDayOfWeek());
         updateStudentSchedule();
 
-    }//GEN-LAST:event_main_NextClassesButtonActionPerformed
+    }//GEN-LAST:event_sMain_NextClassesButtonActionPerformed
 
-    private void main_CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_CalendarButtonActionPerformed
+    private void sMain_CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sMain_CalendarButtonActionPerformed
 
         parentPanel.removeAll();
         parentPanel.add(screen_sCalendar);
@@ -1306,14 +1311,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sCalendar_eventTypeCombo.setSelectedItem("All");
 
         //updateCalendarScreen(); Apparently do not need this for the calendar screen to work?
-    }//GEN-LAST:event_main_CalendarButtonActionPerformed
+    }//GEN-LAST:event_sMain_CalendarButtonActionPerformed
 
-    private void main_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_BackButtonActionPerformed
+    private void sMain_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sMain_BackButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_login);
         parentPanel.repaint();
         parentPanel.revalidate();
-    }//GEN-LAST:event_main_BackButtonActionPerformed
+    }//GEN-LAST:event_sMain_BackButtonActionPerformed
 
     private void sNavScreen_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sNavScreen_BackButtonActionPerformed
         parentPanel.removeAll();
@@ -1322,7 +1327,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.revalidate();
     }//GEN-LAST:event_sNavScreen_BackButtonActionPerformed
 
-    private void main_NavToClassButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_NavToClassButtonActionPerformed
+    private void sMain_NavToClassButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sMain_NavToClassButtonActionPerformed
         parentPanel.removeAll();
         parentPanel.add(screen_navDirections);
         parentPanel.repaint();
@@ -1334,7 +1339,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_main_NavToClassButtonActionPerformed
+    }//GEN-LAST:event_sMain_NavToClassButtonActionPerformed
 
     private void forgotten_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotten_usernameActionPerformed
         // TODO add your handling code here:
@@ -1368,7 +1373,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     }//GEN-LAST:event_lMain_BackButtonActionPerformed
 
     private void lMain_CalendarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMain_CalendarButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        parentPanel.removeAll();
+        parentPanel.add(screen_sCalendar);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+
+        sCalendar_monthCombo.setSelectedItem(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+        sCalendar_eventTypeCombo.setSelectedItem("All");
     }//GEN-LAST:event_lMain_CalendarButton1ActionPerformed
 
     private void lMain_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMain_NextClassesButtonActionPerformed
@@ -1451,12 +1463,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPasswordField login_password;
     private javax.swing.JComboBox<String> login_userTypeCombo;
     private javax.swing.JTextField login_username;
-    private javax.swing.JButton main_BackButton;
-    private javax.swing.JButton main_CalendarButton;
     private javax.swing.JScrollPane main_CalendarScrollPane;
     private javax.swing.JScrollPane main_CalendarScrollPane1;
-    private javax.swing.JButton main_NavToClassButton;
-    private javax.swing.JButton main_NextClassesButton;
     private javax.swing.JLabel navDirections_BannerText;
     private javax.swing.JTable navDirections_DirectionsTable;
     private javax.swing.JButton navMenu_BackButton1;
@@ -1474,6 +1482,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sCalendar_eventTypeCombo;
     private javax.swing.JComboBox<String> sCalendar_monthCombo;
     private javax.swing.JLabel sCalendar_tableHeader;
+    private javax.swing.JButton sMain_BackButton;
+    private javax.swing.JButton sMain_CalendarButton;
+    private javax.swing.JButton sMain_NavToClassButton;
+    private javax.swing.JButton sMain_NextClassesButton;
     private javax.swing.JLabel sMain_WelcomeBackMessage;
     private javax.swing.JTable sMain_calendarEvents;
     private javax.swing.JTable sMain_nextClassTable;
@@ -1495,7 +1507,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
 
-    private void updateMainScreenCalendar(String tablePrefix) throws SQLException {
+    private void updateMainScreenCalendar() throws SQLException {
 
         int currentDay = calendar.get(Calendar.DATE);
         //int currentDay = 23;
@@ -1656,7 +1668,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         }
     }
 
-    private void updateMainNextClass(String tablePrefix) {
+    private void updateMainNextClass() {
         //String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
         String query;
         String currentDay = getDayOfWeek();
