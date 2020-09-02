@@ -1361,7 +1361,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     }//GEN-LAST:event_forgotten_BackButtonActionPerformed
 
     private void lMain_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMain_BackButtonActionPerformed
-        // TODO add your handling code here:
+        parentPanel.removeAll();
+        parentPanel.add(screen_login);
+        parentPanel.repaint();
+        parentPanel.revalidate();
     }//GEN-LAST:event_lMain_BackButtonActionPerformed
 
     private void lMain_CalendarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMain_CalendarButton1ActionPerformed
@@ -1492,7 +1495,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
 
-    private void updateMainScreenCalendar(String tablePrefix1) throws SQLException {
+    private void updateMainScreenCalendar(String tablePrefix) throws SQLException {
 
         int currentDay = calendar.get(Calendar.DATE);
         //int currentDay = 23;
@@ -1653,15 +1656,29 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         }
     }
 
-    private void updateMainNextClass(String tablePrefix1) {
+    private void updateMainNextClass(String tablePrefix) {
         //String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        String query;
         String currentDay = getDayOfWeek();
-
         String currentTime = getCurrentTime();
         System.out.println(currentTime);
+        
+        if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
+            currentDay = "Monday";
+            currentTime = "00:00:01";
+        }
 
-        String query;
-        sMain_nextClassTable.setModel(mainNextClassTableModel);
+        
+        
+        if ("s".equalsIgnoreCase(tablePrefix)) {
+            sMain_nextClassTable.setModel(mainNextClassTableModel);
+            query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay = '" + currentDay + "' AND ModuleEnd >= '" + currentTime + "' AND module.TimeTableID = " + timeTableID + " LIMIT 1";
+        } else {
+            lMain_nextClassTable.setModel(mainNextClassTableModel);
+            query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay = '" + currentDay + "' AND ModuleEnd >= '" + currentTime + "' AND module.LecturerID = " + lecturerID + " LIMIT 1";
+        }
+        
+        
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
 
         renderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
@@ -1675,15 +1692,20 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         }
 
         mainNextClassTableModel.addColumn("Your next class:");
-        sMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
-
-        if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
-            currentDay = "Monday";
-            currentTime = "00:00:01";
+        if ("s".equals(tablePrefix)) {
+            sMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+        } else {
+            lMain_nextClassTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
         }
+        
+
+        
 
         //query = "SELECT SubjectName, SubjectCode, Venue, StartTime, EndTime FROM timetableyear1 WHERE Day = '" + currentDay + "' AND EndTime >= '" + currentTime + "' LIMIT 1"; //Uses old database
-        query = "SELECT ModuleName, ModuleCode, ModuleVenue, ModuleStart, ModuleEnd FROM module WHERE ModuleDay = '" + currentDay + "' AND ModuleEnd >= '" + currentTime + "' AND module.TimeTableID = " + timeTableID + " LIMIT 1";
+        
+        
+        
+        
 
         try {
 
