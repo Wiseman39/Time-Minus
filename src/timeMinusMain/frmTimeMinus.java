@@ -27,10 +27,9 @@ import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
  * @author Justin ,Kieran
  */
 public final class frmTimeMinus extends javax.swing.JFrame {
-    private int timeTableID;
-    
-    
-    
+
+    private int timeTableID, lecturerID;
+
     DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
 
     DefaultTableModel mainEventsTableModel = new DefaultTableModel(); //create tableModel object to manipulate the main screen upcomming table
@@ -56,9 +55,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         main_calendarEvents.setShowGrid(true);
         sCalendar_calendarTable.setShowGrid(true);
         sSchedule_scheduleTable.setShowGrid(true);
-        
+
         login_forgottenLink.addMouseListener(new MouseListener() {
-            
+
             public void mouseClicked(MouseEvent e) {
                 parentPanel.removeAll();
                 parentPanel.add(screen_forgottenPassword);
@@ -66,28 +65,23 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 parentPanel.revalidate();
             }
 
-            
             public void mousePressed(MouseEvent e) {
             }
 
-            
             public void mouseReleased(MouseEvent e) {
             }
 
-            
             public void mouseEntered(MouseEvent e) {
             }
 
-            
             public void mouseExited(MouseEvent me) {
             }
         });
-        
+
         //DefaultTableCellRenderer scheduleRenderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code 
         //scheduleRenderer.setHorizontalAlignment(SwingConstants.CENTER);//centres code in cell
         //sSchedule_scheduleTable.getColumnModel().getColumn(0).setCellRenderer(scheduleRenderer);
         DBconnect(); // connects to the database
-        
 
     }
 
@@ -123,7 +117,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         login_Background = new javax.swing.JLabel();
         screen_sMain = new javax.swing.JPanel();
         main_BackButton = new javax.swing.JButton();
-        main_WelcomeBackMessage = new javax.swing.JLabel();
+        sMain_WelcomeBackMessage = new javax.swing.JLabel();
         main_NavToClassButton = new javax.swing.JButton();
         main_CalendarScrollPane = new javax.swing.JScrollPane();
         main_calendarEvents = new javax.swing.JTable();
@@ -138,6 +132,15 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         sSchedule_scheduleTable = new javax.swing.JTable();
         sSchedule_dayOfWeekCombo = new javax.swing.JComboBox<>();
+        screen_lMain = new javax.swing.JPanel();
+        lMain_BackButton = new javax.swing.JButton();
+        lMain_WelcomeBackMessage = new javax.swing.JLabel();
+        main_CalendarScrollPane1 = new javax.swing.JScrollPane();
+        lMain_calendarEvents = new javax.swing.JTable();
+        lMain_CalendarButton1 = new javax.swing.JButton();
+        lMain_NextClassesButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        lMain_nextClassTable = new javax.swing.JTable();
         screen_sCalendar = new javax.swing.JPanel();
         sCalendar_Banner = new javax.swing.JPanel();
         sCalendar_BannerText = new javax.swing.JLabel();
@@ -252,7 +255,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         login_PasswordLabel.setText("Password:");
 
-        login_userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student" }));
+        login_userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Lecturer" }));
 
         login_UserTypeLabel.setText("User Type:");
 
@@ -349,7 +352,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         );
 
         screen_login.add(Debug_Panel);
-        Debug_Panel.setBounds(10, 470, 340, 100);
+        Debug_Panel.setBounds(10, 480, 340, 100);
 
         login_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginBackgroundResized.jpg"))); // NOI18N
         screen_login.add(login_Background);
@@ -370,11 +373,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
-        main_WelcomeBackMessage.setBackground(new java.awt.Color(0, 0, 0));
-        main_WelcomeBackMessage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        main_WelcomeBackMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        main_WelcomeBackMessage.setText("Welcome Back USER_NAME USER_SURNAME");
-        main_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        sMain_WelcomeBackMessage.setBackground(new java.awt.Color(0, 0, 0));
+        sMain_WelcomeBackMessage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        sMain_WelcomeBackMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sMain_WelcomeBackMessage.setText("Welcome Back USER_NAME USER_SURNAME");
+        sMain_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         main_NavToClassButton.setBackground(new java.awt.Color(2, 31, 84));
         main_NavToClassButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -453,7 +456,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_sMainLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(sMain_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(main_CalendarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(screen_sMainLayout.createSequentialGroup()
                         .addComponent(main_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,7 +471,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             screen_sMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(screen_sMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(main_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sMain_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -573,6 +576,120 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         );
 
         parentPanel.add(screen_studentSchedule, "card4");
+
+        screen_lMain.setBackground(new java.awt.Color(255, 255, 255));
+        screen_lMain.setPreferredSize(new java.awt.Dimension(360, 640));
+
+        lMain_BackButton.setBackground(new java.awt.Color(255, 255, 255));
+        lMain_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        lMain_BackButton.setText("<<");
+        lMain_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
+        lMain_BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lMain_BackButtonActionPerformed(evt);
+            }
+        });
+
+        lMain_WelcomeBackMessage.setBackground(new java.awt.Color(0, 0, 0));
+        lMain_WelcomeBackMessage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lMain_WelcomeBackMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lMain_WelcomeBackMessage.setText("Welcome Back USER_NAME USER_SURNAME");
+        lMain_WelcomeBackMessage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        lMain_calendarEvents.setBackground(new java.awt.Color(2, 31, 84));
+        lMain_calendarEvents.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        lMain_calendarEvents.setForeground(new java.awt.Color(255, 255, 255));
+        lMain_calendarEvents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Upcomming Events"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        lMain_calendarEvents.setFocusable(false);
+        lMain_calendarEvents.setGridColor(new java.awt.Color(255, 255, 255));
+        lMain_calendarEvents.setIntercellSpacing(new java.awt.Dimension(1, 2));
+        lMain_calendarEvents.setRowHeight(50);
+        lMain_calendarEvents.setRowSelectionAllowed(false);
+        main_CalendarScrollPane1.setViewportView(lMain_calendarEvents);
+
+        lMain_CalendarButton1.setBackground(new java.awt.Color(2, 31, 84));
+        lMain_CalendarButton1.setForeground(new java.awt.Color(255, 255, 255));
+        lMain_CalendarButton1.setText("Open Calendar View");
+        lMain_CalendarButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lMain_CalendarButton1ActionPerformed(evt);
+            }
+        });
+
+        lMain_NextClassesButton.setBackground(new java.awt.Color(2, 31, 84));
+        lMain_NextClassesButton.setForeground(new java.awt.Color(255, 255, 255));
+        lMain_NextClassesButton.setText("Schedule >");
+        lMain_NextClassesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lMain_NextClassesButtonActionPerformed(evt);
+            }
+        });
+
+        lMain_nextClassTable.setBackground(new java.awt.Color(2, 31, 84));
+        lMain_nextClassTable.setForeground(new java.awt.Color(255, 255, 255));
+        lMain_nextClassTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        lMain_nextClassTable.setRowHeight(117);
+        jScrollPane5.setViewportView(lMain_nextClassTable);
+
+        javax.swing.GroupLayout screen_lMainLayout = new javax.swing.GroupLayout(screen_lMain);
+        screen_lMain.setLayout(screen_lMainLayout);
+        screen_lMainLayout.setHorizontalGroup(
+            screen_lMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_lMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(screen_lMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(main_CalendarScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screen_lMainLayout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addComponent(lMain_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lMain_CalendarButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(screen_lMainLayout.createSequentialGroup()
+                        .addComponent(lMain_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lMain_NextClassesButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        screen_lMainLayout.setVerticalGroup(
+            screen_lMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_lMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lMain_WelcomeBackMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lMain_NextClassesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(main_CalendarScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lMain_CalendarButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(lMain_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        parentPanel.add(screen_lMain, "card3");
 
         screen_sCalendar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1016,15 +1133,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
 
-        //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
-
-        
-        //Actual Login with database
-        String user = login_username.getText();
-        String pass = login_password.getText();
-        String userType = toLowerCase((String) login_userTypeCombo.getSelectedItem());
         try {
-            
+
+            //testingLoginBypass();// Bypasses login for easily testing GUI, MUST REMOVE
+            //Actual Login with database
+            String user = login_username.getText();
+            String pass = login_password.getText();
+            String userType = toLowerCase((String) login_userTypeCombo.getSelectedItem());
+
             //String query = "select * from students";
             String query = "SELECT * FROM " + userType;
             resSet = st.executeQuery(query);
@@ -1035,68 +1151,89 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             String surname = null;
             boolean userFound = false;
 
-            switch(userType){
-                
+            switch (userType) {
+
                 case "student":
                     while (resSet.next()) {
-                username = resSet.getString("StudentUserName");
-                password = resSet.getString("StudentPassword");
-                name = resSet.getString("StudentName");
-                surname = resSet.getString("StudentSurname");
-                timeTableID = resSet.getInt("timeTableID");
-                if (user.equalsIgnoreCase(username) && pass.equalsIgnoreCase(password)) {
+                        username = resSet.getString("StudentUserName");
+                        password = resSet.getString("StudentPassword");
+                        name = resSet.getString("StudentName");
+                        surname = resSet.getString("StudentSurname");
+                        timeTableID = resSet.getInt("timeTableID");
+                        if (user.equalsIgnoreCase(username) && pass.equalsIgnoreCase(password)) {
 
-                    JOptionPane.showMessageDialog(null, "Hi " + name + " " + surname + " you have logged in successfully");
-                    parentPanel.removeAll();
-                    parentPanel.add(screen_sMain);
-                    parentPanel.repaint();
-                    parentPanel.revalidate();
-                    if (!login_RememberDetails.isSelected()) {
-                        /*login_password.setText("Password");
-                        login_password.setForeground(new Color(153, 153, 153));
-                        login_username.setText("Student ID / Pearson Email");
-                        login_username.setForeground(new Color(153, 153, 153));*/
-                        login_password.setText("");
-                        login_username.setText("");
+                            JOptionPane.showMessageDialog(null, "Hi " + name + " " + surname + " you have logged in successfully");
+                            parentPanel.removeAll();
+                            parentPanel.add(screen_sMain);
+                            parentPanel.repaint();
+                            parentPanel.revalidate();
+                            if (!login_RememberDetails.isSelected()) {
+                                /*login_password.setText("Password");
+                                login_password.setForeground(new Color(153, 153, 153));
+                                login_username.setText("Student ID / Pearson Email");
+                                login_username.setForeground(new Color(153, 153, 153));*/
+                                login_password.setText("");
+                                login_username.setText("");
+
+                            }
+                            userFound = true;
+                            sMain_WelcomeBackMessage.setText("Welcome Back " + name + " " + surname);
+                            break;
+
+                        }
 
                     }
-                    userFound = true;                                                         
-                    main_WelcomeBackMessage.setText("Welcome Back " + name + " " + surname);
                     break;
 
-                }
-
-            }
-                    break;
-                    
                 case "lecturer":
-                    
+                    while (resSet.next()) {
+                        username = resSet.getString("LecturerUsername");
+                        password = resSet.getString("LecturerPassword");
+                        name = resSet.getString("LecturerName");
+                        surname = resSet.getString("LecturerSurname");
+                        lecturerID = resSet.getInt("LecturerID");
+                        if (user.equalsIgnoreCase(username) && pass.equalsIgnoreCase(password)) {
+
+                            JOptionPane.showMessageDialog(null, "Hi " + name + " " + surname + " you have logged in successfully");
+                            
+                            parentPanel.removeAll();
+                            parentPanel.add(screen_lMain);
+                            parentPanel.repaint();
+                            parentPanel.revalidate();
+                            
+                            if (!login_RememberDetails.isSelected()) {
+                                /*login_password.setText("Password");
+                                login_password.setForeground(new Color(153, 153, 153));
+                                login_username.setText("Student ID / Pearson Email");
+                                login_username.setForeground(new Color(153, 153, 153));*/
+                                login_password.setText("");
+                                login_username.setText("");
+
+                            }
+                            userFound = true;
+                            lMain_WelcomeBackMessage.setText("Welcome Back " + name + " " + surname);
+                            break;
+
+                        }
+
+                    }
                     break;
             }
-            
-            
 
             if (userFound == false) {
 
-                /*login_password.setText("Password");
-                login_password.setForeground(new Color(153, 153, 153));
-                login_username.setText("Student ID / Pearson Email");
-                login_username.setForeground(new Color(153, 153, 153));*/
                 login_password.setText("");
                 login_username.setText("");
                 JOptionPane.showMessageDialog(parentPanel, "Incorrect Username or Password", "", JOptionPane.WARNING_MESSAGE);
 
             }
 
-        } catch (Exception ex) {
-            System.out.println(ex);
-
-        }
-        
-        
-        try {
-            updateMainScreenCalendar(); //Updates main screen upcomming calendar when program starts.
-            updateMainNextClass();
+            try {
+                updateMainScreenCalendar(); //Updates main screen upcomming calendar when program starts.
+                updateMainNextClass();
+            } catch (SQLException ex) {
+                Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1201,15 +1338,15 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String message = "<html>If your " + forgotten_typeCombo.getSelectedItem() + " is found in the database,<br> an email will be sent to your address with<br> instructions on how to get access again<html>";
-        
+
         if (!"".equals(forgotten_username.getText())) {
             JOptionPane.showMessageDialog(this, message, "Note", WIDTH);
             forgotten_username.setText("");
             forgotten_typeCombo.setSelectedIndex(0);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Please enter a username or Email", message, JOptionPane.WARNING_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void forgotten_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotten_BackButtonActionPerformed
@@ -1218,6 +1355,18 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_forgotten_BackButtonActionPerformed
+
+    private void lMain_BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMain_BackButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lMain_BackButtonActionPerformed
+
+    private void lMain_CalendarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMain_CalendarButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lMain_CalendarButton1ActionPerformed
+
+    private void lMain_NextClassesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lMain_NextClassesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lMain_NextClassesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1273,6 +1422,13 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JButton lMain_BackButton;
+    private javax.swing.JButton lMain_CalendarButton1;
+    private javax.swing.JButton lMain_NextClassesButton;
+    private javax.swing.JLabel lMain_WelcomeBackMessage;
+    private javax.swing.JTable lMain_calendarEvents;
+    private javax.swing.JTable lMain_nextClassTable;
     private javax.swing.JLabel login_AppName;
     private javax.swing.JLabel login_Background;
     private javax.swing.JButton login_Button;
@@ -1291,9 +1447,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JButton main_BackButton;
     private javax.swing.JButton main_CalendarButton;
     private javax.swing.JScrollPane main_CalendarScrollPane;
+    private javax.swing.JScrollPane main_CalendarScrollPane1;
     private javax.swing.JButton main_NavToClassButton;
     private javax.swing.JButton main_NextClassesButton;
-    private javax.swing.JLabel main_WelcomeBackMessage;
     private javax.swing.JTable main_calendarEvents;
     private javax.swing.JLabel navDirections_BannerText;
     private javax.swing.JTable navDirections_DirectionsTable;
@@ -1312,6 +1468,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sCalendar_eventTypeCombo;
     private javax.swing.JComboBox<String> sCalendar_monthCombo;
     private javax.swing.JLabel sCalendar_tableHeader;
+    private javax.swing.JLabel sMain_WelcomeBackMessage;
     private javax.swing.JTable sMain_nextClassTable;
     private javax.swing.JButton sNavScreen_BackButton;
     private javax.swing.JButton sSchedule_BackButton;
@@ -1322,6 +1479,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPanel screen_ChatRoom;
     private javax.swing.JPanel screen_chatMenu;
     private javax.swing.JPanel screen_forgottenPassword;
+    private javax.swing.JPanel screen_lMain;
     private javax.swing.JPanel screen_login;
     private javax.swing.JPanel screen_navDirections;
     private javax.swing.JPanel screen_navMenu;
@@ -1397,7 +1555,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
         sCalendarTableModel.addColumn(sCalendar_monthCombo.getSelectedItem());
         sCalendar_calendarTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
-        
+
         if (sCalendar_eventTypeCombo.getSelectedItem() != "All") {
             query = "SELECT DateDay, DateMonth, DateYear, EventDesc, EventType, Time, EventVenue FROM eventstable WHERE DateMonth = '" + sCalendar_monthCombo.getSelectedItem() + "' AND EventType = '" + sCalendar_eventTypeCombo.getSelectedItem() + "'";
         } else {
@@ -1420,11 +1578,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                     String type = resSet.getString(5);
                     String time = resSet.getString(6);
                     String venue = resSet.getString(7);
-                    
+
                     sCalendarTableModel.insertRow(sCalendarTableModel.getRowCount(), new Object[]{"<html><div style=\"text-align:center\"><b>Date: " + day + " " + month + " " + year + ": </b>"
                         + "<br>Time: <i>" + time
                         + "</i><br>" + type
-                        + "<br>Description: " + desc 
+                        + "<br>Description: " + desc
                         + "<br>Venue: " + venue + "</div></html>"});
                 }
             }
@@ -1488,11 +1646,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private void updateMainNextClass() {
         //String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
         String currentDay = getDayOfWeek();
-        
-        
+
         String currentTime = getCurrentTime();
         System.out.println(currentTime);
-        
+
         String query;
         sMain_nextClassTable.setModel(mainNextClassTableModel);
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();//create cell renderer to manipulate entry of code
@@ -1550,17 +1707,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         int i = 1;
         String query;
         ImageIcon image;
-        
-        
+
         String currentTime = getCurrentTime();
         String currentDay = getDayOfWeek();
 
         //if ((currentDay.equalsIgnoreCase("Saturday")) || (currentDay.equalsIgnoreCase("Sunday"))) {
-       //    currentDay = "Monday";
+        //    currentDay = "Monday";
         //    currentTime = "08:00:00";
         //}
-
-        
         query = "SELECT LessonNo, PrevLessonNo, ModuleVenue FROM module WHERE ModuleDay = '" + currentDay + "' AND ModuleEnd >= '" + currentTime + "' AND module.TimeTableID = " + timeTableID + " LIMIT 1";
         resSet = st.executeQuery(query);    //if the result set is empty, I.E. no next class for the day, a warning message will be displayed and user is left on the main screen
         if (!resSet.next()) {
@@ -1576,7 +1730,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             String prevLessonNo = resSet.getString(2);
             String venue = resSet.getString(3);
             String directionGroup = prevLessonNo + "to" + lessonNo;
-            
+
             String imagePath = "/NavigationImages/" + directionGroup + "-";
             query = "SELECT DirectDesc FROM directions WHERE DirectionGroup = '" + directionGroup + "' AND TimeTableID = " + timeTableID + " ORDER BY DirectNo";
             resSet = st.executeQuery(query);
@@ -1622,7 +1776,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
 
     private String getDayOfWeek() {//returns the current day of the week for the main screen next class notification and is used for class navigation
         //return (calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())); //gets current day
-        
+
         return (String) Debug_DayOfWeek.getSelectedItem();//use for testing and debuging MUST REMOVE
     }
 
@@ -1630,7 +1784,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         //LocalDateTime now = LocalDateTime.now();
         //return (dtf.format(now));
-        
+
         return (String) Debug_Time.getSelectedItem();//use for testing and Debugging MUST REMOVE
     }
 /////////////
