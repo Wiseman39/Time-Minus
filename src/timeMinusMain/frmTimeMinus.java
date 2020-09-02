@@ -29,7 +29,8 @@ import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 public final class frmTimeMinus extends javax.swing.JFrame {
 
     private int timeTableID, lecturerID;
-
+    private String tablePrefix;//used to tell program which specific tables to update depending on if a lecturer or a student signs in. Allows for use of same code with different tables
+    
     DefaultTableModel sScheduleTableModel = new DefaultTableModel(); //create tableModel object to manipulate the schedule table
 
     DefaultTableModel mainEventsTableModel = new DefaultTableModel(); //create tableModel object to manipulate the main screen upcomming table
@@ -52,7 +53,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         parentPanel.repaint();
         parentPanel.revalidate();
 
-        main_calendarEvents.setShowGrid(true);
+        sMain_calendarEvents.setShowGrid(true);
+        lMain_calendarEvents.setShowGrid(true);
         sCalendar_calendarTable.setShowGrid(true);
         sSchedule_scheduleTable.setShowGrid(true);
 
@@ -120,18 +122,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         sMain_WelcomeBackMessage = new javax.swing.JLabel();
         main_NavToClassButton = new javax.swing.JButton();
         main_CalendarScrollPane = new javax.swing.JScrollPane();
-        main_calendarEvents = new javax.swing.JTable();
+        sMain_calendarEvents = new javax.swing.JTable();
         main_CalendarButton = new javax.swing.JButton();
         main_NextClassesButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         sMain_nextClassTable = new javax.swing.JTable();
-        screen_studentSchedule = new javax.swing.JPanel();
-        sSchedule_Banner = new javax.swing.JPanel();
-        sSchedule_BannerText = new javax.swing.JLabel();
-        sSchedule_BackButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        sSchedule_scheduleTable = new javax.swing.JTable();
-        sSchedule_dayOfWeekCombo = new javax.swing.JComboBox<>();
         screen_lMain = new javax.swing.JPanel();
         lMain_BackButton = new javax.swing.JButton();
         lMain_WelcomeBackMessage = new javax.swing.JLabel();
@@ -141,6 +136,13 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         lMain_NextClassesButton = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         lMain_nextClassTable = new javax.swing.JTable();
+        screen_studentSchedule = new javax.swing.JPanel();
+        sSchedule_Banner = new javax.swing.JPanel();
+        sSchedule_BannerText = new javax.swing.JLabel();
+        sSchedule_BackButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        sSchedule_scheduleTable = new javax.swing.JTable();
+        sSchedule_dayOfWeekCombo = new javax.swing.JComboBox<>();
         screen_sCalendar = new javax.swing.JPanel();
         sCalendar_Banner = new javax.swing.JPanel();
         sCalendar_BannerText = new javax.swing.JLabel();
@@ -388,10 +390,10 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
         });
 
-        main_calendarEvents.setBackground(new java.awt.Color(2, 31, 84));
-        main_calendarEvents.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        main_calendarEvents.setForeground(new java.awt.Color(255, 255, 255));
-        main_calendarEvents.setModel(new javax.swing.table.DefaultTableModel(
+        sMain_calendarEvents.setBackground(new java.awt.Color(2, 31, 84));
+        sMain_calendarEvents.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        sMain_calendarEvents.setForeground(new java.awt.Color(255, 255, 255));
+        sMain_calendarEvents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -407,12 +409,12 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        main_calendarEvents.setFocusable(false);
-        main_calendarEvents.setGridColor(new java.awt.Color(255, 255, 255));
-        main_calendarEvents.setIntercellSpacing(new java.awt.Dimension(1, 2));
-        main_calendarEvents.setRowHeight(50);
-        main_calendarEvents.setRowSelectionAllowed(false);
-        main_CalendarScrollPane.setViewportView(main_calendarEvents);
+        sMain_calendarEvents.setFocusable(false);
+        sMain_calendarEvents.setGridColor(new java.awt.Color(255, 255, 255));
+        sMain_calendarEvents.setIntercellSpacing(new java.awt.Dimension(1, 2));
+        sMain_calendarEvents.setRowHeight(50);
+        sMain_calendarEvents.setRowSelectionAllowed(false);
+        main_CalendarScrollPane.setViewportView(sMain_calendarEvents);
 
         main_CalendarButton.setBackground(new java.awt.Color(2, 31, 84));
         main_CalendarButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -487,95 +489,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         );
 
         parentPanel.add(screen_sMain, "card3");
-
-        screen_studentSchedule.setBackground(new java.awt.Color(255, 255, 255));
-        screen_studentSchedule.setMaximumSize(new java.awt.Dimension(360, 640));
-
-        sSchedule_Banner.setBackground(new java.awt.Color(2, 31, 84));
-
-        sSchedule_BannerText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        sSchedule_BannerText.setForeground(new java.awt.Color(255, 255, 255));
-        sSchedule_BannerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sSchedule_BannerText.setText("Your Schedule for the day");
-
-        javax.swing.GroupLayout sSchedule_BannerLayout = new javax.swing.GroupLayout(sSchedule_Banner);
-        sSchedule_Banner.setLayout(sSchedule_BannerLayout);
-        sSchedule_BannerLayout.setHorizontalGroup(
-            sSchedule_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sSchedule_BannerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sSchedule_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        sSchedule_BannerLayout.setVerticalGroup(
-            sSchedule_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sSchedule_BannerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sSchedule_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        sSchedule_BackButton.setBackground(new java.awt.Color(255, 255, 255));
-        sSchedule_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
-        sSchedule_BackButton.setText("<<");
-        sSchedule_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
-        sSchedule_BackButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sSchedule_BackButtonActionPerformed(evt);
-            }
-        });
-
-        sSchedule_scheduleTable.setBackground(new java.awt.Color(2, 31, 84));
-        sSchedule_scheduleTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        sSchedule_scheduleTable.setForeground(new java.awt.Color(255, 255, 255));
-        sSchedule_scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                ""
-            }
-        ));
-        sSchedule_scheduleTable.setGridColor(new java.awt.Color(255, 255, 255));
-        sSchedule_scheduleTable.setRowHeight(100);
-        sSchedule_scheduleTable.setRowSelectionAllowed(false);
-        sSchedule_scheduleTable.setTableHeader(null);
-        jScrollPane1.setViewportView(sSchedule_scheduleTable);
-
-        sSchedule_dayOfWeekCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
-        sSchedule_dayOfWeekCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sSchedule_dayOfWeekComboActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout screen_studentScheduleLayout = new javax.swing.GroupLayout(screen_studentSchedule);
-        screen_studentSchedule.setLayout(screen_studentScheduleLayout);
-        screen_studentScheduleLayout.setHorizontalGroup(
-            screen_studentScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sSchedule_Banner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(screen_studentScheduleLayout.createSequentialGroup()
-                .addComponent(sSchedule_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(screen_studentScheduleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sSchedule_dayOfWeekCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        screen_studentScheduleLayout.setVerticalGroup(
-            screen_studentScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(screen_studentScheduleLayout.createSequentialGroup()
-                .addComponent(sSchedule_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sSchedule_dayOfWeekCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sSchedule_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        parentPanel.add(screen_studentSchedule, "card4");
 
         screen_lMain.setBackground(new java.awt.Color(255, 255, 255));
         screen_lMain.setPreferredSize(new java.awt.Dimension(360, 640));
@@ -690,6 +603,95 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         );
 
         parentPanel.add(screen_lMain, "card3");
+
+        screen_studentSchedule.setBackground(new java.awt.Color(255, 255, 255));
+        screen_studentSchedule.setMaximumSize(new java.awt.Dimension(360, 640));
+
+        sSchedule_Banner.setBackground(new java.awt.Color(2, 31, 84));
+
+        sSchedule_BannerText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        sSchedule_BannerText.setForeground(new java.awt.Color(255, 255, 255));
+        sSchedule_BannerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sSchedule_BannerText.setText("Your Schedule for the day");
+
+        javax.swing.GroupLayout sSchedule_BannerLayout = new javax.swing.GroupLayout(sSchedule_Banner);
+        sSchedule_Banner.setLayout(sSchedule_BannerLayout);
+        sSchedule_BannerLayout.setHorizontalGroup(
+            sSchedule_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sSchedule_BannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sSchedule_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        sSchedule_BannerLayout.setVerticalGroup(
+            sSchedule_BannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sSchedule_BannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sSchedule_BannerText, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        sSchedule_BackButton.setBackground(new java.awt.Color(255, 255, 255));
+        sSchedule_BackButton.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        sSchedule_BackButton.setText("<<");
+        sSchedule_BackButton.setPreferredSize(new java.awt.Dimension(90, 40));
+        sSchedule_BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sSchedule_BackButtonActionPerformed(evt);
+            }
+        });
+
+        sSchedule_scheduleTable.setBackground(new java.awt.Color(2, 31, 84));
+        sSchedule_scheduleTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        sSchedule_scheduleTable.setForeground(new java.awt.Color(255, 255, 255));
+        sSchedule_scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                ""
+            }
+        ));
+        sSchedule_scheduleTable.setGridColor(new java.awt.Color(255, 255, 255));
+        sSchedule_scheduleTable.setRowHeight(100);
+        sSchedule_scheduleTable.setRowSelectionAllowed(false);
+        sSchedule_scheduleTable.setTableHeader(null);
+        jScrollPane1.setViewportView(sSchedule_scheduleTable);
+
+        sSchedule_dayOfWeekCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
+        sSchedule_dayOfWeekCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sSchedule_dayOfWeekComboActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout screen_studentScheduleLayout = new javax.swing.GroupLayout(screen_studentSchedule);
+        screen_studentSchedule.setLayout(screen_studentScheduleLayout);
+        screen_studentScheduleLayout.setHorizontalGroup(
+            screen_studentScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sSchedule_Banner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(screen_studentScheduleLayout.createSequentialGroup()
+                .addComponent(sSchedule_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(screen_studentScheduleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sSchedule_dayOfWeekCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        screen_studentScheduleLayout.setVerticalGroup(
+            screen_studentScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screen_studentScheduleLayout.createSequentialGroup()
+                .addComponent(sSchedule_Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSchedule_dayOfWeekCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSchedule_BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        parentPanel.add(screen_studentSchedule, "card4");
 
         screen_sCalendar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1178,6 +1180,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                             }
                             userFound = true;
                             sMain_WelcomeBackMessage.setText("Welcome Back " + name + " " + surname);
+                            tablePrefix = "s";
                             break;
 
                         }
@@ -1212,6 +1215,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
                             }
                             userFound = true;
                             lMain_WelcomeBackMessage.setText("Welcome Back " + name + " " + surname);
+                            tablePrefix = "l";
                             break;
 
                         }
@@ -1229,8 +1233,8 @@ public final class frmTimeMinus extends javax.swing.JFrame {
             }
 
             try {
-                updateMainScreenCalendar(); //Updates main screen upcomming calendar when program starts.
-                updateMainNextClass();
+                updateMainScreenCalendar(tablePrefix); //Updates main screen upcomming calendar when program starts.
+                updateMainNextClass(tablePrefix);
             } catch (SQLException ex) {
                 Logger.getLogger(frmTimeMinus.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1450,7 +1454,6 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JScrollPane main_CalendarScrollPane1;
     private javax.swing.JButton main_NavToClassButton;
     private javax.swing.JButton main_NextClassesButton;
-    private javax.swing.JTable main_calendarEvents;
     private javax.swing.JLabel navDirections_BannerText;
     private javax.swing.JTable navDirections_DirectionsTable;
     private javax.swing.JButton navMenu_BackButton1;
@@ -1469,6 +1472,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sCalendar_monthCombo;
     private javax.swing.JLabel sCalendar_tableHeader;
     private javax.swing.JLabel sMain_WelcomeBackMessage;
+    private javax.swing.JTable sMain_calendarEvents;
     private javax.swing.JTable sMain_nextClassTable;
     private javax.swing.JButton sNavScreen_BackButton;
     private javax.swing.JButton sSchedule_BackButton;
@@ -1488,13 +1492,19 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     private javax.swing.JPanel screen_studentSchedule;
     // End of variables declaration//GEN-END:variables
 
-    private void updateMainScreenCalendar() throws SQLException {
+    private void updateMainScreenCalendar(String tablePrefix1) throws SQLException {
 
         int currentDay = calendar.get(Calendar.DATE);
         //int currentDay = 23;
         //System.out.println(currentDay);
         String currentMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-        main_calendarEvents.setModel(mainEventsTableModel);
+        if ("s".equals(tablePrefix)) {
+            sMain_calendarEvents.setModel(mainEventsTableModel);
+        } else {
+            lMain_calendarEvents.setModel(mainEventsTableModel);
+        }
+        
+        //sMain_calendarEvents.setModel(mainEventsTableModel);
         mainEventsTableModel.setColumnCount(0);
 
         if (mainEventsTableModel.getRowCount() > 0) {//removes any previous rows from the JTable
@@ -1643,7 +1653,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         }
     }
 
-    private void updateMainNextClass() {
+    private void updateMainNextClass(String tablePrefix1) {
         //String currentDay = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
         String currentDay = getDayOfWeek();
 
