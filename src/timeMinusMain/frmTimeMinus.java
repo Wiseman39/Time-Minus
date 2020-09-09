@@ -57,7 +57,9 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         lMain_calendarEvents.setShowGrid(true);
         sCalendar_calendarTable.setShowGrid(true);
         schedule_scheduleTable.setShowGrid(true);
-
+        
+        login_UserNameLabel.setText("Student Number:");
+        
         login_forgottenLink.addMouseListener(new MouseListener() {
 
             public void mouseClicked(MouseEvent e) {
@@ -229,6 +231,11 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         login_PasswordLabel.setText("Password:");
 
         login_userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Lecturer" }));
+        login_userTypeCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_userTypeComboActionPerformed(evt);
+            }
+        });
 
         login_UserTypeLabel.setText("User Type:");
 
@@ -1365,6 +1372,14 @@ public final class frmTimeMinus extends javax.swing.JFrame {
         schedule_dayOfWeekCombo.setSelectedItem(getDayOfWeek());
         updateScheduleScreen();
     }//GEN-LAST:event_lMain_NextClassesButtonActionPerformed
+
+    private void login_userTypeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_userTypeComboActionPerformed
+        if (login_userTypeCombo.getSelectedItem() == "Student") {
+            login_UserNameLabel.setText("Student Number:");
+        } else {
+            login_UserNameLabel.setText("Lecturer Email:");
+        }
+    }//GEN-LAST:event_login_userTypeComboActionPerformed
 
     /**
      * @param args the command line arguments
