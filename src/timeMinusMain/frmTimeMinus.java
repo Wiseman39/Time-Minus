@@ -1319,7 +1319,7 @@ public final class frmTimeMinus extends javax.swing.JFrame {
     }//GEN-LAST:event_forgotten_usernameActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String message = "<html>If your " + forgotten_typeCombo.getSelectedItem() + " is found in the database,<br> an email will be sent to your address with<br> instructions on how to get access again<html>";
+        String message = "<html>If your " + forgotten_typeCombo.getSelectedItem() + " is found in the database,<br> an email will be sent to you with<br> instructions on how to get access again.<html>";
 
         if (!"".equals(forgotten_username.getText())) {
             JOptionPane.showMessageDialog(this, message, "Note", WIDTH);
